@@ -26,7 +26,7 @@ SECRET_KEY = 'a23vukslfng-f39jo_=%@76a73ofgbg0x@6s-yc8-u!q@$8mhn'
 DEBUG = True
 
 # Seems 'testserver needs to be here for unit testing:
-ALLOWED_HOSTS = ['*']  
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -153,4 +153,4 @@ STATICFILES_DIRS = [
 
 # Login page
 LOGIN_URL = '/login/' #  Url der innlogging skjer
-LOGIN_REDIRECT_URL = '/' #  Url som det redirectes til etter successfull innlogging
+LOGIN_REDIRECT_URL = '/overview' #  Url som det redirectes til etter successfull innlogging
