@@ -18,7 +18,6 @@ def get_course_list(username):
 
 @login_required()
 def courses(request):
-    """OBS: lecture frot end må bruke CourseFrom fra exercise.forms"""
     if request.method == 'POST':     # and request.user.has_perm('exercise.add_course'):
         form = CourseForm(request.POST)
         if form.is_valid():
