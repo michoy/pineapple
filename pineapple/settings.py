@@ -26,7 +26,7 @@ SECRET_KEY = 'a23vukslfng-f39jo_=%@76a73ofgbg0x@6s-yc8-u!q@$8mhn'
 DEBUG = True
 
 # Seems 'testserver needs to be here for unit testing:
-ALLOWED_HOSTS = ['*']    # bakerste må endres. Sjekk ipv4 fra ipconfig i cmd
+ALLOWED_HOSTS = ['*']  
 
 
 # Application definition
