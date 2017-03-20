@@ -1,20 +1,30 @@
 from django.shortcuts import render
-
-from django.http import HttpResponse
-from django.template import loader
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from quiz.forms import CourseForm
 
-# Create your views here.
 
-def getCourseList(username):
+def get_course_list(username):
     user = User.objects.get(username=username)
-    courseList = []
-    for each in user.coursecollection.courses.all():
-        courseList.append((each.name,each.description))
-    return courseList
+    course_list = []
+    if hasattr(user, 'coursestudent'):
+        for each in user.coursestudent.courses.all():
+            course_list.append((each.name, each.description))
+    if hasattr(user, 'courseadmin'):
+        for each in user.courseadmin.courses.all():
+            course_list.append((each.name, each.description))
+    return course_list
 
 
+@login_required()
 def courses(request):
-    courseList = getCourseList(request.user.username)
-    return render(request,'courses.html', {'courseList': courseList})
-
+    """OBS: lecture frot end må bruke CourseFrom fra quiz.forms"""
+    if request.method == 'POST':     # and request.user.has_perm('quiz.add_course'):
+        form = CourseForm(request.POST)
+        if form.is_valid():
+            form.save()  # uncertain part
+            form = CourseForm()
+    else:
+        form = CourseForm()
+    course_list = get_course_list(request.user.username)
+    return render(request, 'courses.html', {'courseList': course_list, 'form': form})
