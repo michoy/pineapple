@@ -1,5 +1,5 @@
 # coding=utf-8
-""" This is where forms for the frontPage module are stored """
+""" This is where forms for the about module are stored """
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate

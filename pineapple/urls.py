@@ -16,11 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-import apps.quiz.views
-import apps.frontPage.views
-import apps.courses.views
+import apps.exercise.views
+import apps.about.views
+import apps.overview.views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^base/', apps.quiz.views.base),
+    url(r'^base/', apps.exercise.views.base),
     ]

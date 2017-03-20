@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class FrontpageConfig(AppConfig):
-    name = 'apps.frontPage'
+    name = 'apps.about'

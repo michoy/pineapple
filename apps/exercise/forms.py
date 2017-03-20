@@ -1,8 +1,8 @@
 # coding=utf-8
-""" This is where forms for the quiz module are stored """
+""" This is where forms for the exercise module are stored """
 from django import forms
 
-from apps.quiz.models import Question
+from apps.exercise.models import Question
 
 
 class TestForm(forms.Form):

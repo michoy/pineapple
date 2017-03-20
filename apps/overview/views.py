@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from quiz.forms import CourseForm
+from apps.course.forms import CourseForm
 
 
 def get_course_list(username):
@@ -18,8 +18,8 @@ def get_course_list(username):
 
 @login_required()
 def courses(request):
-    """OBS: lecture frot end må bruke CourseFrom fra quiz.forms"""
-    if request.method == 'POST':     # and request.user.has_perm('quiz.add_course'):
+    """OBS: lecture frot end må bruke CourseFrom fra exercise.forms"""
+    if request.method == 'POST':     # and request.user.has_perm('exercise.add_course'):
         form = CourseForm(request.POST)
         if form.is_valid():
             form.save()  # uncertain part
@@ -27,4 +27,4 @@ def courses(request):
     else:
         form = CourseForm()
     course_list = get_course_list(request.user.username)
-    return render(request, 'courses.html', {'courseList': course_list, 'form': form})
+    return render(request, 'overview.html', {'courseList': course_list, 'form': form})

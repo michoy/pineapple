@@ -1,9 +1,8 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
-from apps.quiz.models import Question, Exercise, CourseCollection
-
-from apps.quiz.forms import QuestionForm
+from apps.exercise.models import Question, Exercise, CourseCollection
+from apps.exercise.forms import QuestionForm
 
 
 @permission_required('lecturer')
@@ -65,7 +64,7 @@ def courses_page(request):
     current_user = request.user
     course_member = CourseCollection.objects.filter(student=current_user.id)
     courses = [cm.course for cm in course_member]
-    return render(request, 'courses.html', {'courses': courses})
+    return render(request, 'overview.html', {'overview': courses})
 
 
 def test(request):
