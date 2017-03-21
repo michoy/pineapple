@@ -1,7 +1,8 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from apps.course.forms import CourseForm
+from django.contrib.auth.models import User
+from django.shortcuts import render
+
+from course.forms import CourseForm
 
 
 def get_course_list(username):

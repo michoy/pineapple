@@ -4,8 +4,8 @@ import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 django.setup()  # Don't mess with this, unless you know what you're doing
-from apps.exercise import add_exercisecollection
-from apps.exercise import add_exercise
+from exercise import add_exercisecollection
+from exercise import add_exercise
 import random
 from django.db.models import Sum
 
