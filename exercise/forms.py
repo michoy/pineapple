@@ -2,7 +2,7 @@
 """ This is where forms for the exercise module are stored """
 from django import forms
 
-from exercise import Question
+from exercise.models import Question
 
 
 class TestForm(forms.Form):
