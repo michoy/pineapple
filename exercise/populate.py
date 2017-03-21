@@ -1,12 +1,10 @@
 import os
-
 import django
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 django.setup()  # Don't mess with this, unless you know what you're doing
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
-
+from exercise.models import *
 
 # Simple script to populate the database with objects for testing and demonstration
 
@@ -101,6 +99,12 @@ def add_resultcollection(student, result_pk_list):
         result_col.results.add(Result.objects.get(pk=each))
     result_col.save()
     return result_col
+
+def add_user_group(name):
+    newGroup = Group()
+    newGroup.name = name
+    newGroup.save()
+
 
 def main():
     # Delete existing entries
@@ -200,6 +204,12 @@ def main():
         'Software Quality Assurance'
          ]
     add_tag('Exercise Lectures', exercise_list)
+
+    # Add groups (needed for unit testing)
+    #TODO add permissions
+    lecturergroup = add_user_group('Lecturer')
+    studentgroup = add_user_group('Student')
+
     # Lecturers
     group = Group.objects.get(name='Lecturer')
     lect = User.objects.create_user(username='Pekka', email='the@man.com', password='kanban')

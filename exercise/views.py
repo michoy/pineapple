@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 
-from exercise import Question, Exercise, CourseCollection
-from exercise import QuestionForm
+from exercise.models import Question, Exercise, CourseCollection
+from exercise.forms import QuestionForm
 
 
 @permission_required('lecturer')
