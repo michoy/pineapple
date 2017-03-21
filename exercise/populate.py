@@ -111,6 +111,7 @@ def main():
     ReadingMaterial.objects.all().delete()
     ThemeTag.objects.all().delete()
     User.objects.filter(is_superuser=0).delete()
+    Group.objects.all().delete()
     Course.objects.all().delete()
     Question.objects.all().delete()
     Exercise.objects.all().delete()
