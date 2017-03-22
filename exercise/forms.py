@@ -15,3 +15,9 @@ class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
         fields = '__all__'
+
+
+def make_answer_form(choices):
+    class AnswerForm(forms.Form):
+        Answer = forms.ChoiceField(choices=choices, widget=forms.RadioSelect)
+    return AnswerForm
