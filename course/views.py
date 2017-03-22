@@ -25,3 +25,4 @@ def lecturer_course_view(request):
         return render(request, 'student_course.html', {'exercises': exercise_name_list, 'course': course})
     else:
         pass
+
