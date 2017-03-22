@@ -30,5 +30,5 @@ urlpatterns = [
     #url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
     url(r'^login/$', about.views.login_view, name='/login/'),
     url(r'^about/', about.views.about),
-    url(r'^lecturer_course/', course.views.lecturer_course),
+    url(r'^exercise/', exercise.views.do_exercise),
     ]
