@@ -17,15 +17,14 @@ def do_exercise(request):
     if request.method == 'POST':
         pass
     else:
-        result_cols = ResultCollection.objects.filter(student=current_user)
-        exercise = Exercise.objects.get(course_id=1)
+        result_cols = ResultCollection.results
+        exercise = Exercise.objects.first()
         #question = exercise.contains.exclude.first()
         stuff = result_cols
         choices = (
             ('alt_1', 'Blue'),
             ('alt_2', 'Green'),
             ('alt_3', 'Black'),
-            ('alt_4', )
         )
         que_form = make_answer_form(choices)
         context = {
