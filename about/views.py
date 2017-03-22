@@ -24,3 +24,6 @@ def login_view(request):
         #        return render(request, 'registration/login.html', {'form': form })  # Redirect etter feilet registrering
     return render(request, 'registration/login.html', {'form': LoginForm(request.POST or None)})
 
+
+def about(request):
+    return render(request, 'about.html')
