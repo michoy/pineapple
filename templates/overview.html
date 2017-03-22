@@ -3,5 +3,10 @@
 {% block title %}Overview{% endblock %}
 
 {% block content %}
-test-tekst
+    {% for course in courseList %}
+        <form action="" method="post">
+            <button name={{ course }} value="upvote">Go To {{ course }}</button>
+        </form>
+        <p>{{ course }}</p>
+    {% endfor %}
 {% endblock %}

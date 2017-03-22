@@ -9,11 +9,13 @@ from exercise import populate
 
 def get_course_list(username):
     user = User.objects.get(username=username)
+    userGroups = list(user.groups.all().values_list('name',flat=True))
+    print(userGroups)
     course_list = []
-    if hasattr(user, 'coursestudent'):
-        for each in user.coursestudent.courses.all():
+    if 'Student' in userGroups:
+        for each in user.coursecollection.courses.all():
             course_list.append((each.name, each.description))
-    if hasattr(user, 'courseadmin'):
+    if 'Lecturer' in userGroups:
         for each in user.courseadmin.courses.all():
             course_list.append((each.name, each.description))
     return course_list
@@ -42,4 +44,5 @@ def courses(request):
         else:
             form = StudentAddCourseForm()
     course_list = get_course_list(request.user.username)
+    print(course_list)
     return render(request, 'overview.html', {'courseList': course_list, 'form': form})
