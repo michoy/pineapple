@@ -1,7 +1,7 @@
 /* YOUR CUSTOM STYLES */
 
-       .navbar {
-            background-color: #dfe9f0;
+        .navbar {
+            background-color: #2E2E2E;
            font-weight: 400;
      }
 /*
@@ -14,11 +14,11 @@
      }
 
       footer.page-footer {
-            background-color: #dfe9f0;
+            background-color: #2E2E2E;
             margin-top: 2rem;
             color: black;
         
-        }
+      }
 /*
 .navbar.navbar-dark .navbar-brand, .navbar.navbar-dark .navbar-brand:hover {
     color: #4c4c4c;

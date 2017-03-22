@@ -18,25 +18,61 @@
     <!-- Material Design Bootstrap -->
     <link href="../static/css/mdb.min.css" rel="stylesheet">
 
-    <link href="../static/css/basestyle.css" rel="stylesheet">
-
     <!-- Template styles -->
-    <style rel="stylesheet">
+    <style>
         /* TEMPLATE STYLES */
 
-        main {
-            margin-top: 3rem;
-            ;
+        html,
+        body,
+        .view {
+            height: 100%;
+        }
+        /* Navigation*/
+
+        .navbar {
+            background-color: transparent;
         }
 
-        main .card {
-            margin-bottom: 2rem;
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+
+        .navbar {
+            background-color: #ffbb33;
+           font-weight: 400;
+        }
+
+        footer.page-footer {
+            background-color: #ffbb33;
+            margin-top: 2rem;
         }
 
         @media only screen and (max-width: 768px) {
-            .read-more {
-                text-align: center;
+            .navbar {
+                background-color: #212121;
+            }
+        }
+        /*Call to action*/
 
+        .flex-center {
+            color: #fff;
+        }
+
+        .view {
+            background: url("../static/img/Bilder/bg1.jpg")no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        /*Contact section*/
+
+        #contact .fa {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #FF8800;
         }
     </style>
 </head>
@@ -45,44 +81,36 @@
 
     <header>
         <!--Navbar-->
-        <nav class="navbar navbar-toggleable-md navbar-light">
-            <div class="container">
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="#">
-                    <strong>Navbar</strong>
-                </a>
-                <div class="collapse navbar-collapse" id="navbarNav1">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link">Pricing</a>
-                        </li>
-                        <li class="nav-item dropdown btn-group">
-                            <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                            <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
-                                <a class="dropdown-item">Action</a>
-                                <a class="dropdown-item">Another action</a>
-                                <a class="dropdown-item">Something else here</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <form class="form-inline waves-effect waves-light">
-                        <input class="form-control" type="text" placeholder="Search">
-                    </form>
-                </div>
+        <nav class="navbar navbar-toggleable-md navbar-dark fixed-top scrolling-navbar">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <strong>Pineapple</strong>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav1">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Pricing</a>
+                    </li>
+                </ul>
+                <form class="form-inline waves-effect waves-light">
+                    <input class="form-control" type="text" placeholder="Search">
+                </form>
             </div>
-        </nav>
+        </div>
+    </nav>
         <!--/.Navbar-->
     </header>
 
-    <main>
+        <main>
         <!--Main layout-->
         <div class="container">
 
@@ -109,86 +137,77 @@
 
     <!--Footer-->
     <footer class="page-footer center-on-small-only">
-        <!--Footer links-->
+
+        <!--Footer Links-->
         <div class="container-fluid">
             <div class="row">
+
                 <!--First column-->
                 <div class="col-md-3 offset-lg-1 hidden-lg-down">
-                    <h5 class="title"><strong>About material design</strong></h5>
-                    <p>Material Design (codenamed Quantum Paper) is a design language developed by Google.</p>
+                    <h5 class="title">ABOUT MATERIAL DESIGN</h5>
+                    <p>Material Design (codenamed Quantum Paper) is a design language developed by Google. </p>
+
                     <p>Material Design for Bootstrap (MDB) is a powerful Material Design UI KIT for most popular HTML, CSS, and JS framework - Bootstrap.</p>
                 </div>
                 <!--/.First column-->
+
                 <hr class="hidden-md-up">
+
                 <!--Second column-->
                 <div class="col-lg-2 col-md-4 offset-lg-1">
-                    <h5 class="title"><strong>First column</strong></h5>
+                    <h5 class="title">First column</h5>
                     <ul>
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
+                        <li><a href="#!">Link 1</a></li>
+                        <li><a href="#!">Link 2</a></li>
+                        <li><a href="#!">Link 3</a></li>
+                        <li><a href="#!">Link 4</a></li>
                     </ul>
                 </div>
                 <!--/.Second column-->
+
                 <hr class="hidden-md-up">
+
                 <!--Third column-->
                 <div class="col-lg-2 col-md-4">
-                    <h5 class="title"><strong>Second column</strong></h5>
+                    <h5 class="title">Second column</h5>
                     <ul>
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
+                        <li><a href="#!">Link 1</a></li>
+                        <li><a href="#!">Link 2</a></li>
+                        <li><a href="#!">Link 3</a></li>
+                        <li><a href="#!">Link 4</a></li>
                     </ul>
                 </div>
                 <!--/.Third column-->
+
                 <hr class="hidden-md-up">
+
                 <!--Fourth column-->
                 <div class="col-lg-2 col-md-4">
-                    <h5 class="title"><strong>Third column</strong></h5>
+                    <h5 class="title">Third column</h5>
                     <ul>
-                        <li>
-                            <a href="#!">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!">Link 4</a>
-                        </li>
+                        <li><a href="#!">Link 1</a></li>
+                        <li><a href="#!">Link 2</a></li>
+                        <li><a href="#!">Link 3</a></li>
+                        <li><a href="#!">Link 4</a></li>
                     </ul>
                 </div>
                 <!--/.Fourth column-->
+
             </div>
         </div>
+        <!--/.Footer Links-->
+
+        <hr>
 
         <!--Copyright-->
         <div class="footer-copyright">
-            <div class="containter-fluid">
-                © 2015 Copyright: Pineapple NTNU
+            <div class="container-fluid">
+                © 2017 Copyright: Pineapple NTNU </a>
+
             </div>
         </div>
         <!--/.Copyright-->
+
     </footer>
     <!--/.Footer-->
 
@@ -207,4 +226,3 @@
     <script type="text/javascript" src="../static/js/mdb.min.js"></script>
 
 </body>
-
