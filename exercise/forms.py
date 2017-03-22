@@ -17,7 +17,13 @@ class QuestionForm(forms.ModelForm):
         fields = '__all__'
 
 
-def make_answer_form(choices):
-    class AnswerForm(forms.Form):
+def make_question_form(choices, correct_ans):
+    """ used to display questions. Needs to be identical to AnswerForm """
+    class QuestionForm(forms.Form):
         Answer = forms.ChoiceField(choices=choices, widget=forms.RadioSelect)
-    return AnswerForm
+        correct = forms.HiddenInput()
+    return QuestionForm
+
+
+class AnswerForm(forms.Form):
+    Answer = forms.CharField()
