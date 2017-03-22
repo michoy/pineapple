@@ -58,6 +58,7 @@ class Question(models.Model):
 
 class Exercise(models.Model):
     title = models.CharField(max_length=80, primary_key=True)
+    private = models.BooleanField(default=False)
     course = models.ForeignKey(Course)
     contains = models.ManyToManyField(Question)  # Spørsmålet oppgaven vil tilby
 

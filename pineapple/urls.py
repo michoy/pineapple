@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^base/', exercise.views.base),
     url(r'^overview/', overview.views.courses),
+    #url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
+    url(r'^login/$', about.views.login_view, name='/login/')
     ]
