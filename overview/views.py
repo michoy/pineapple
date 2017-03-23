@@ -16,8 +16,12 @@ def get_course_list(username):
         for each in user.coursecollection.courses.all():
             course_list.append((each.name, each.description))
     if 'Lecturer' in userGroups:
-        for each in user.courseadmin.courses.all():
+        for each in user.coursecollection.courses.all():
             course_list.append((each.name, each.description))
+        for each in Course.objects.all():
+            if list(each.administrators.all().values_list('username', flat=True)):
+                course_list.append((each.name, each.description))
+    print(course_list)
     return course_list
 
 
