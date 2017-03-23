@@ -1,7 +1,14 @@
+<!-- PLACEHOLDER FOR DEMO PURPOSES -->
 {% extends "base.html" %}
 
 {% block title %}Course{% endblock %}
 
 {% block content %}
 
+    {% for exercise in exercises %}
+        <form action="" method="post">
+            <button name={{ exercise }} value="upvote">Go To {{ exercise }}</button>
+        </form>
+    {% endfor %}
 {% endblock %}
+
