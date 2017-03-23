@@ -11,7 +11,7 @@ def base(request):
 
 
 @login_required()
-def do_exercise(request):
+def do_exercise(request, exer_id):
     """ 1. Sends form with alternatives through context. Receives answer alternative.
      2. Evaluates it and saves the result. Sends context with correct value and empty form.
      3. recieves request without post. Send context with new alternatives (1.) """
@@ -35,22 +35,35 @@ def do_exercise(request):
         return render(request, 'exercise.html', {'form': form, 'correct': correct})
     else:
         # todo: retrieve a valid question
+        questions = ResultCollection.objects.raw(
+            'SELECT DISTINCT R.id, R.question_id '
+            'FROM exercise_resultcollection AS Rc '
+            'JOIN exercise_resultcollection_results AS RcR ON Rc.id = RcR.resultcollection_id '
+            'JOIN exercise_result AS R ON RcR.result_id = R.id '
+            'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
+            'WHERE EC.exercise_id = %s', [exer_id]
+        )
+        '''
         cursor = connection.cursor()
         cursor.execute(
-            'SELECT question '
-            'FROM auth_user  JOIN (exercise_resultcollection, exercise_resultcollection_results,exercise_result, exercise_question) '
-            'ON (auth_user.id = exercise_resultcollection.student_id) AND '
-            '(exercise_resultcollection.id = exercise_resultcollection_results.resultcollection_id) AND '
-            '(exercise_resultcollection_results.result_id = exercise_result.id) AND '
-            'exercise_result.question_id = exercise_question.title '
-            'WHERE result.id = NULL'
-            '')
-        choices = cursor.fetchall()
+            'SELECT DISTINCT EC.question_id '
+            'FROM exercise_resultcollection AS Rc '
+            'JOIN exercise_resultcollection_results AS RcR ON Rc.id = RcR.resultcollection_id '
+            'JOIN exercise_result AS R ON RcR.result_id = R.id '
+            'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
+            'WHERE EC.exercise_id = %s', [exer_id]
+        )
+        stuff = cursor.fetchall()
+        '''
         correct_ans = 'alt_1'
+        #que = Question.objects.get(questions['question.id'])
+        choices = (
+            #"('alt_1', que.alternative_1),
+        )
         que_form = make_question_form(choices, correct_ans)
         context = {
             'form': que_form,
             #'question': title,
-            #'stuff': stuff,
+            'stuff': stuff,
         }
         return render(request, 'exercise.html', context)
