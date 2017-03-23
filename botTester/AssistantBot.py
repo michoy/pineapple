@@ -76,6 +76,8 @@ def gen_reading_rec(num, dist_dict):
         selected_pks.extend(random.sample(tag_pks, min(x, len(tag_pks))))
     return selected_pks
 
+def gen_graph_data(mode, username):
+    pass
 
 def main():
     rec = make_rec('Pål', 'TDT4140')

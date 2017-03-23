@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from exercise.models import *
 
+from django.db import connection
 # Simple script to populate the database with objects for testing and demonstration
 
 def add_reading_material(title, link):
@@ -279,6 +280,17 @@ def main():
     add_result(True, 'Q3', 'Per')
     add_result(True, 'Q3', 'Pål')
 
-
+    #cursor=connection.cursor()
+    #cursor.execute(
+    #    'SELECT title '
+    #    'FROM auth_user  JOIN (exercise_resultcollection, exercise_resultcollection_results,exercise_result, exercise_question) '
+    #    'ON (auth_user.id = exercise_resultcollection.student_id) AND '
+    #    '(exercise_resultcollection.id = exercise_resultcollection_results.resultcollection_id) AND '
+    #    '(exercise_resultcollection_results.result_id = exercise_result.id) AND '
+    #    'exercise_result.question_id = exercise_question.title '
+    #    '')
+    #x = cursor.fetchall()
+    #print(x)
+    #Joiner feil her, kim enn som løyse det e ein gud
 if __name__ == '__main__':
     main()

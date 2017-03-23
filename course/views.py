@@ -22,7 +22,7 @@ def lecturer_course_view(request):
         # course = request['course]
         course = tempCourseName
         exercise_name_list = list(Exercise.objects.filter(course__name=course).filter(private=False).values_list('title', flat=True))
-        return render(request, 'student_course.html', {'exercises': exercise_name_list, 'course': course})
+        return render(request, 'lecturer_course.html', {'exercises': exercise_name_list, 'course': course})
     else:
         pass
 
