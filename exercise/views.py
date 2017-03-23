@@ -41,7 +41,7 @@ def do_exercise(request, exer_id):
             'JOIN exercise_resultcollection_results AS RcR ON Rc.id = RcR.resultcollection_id '
             'JOIN exercise_result AS R ON RcR.result_id = R.id '
             'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
-            'WHERE EC.exercise_id = %s', [exer_id]
+            'WHERE EC.exercise_id = %s AND Rc.student_id = %s', [exer_id, current_user.id]
         )
         '''
         cursor = connection.cursor()
@@ -55,6 +55,7 @@ def do_exercise(request, exer_id):
         )
         stuff = cursor.fetchall()
         '''
+        stuff = questions.columns
         correct_ans = 'alt_1'
         #que = Question.objects.get(questions['question.id'])
         choices = (
