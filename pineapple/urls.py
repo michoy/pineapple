@@ -26,8 +26,16 @@ import botTester.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^base/', exercise.views.base),
-    url(r'^overview/', overview.views.courses),
     #url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
     url(r'^login/$', about.views.login_view, name='/login/'),
+    url(r'^course/$', course.views.lecturer_course_view, name='/course/'),
+<<<<<<< HEAD
     url(r'^about/', about.views.about),
+    url(r'^exercise/(?P<exer_id>[0-9]+)/$', exercise.views.do_exercise),
+=======
+    url(r'^course/(?P<fagkode>[\w]{7})/$', course.views.delegate_course_view), # TODO VI KAN KUN HA 7-TEGN FAGKODER!
+    url(r'^about/$', about.views.about),
+    url(r'^exercise/$', exercise.views.do_exercise),
+    url(r'^lecturer_course/$', course.views.lecturer_course),
+>>>>>>> refs/remotes/origin/master
     ]

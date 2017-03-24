@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+<<<<<<< HEAD
 {% block pagename %}Fagkode{%  endblock %}
 
 {% block p_heading %}Fagnavn{%  endblock %}
@@ -7,7 +8,43 @@
 {% block p_2heading %}Fagkode{%  endblock %}
 
 {% block title %}Course{% endblock %}
+=======
+{% block title %}CourseCode{% endblock %}
+{% block p_heading %}CourseCode{% endblock %}
+{% block p_2heading %}CourseName{% endblock %}
+>>>>>>> refs/remotes/origin/master
 
 {% block content %}
+{% csrf_token %}
 
+    <!-- Exercise pluss chart row -->
+    <div class="container">
+        <div class="row">
+            <!-- Exercise card -->
+            <div class="col-4 offset-1" >
+                {% for each in exercises %}
+                    <!--Card-->
+                    <div class="card wow fadeInUp">
+                        <!--Card content-->
+                        <div class="card-block text-center">
+                            <!--Title-->
+                            <h4 class="card-title">{{ each }}</h4>
+                            <hr>
+                            <!--Text-->
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
+                            <!--Button-->
+                            <form action="" method="post">
+                                <button type="button" name="exercise-select" value={{ each }} class="btn btn-primary btn-lg btn-block">Go to Exercise!</button>
+                            </form>
+                        </div>
+                        <!--/.Card content-->
+                    </div>
+                    <!--/.Card-->
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </div>
+    <!-- End: Exercise pluss chart row -->
 {% endblock %}

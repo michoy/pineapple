@@ -7,6 +7,7 @@
 {% block p_2heading %}TMA4140{% endblock %}
 
 {% block content %}
+<<<<<<< HEAD
     <div class="row">
         <div class="md-form col-12">
             <input type="text" id="form1" class="form-control">
@@ -79,4 +80,13 @@
         </div>
     </div>
     <!--/.Card-->
+=======
+    {% for course in courseList %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <button name='course-select' value={{ course.0 }}>Go To {{ course.0 }}</button>
+        </form>
+        <p>{{ course.1 }}</p>
+    {% endfor %}
+>>>>>>> refs/remotes/origin/master
 {% endblock %}

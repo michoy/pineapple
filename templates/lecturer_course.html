@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Course{% endblock %}
+{% block title %}CourseCode{% endblock %}
+{% block p_heading %}CourseCode{% endblock %}
+{% block p_2heading %}CourseName{% endblock %}
 
 {% block content %}
+{% csrf_token %}
+
+
+    <canvas id="lineChart" height="400" width="400" style="border: dotted"></canvas>
+
 
 {% endblock %}
+
+    <script type="text/javascript" src="/static/js/lecturer_course.js"></script>
+        <!-- Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
