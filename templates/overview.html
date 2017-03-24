@@ -5,8 +5,9 @@
 {% block content %}
     {% for course in courseList %}
         <form action="" method="post">
-            <button name={{ course }} value="upvote">Go To {{ course }}</button>
+            {% csrf_token %}
+            <button name='course-select' value={{ course.0 }}>Go To {{ course.0 }}</button>
         </form>
-        <p>{{ course }}</p>
+        <p>{{ course.1 }}</p>
     {% endfor %}
 {% endblock %}
