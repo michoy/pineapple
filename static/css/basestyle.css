@@ -7,7 +7,7 @@
 /*
         nav-item a {
         color: black;
-     }   
+     }
 */
        footer.page-footer a {
         color: #323232;
@@ -17,7 +17,11 @@
             background-color: #2E2E2E;
             margin-top: 2rem;
             color: black;
+<<<<<<< HEAD
+
+=======
         
+>>>>>>> refs/remotes/origin/master
       }
 /*
 .navbar.navbar-dark .navbar-brand, .navbar.navbar-dark .navbar-brand:hover {
