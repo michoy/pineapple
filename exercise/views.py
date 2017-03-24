@@ -18,21 +18,20 @@ def do_exercise(request, exer_id):
     current_user = request.user
     if request.method == 'POST':
         correct = False
+        wrong = False
         form = AnswerForm(request.POST)
         if form.is_valid():
-            que = 'the question obj'    # todo: keep question object in process
             data = form.cleaned_data    # gives an alt_#
-            if True:       # data == righ alternative
-                res = Result(True, que)
-                res.save()
-                rc = ResultCollection(current_user, res)        # todo: save result properly
-                rc.save()
-                correct = True
-            else:
-                res = Result(False, que)
-                # osv..
+            if request.POST['submit']:
+                que_pk = request.POST['submit']
+                que = Question.objects.get(title=que_pk)
+                if int(data['Answer']) == que.correct_alternative:
+                    # todo: save
+                    correct = True
+                else:
+                    wrong = True
             form = []
-        return render(request, 'exercise.html', {'form': form, 'correct': correct})
+        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong})
     else:
         # todo: retrieve a valid question
         questions = ResultCollection.objects.raw(
@@ -56,15 +55,18 @@ def do_exercise(request, exer_id):
         stuff = cursor.fetchall()
         '''
         stuff = questions.columns
-        correct_ans = 'alt_1'
-        #que = Question.objects.get(questions['question.id'])
+        que = Question.objects.first()
         choices = (
-            #"('alt_1', que.alternative_1),
+            ('1', que.alternative_1),
+            ('2', que.alternative_2),
+            ('3', que.alternative_3),
+            ('4', que.alternative_4),
         )
-        que_form = make_question_form(choices, correct_ans)
+        que_form = make_question_form(choices)
         context = {
             'form': que_form,
+            'que_pk': que.title,
             #'question': title,
-            'stuff': stuff,
+            #'stuff': stuff,
         }
         return render(request, 'exercise.html', context)

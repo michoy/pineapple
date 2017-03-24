@@ -3,10 +3,30 @@
 {% block title %}Exercise{% endblock %}
 
 {% block content %}
-        <form action="" method="post">
+
+    {% if form %}
+
+    <form action="" method="post">
         {% csrf_token %}
         {{ form.as_table }}
-        <input type="submit" value="Check">
+        <button name="submit" class="btn btn-primary btn-lg" value={{ que_pk }}>Check</button>
     </form>
-    {{ stuff }}
+    {% else %}
+        <button type="button" id="next" class="btn btn-primary btn-lg" onClick="window.location.reload()">Next</button>
+    {% endif %}
+
+    {% if correct %}
+        <p>The answer was correct</p>
+    {% elif wrong %}
+        <p>The answer was wrong</p>
+    {% else %}
+        <p></p>
+    {% endif %}
+
 {% endblock %}
+
+<script type="text/javascript">
+    document.getElementById("next").onclick = function () {
+        location.href = "/";
+    };
+</script>
