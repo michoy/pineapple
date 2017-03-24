@@ -29,3 +29,6 @@ def delegate_course_view(request, fagkode=''):
         return lecturer_course_view(request,fagkode)
     else:
         return student_course_view(request,fagkode)
+
+def lecturer_course(request):
+    return render(request,'lecturer_course.html')
