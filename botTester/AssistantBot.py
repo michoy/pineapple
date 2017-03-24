@@ -34,7 +34,8 @@ def gen_exercise(num, dist_dict, username, course):
     new_e = add_exercise(
         title=user.username+"'s tailored Exercise "+(str(col.exercises.all().count()+1)),
         course=course,
-        question_list=selected_pks
+        question_list=selected_pks,
+        private=True,
     )
     col.exercises.add(new_e)
     return new_e
@@ -77,12 +78,46 @@ def gen_reading_rec(num, dist_dict):
     return selected_pks
 
 def gen_graph_data(mode, username):
+    #Delegate to other methods
+    pass
+
+def gen_lecturer_exercise(course_name):
+    exercise_list = list(Exercise.objects.filter(course__name=course_name)
+                         .filter(private=False).values_list('title',flat=True))
+    data_points = []
+    for ex_name in exercise_list:
+        q_list = list(Exercise.objects.get(title=ex_name).contains.all().values_list('title',flat=True))
+        correct = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
+                      .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if correct != 0:
+            possible = int(Result.objects.filter(question__title__in=q_list)
+                           .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+            data_points.append(int((correct/possible)*100))
+        else:
+            data_points.append(100)
+    return data_points
+
+def gen_lecturer_theme(course_name):
+    tag_list = list(Question.themeTags.filter(question__belongsTo=course_name).values_list('name',flat=True).distinct())
+
+def gen_lecturer_time(course_name):
+    pass
+
+def gen_student_exercise(course_name):
+    pass
+
+def gen_student_theme(course_name):
+    pass
+
+def gen_student_time(course_name):
     pass
 
 def main():
     rec = make_rec('Pål', 'TDT4140')
     gen_exercise(2, rec, 'Pål', 'TDT4140')
     gen_reading_rec(3, rec)
+    print(gen_lecturer_exercise('TDT4140'))
+
 
 if __name__ == '__main__':
     main()

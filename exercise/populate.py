@@ -55,8 +55,8 @@ def add_question(title, question, alternative_list, correct_num, tag_list, belon
     # TODO: Rewrite question to allow arbitrary amount of alternatives?
 
 
-def add_exercise(title, course, question_list):
-    exercise = Exercise(title=title, course=Course.objects.get(name=course))
+def add_exercise(title, course, question_list, private=False):
+    exercise = Exercise(title=title, course=Course.objects.get(name=course), private=private)
     exercise.save()
     for each in question_list:
         exercise.contains.add(Question.objects.get(title=each))
@@ -235,7 +235,7 @@ def main():
     add_coursecollection('Per', ['TDT4140'])
     add_coursecollection('Pål', ['TDT4140', 'NyttFag'])
     add_coursecollection('Sofie', ['TDT4140'])
-    add_coursecollection('Pekka', ['TDT4140'])
+    add_coursecollection('Pekka', [])
     add_coursecollection('RandomStudAss', ['NyttFag'])
 
     # Question:
