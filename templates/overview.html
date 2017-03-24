@@ -7,7 +7,6 @@
 {% block p_2heading %}TMA4140{% endblock %}
 
 {% block content %}
-<<<<<<< HEAD
     <div class="row">
         <div class="md-form col-12">
             <input type="text" id="form1" class="form-control">
@@ -16,77 +15,30 @@
     </div>
     <!--Card-->
     <div class="row">
-        <div class="card col-lg-3 col-md-6 col-sm-12" style="
-            padding-left: 0px;
-            padding-right: 0px;
-            margin-left: 10px;
-            margin-right: 10px">
-            <!--Card image-->
-            <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
-            <!--/.Card image-->
+        {% for course in courseList %}
+            <div class="card col-lg-3 col-md-6 col-sm-12" style="
+                padding-left: 0px;
+                padding-right: 0px;
+                margin-left: 10px;
+                margin-right: 10px">
+                <!--Card image-->
+                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
+                <!--/.Card image-->
 
-            <!--Card content-->
-            <div class="card-block">
-                <!--Title-->
-                <h4 class="card-title">Fagkode</h4>
-                <!--Text-->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-success">Learn!</a>
+                <!--Card content-->
+                <div class="card-block">
+                    <!--Title-->
+                    <h4 class="card-title">{{ course.0 }}</h4>
+                    <!--Text-->
+                    <p class="card-text">{{ course.1 }}</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button name='course-select' class="btn btn-success" value={{ course.0 }}>Go To {{ course.0 }}</button>
+                    </form>
+                </div>
+                <!--/.Card content-->
             </div>
-            <!--/.Card content-->
-
-        </div>
-
-        <div class="card col-lg-3 col-md-6 col-sm-12" style="
-            padding-left: 0px;
-            padding-right: 0px;
-            margin-left: 10px;
-            margin-right: 10px">
-            <!--Card image-->
-            <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
-            <!--/.Card image-->
-
-            <!--Card content-->
-            <div class="card-block">
-                <!--Title-->
-                <h4 class="card-title">Fagkode</h4>
-                <!--Text-->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-success">Learn!</a>
-            </div>
-            <!--/.Card content-->
-
-        </div>
-
-                <div class="card col-lg-3 col-md-6 col-sm-12" style="
-            padding-left: 0px;
-            padding-right: 0px;
-            margin-left: 10px;
-            margin-right: 10px">
-            <!--Card image-->
-            <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
-            <!--/.Card image-->
-
-            <!--Card content-->
-            <div class="card-block">
-                <!--Title-->
-                <h4 class="card-title">Fagkode</h4>
-                <!--Text-->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-success">Learn!</a>
-            </div>
-            <!--/.Card content-->
-
-        </div>
+        {% endfor %}
     </div>
     <!--/.Card-->
-=======
-    {% for course in courseList %}
-        <form action="" method="post">
-            {% csrf_token %}
-            <button name='course-select' value={{ course.0 }}>Go To {{ course.0 }}</button>
-        </form>
-        <p>{{ course.1 }}</p>
-    {% endfor %}
->>>>>>> refs/remotes/origin/master
 {% endblock %}

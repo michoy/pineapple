@@ -241,21 +241,21 @@ def main():
     # Question:
     add_question(
         'Q1',
-        'My car says',
-        ['dingdong', 'clingcling', 'boom', 'poof'],
-        2,
-        ['basicStuff'],
-        'TDT4140',
-        11
-    )
-    add_question(
-        'Q2',
         'What day is it?',
         ['monday', 'april 27', 'payday', 'taco-friday'],
         4,
         ['basicStuff', 'PU-prosjekt'],
         'TDT4140',
         2
+    )
+    add_question(
+        'Q2',
+        'My car says',
+        ['dingdong', 'clingcling', 'boom', 'poof'],
+        2,
+        ['basicStuff'],
+        'TDT4140',
+        11
     )
     add_question(
         'Q3',

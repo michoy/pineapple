@@ -2,13 +2,15 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from exercise.models import *
 from django.http import HttpResponseRedirect
+
+
 @login_required
 def student_course_view(request, fagkode):
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'GET':
         exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).values_list('title', flat=True))
-        return render(request, 'student_course.html', {'exercises':exercise_name_list, 'course':fagkode})
+        return render(request, 'student_course.html', {'exercises': exercise_name_list, 'course': fagkode})
     else:
         pass
 
