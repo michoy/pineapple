@@ -12,34 +12,30 @@
 
 
     <!-- Exercise pluss chart row -->
-    <div class="container">
-        <div class="row">
-            <!-- Exercise card -->
-            <div class="col-4 offset-1" >
-                {% for each in exercises %}
-                    <!--Card-->
-                    <div class="card wow fadeInUp">
-                        <!--Card content-->
-                        <div class="card-block text-center">
-                            <!--Title-->
-                            <h4 class="card-title">{{ each }}</h4>
-                            <hr>
-                            <!--Text-->
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
-                            <!--Button-->
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                <button type="button" class="btn btn-primary btn-lg btn-block" name="exercise-select" value={{ each }} >Go to Exercise!</button>
-                            </form>
-                        </div>
-                        <!--/.Card content-->
-                    </div>
-                    <!--/.Card-->
-                {% endfor %}
+    <div class="row">
+        {% for each in exercises %}
+            <div class="card col-lg-3 col-md-6 col-sm-12" style="
+                padding-left: 0px;
+                padding-right: 0px;
+                margin-left: 10px;
+                margin-right: 10px">
+                <!--Card image-->
+                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
+                <!--/.Card image-->
+                <!--Card content-->
+                <div class="card-block">
+                    <!--Title-->
+                    <h4 class="card-title">{{ each }}</h4>
+                    <!--Text-->
+                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button name='course-select' class="btn btn-success" value={{ each }}>Go To Exercise!</button>
+                    </form>
+                </div>
             </div>
-
-
-        </div>
+            <!--/.Card content-->
+        {% endfor %}
     </div>
     <!-- End: Exercise pluss chart row -->
 {% endblock %}
