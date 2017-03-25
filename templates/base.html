@@ -17,7 +17,6 @@
 
     <!-- Material Design Bootstrap -->
     <link href="/static/css/mdb.min.css" rel="stylesheet">
-    <link href="/static/css/mdb.min.css" rel="stylesheet">
 
     <!-- Template styles -->
     <style>
@@ -79,33 +78,154 @@
 
     <header>
         <!--Navbar-->
-        <nav class="navbar navbar-toggleable-md navbar-dark fixed-top scrolling-navbar">
-        <div class="container">
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <strong>Pineapple</strong>
-            </a>
-            <div class="collapse navbar-collapse" id="navbarNav1">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link">Home <span class="sr-only">(current)</span></a>
+        {% if user.is_authenticated %}
+            <nav class="navbar navbar-toggleable-md navbar-dark fixed-top scrolling-navbar">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <strong>Pineapple</strong>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav1">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a href="/about" class="nav-link">About<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/overview" class="nav-link">Overview</a>
+                        </li>
+                    </ul>
+                    <li class="nav-item btn-group">
+                        <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a href="/login" class="dropdown-item">Log in</a>
+                            <a href="/logout" class="dropdown-item">Log out</a>
+                            <a href="/register" class="dropdown-item">Register</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">Features</a>
+                </div>
+            </div>
+        </nav>
+        {% else %}
+            <nav class="navbar navbar-toggleable-md navbar-dark fixed-top scrolling-navbar">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <strong>Pineapple</strong>
+                </a>
+                <div class="collapse navbar-collapse" id="navbarNav1">
+                     <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a href="/about" class="nav-link">About<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                    <li class="nav-item btn-group">
+                        <a class="nav-link dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profile</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a href="/login" class="dropdown-item">Log in</a>
+                            <a href="/logout" class="dropdown-item">Log out</a>
+                            <a href="/register" class="dropdown-item">Register</a>
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">Pricing</a>
-                    </li>
-                </ul>
-                <form class="form-inline waves-effect waves-light">
-                    <input class="form-control" type="text" placeholder="Search">
-                </form>
+                </div>
+            </div>
+        </nav>
+        {% endif %}
+        <!--/.Navbar-->
+
+        <!-- Log inn modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="w-100"><i class="fa fa-user"></i> Login</h3>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="md-form">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input type="text" id="form2" class="form-control">
+                            <label for="form2">Your email</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix"></i>
+                            <input type="password" id="form3" class="form-control">
+                            <label for="form3">Your password</label>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg">Login</button>
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <div class="options text-right">
+                            <p>Not a member? <a href="#">Sign Up</a></p>
+                            <p>Forgot <a href="#">Password?</a></p>
+                        </div>
+                        <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!--/.Content-->
             </div>
         </div>
-    </nav>
-        <!--/.Navbar-->
+        <!--/. Log inn modal -->
+
+        <!-- Register modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header flex-column">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <div class="md-form">
+                            <i class="fa fa-envelope prefix"></i>
+                            <input type="text" id="form2" class="form-control">
+                            <label for="form2">Your email</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix"></i>
+                            <input type="password" id="form3" class="form-control">
+                            <label for="form3">Your password</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix"></i>
+                            <input type="password" id="form4" class="form-control">
+                            <label for="form4">Repeat password</label>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary btn-lg">Sign up</button>
+                            <fieldset class="form-group"
+                                <input type="checkbox" id="checkbox1">
+                                <label for="checkbox1">Subscribe me to the newsletter</label>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <div class="options">
+                            <p>Already have an account? <a href="#">Log in</a></p>
+                        </div>
+                        <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+    <!--/. Register modal -->
     </header>
 
         <main>

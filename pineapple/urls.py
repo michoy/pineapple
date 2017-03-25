@@ -27,7 +27,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^base/', exercise.views.base),
     #url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
-    url(r'^login/$', about.views.login_view, name='/login/'),
+    #url(r'^login/$', about.views.login_view, name='/login/'),
+    url(r'^login/$', about.views.do_login),
+    url(r'^logout/$', about.views.do_logout),
+    url(r'^register/$', about.views.register),
     url(r'^course/$', course.views.lecturer_course_view, name='/course/'),
     url(r'^about/', about.views.about),
     url(r'^exercise/(?P<exer_id>[0-9]+)/$', exercise.views.do_exercise),
@@ -35,5 +38,5 @@ urlpatterns = [
     url(r'^about/$', about.views.about),
     url(r'^exercise/$', exercise.views.do_exercise),
     url(r'^lecturer_course/$', course.views.lecturer_course),
-    url(r'^overview/$', overview.views.courses)
+    url(r'^overview/$', overview.views.courses),
     ]
