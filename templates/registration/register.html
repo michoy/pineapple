@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+ <!--Form without header-->
+    <div class="card">
+        <div class="card-block">
+
+            <!--Header-->
+            <div class="text-center">
+                <h3><i class="fa fa-user"></i> Register:</h3>
+                <hr class="mt-2 mb-2">
+            </div>
+
+            <!--Body-->
+            <div class="md-form">
+                <i class="fa fa-user prefix"></i>
+                <input type="text" id="form2" class="form-control">
+                <label for="form2">Your username</label>
+            </div>
+
+            <div class="md-form">
+                <i class="fa fa-envelope prefix"></i>
+                <input type="text" id="form2" class="form-control">
+                <label for="form2">Your email</label>
+            </div>
+
+            <div class="md-form">
+                <i class="fa fa-lock prefix"></i>
+                <input type="password" id="form4" class="form-control">
+                <label for="form4">Your password</label>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-deep-purple">Sign up</button>
+            </div>
+
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer">
+            <div class="options">
+                <p>Already a member? <a href="/login">Log in</a></p>
+            </div>
+        </div>
+
+    </div>
+    <!--/Form without header-->
+
+{% endblock %}
