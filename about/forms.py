@@ -1,11 +1,10 @@
 # coding=utf-8
 """ This is where forms for the about module are stored """
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth import login
-from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from django.contrib.auth.models import User
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150, required=True)
@@ -26,6 +25,7 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         return user
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(max_length=150, required=True)
