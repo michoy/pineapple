@@ -11,8 +11,21 @@ def about(request):
     return render(request, 'about.html')
 
 
-def register(request):
-    return render(request, 'registration/register.html')
+def do_register(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect("/login/")
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        if User.objects.filter(username=username).exists():     # username allready taken
+            return render(request, 'registration/register.html', {'username_taken': True})
+        else:       # user can be created
+            user = User.objects.create_user(username, email, password)
+            login(request, user)
+            return render(request, 'registration/register.html', {'user_created': True})
+    else:
+        return render(request, 'registration/register.html')
 
 
 def login_view(request):
@@ -45,8 +58,6 @@ def do_login(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        print(username)
-        print(password)
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
