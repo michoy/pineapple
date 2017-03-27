@@ -77,46 +77,131 @@ def gen_reading_rec(num, dist_dict):
         selected_pks.extend(random.sample(tag_pks, min(x, len(tag_pks))))
     return selected_pks
 
+
 def gen_graph_data(mode, username):
-    #Delegate to other methods
+    # Delegate to other methods
     pass
+
 
 def gen_lecturer_exercise(course_name):
     exercise_list = list(Exercise.objects.filter(course__name=course_name)
-                         .filter(private=False).values_list('title',flat=True))
+                         .filter(private=False).values_list('title', flat=True))
     data_points = []
     for ex_name in exercise_list:
-        q_list = list(Exercise.objects.get(title=ex_name).contains.all().values_list('title',flat=True))
+        q_list = list(Exercise.objects.get(title=ex_name).contains.all().values_list('title', flat=True))
         correct = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
                       .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
-        if correct != 0:
-            possible = int(Result.objects.filter(question__title__in=q_list)
-                           .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        possible = int(Result.objects.filter(question__title__in=q_list)
+                       .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if possible != 0:
             data_points.append(int((correct/possible)*100))
         else:
-            data_points.append(100)
-    return data_points
+            data_points.append(0)
+    return exercise_list, data_points
+
 
 def gen_lecturer_theme(course_name):
-    tag_list = list(Question.themeTags.filter(question__belongsTo=course_name).values_list('name',flat=True).distinct())
+    data_points = []
+    # TODO: Optimaliser
+    # Finn spørsmål som hører til faget
+    q_list = list(Question.objects.filter(belongsTo__name=course_name).values_list('title', flat=True))
+    # Finn tags som hører til disse spørsmålene
+    tag_list = []
+    for q in q_list:
+        tag_list.extend(Question.objects.get(title=q).themeTags.exclude(name__in=tag_list)
+                        .values_list('name', flat=True))
+    # Finn performance for hver av disse tag-ene
+    for tag in tag_list:
+        correct = int(Result.objects.filter(question__belongsTo__name=course_name)
+                      .filter(question__themeTags__name__contains=tag).filter(resultVal=True)
+                      .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        possible = int(Result.objects.filter(question__belongsTo__name=course_name)
+                       .filter(question__themeTags__name=tag)
+                       .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if possible != 0:
+            data_points.append(int((correct/possible)*100))
+        else:
+            data_points.append(0)
+    return tag_list, data_points
 
-def gen_lecturer_time(course_name):
-    pass
+# def gen_lecturer_time(course_name):
+#    pass
 
-def gen_student_exercise(course_name):
-    pass
 
-def gen_student_theme(course_name):
-    pass
+def gen_student_exercise(course_name, username):
+    user = User.objects.get(username=username)
+    exercise_list = list(Exercise.objects.filter(course__name=course_name)
+                         .filter(private=False).values_list('title', flat=True))
+    data_points_class = []
+    data_points_student = []
+    for ex_name in exercise_list:
+        q_list = list(Exercise.objects.get(title=ex_name).contains.all().values_list('title', flat=True))
+        correct_class = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
+                            .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        possible_class = int(Result.objects.filter(question__title__in=q_list)
+                             .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if possible_class != 0:
+            data_points_class.append(int((correct_class/possible_class)*100))
+        else:
+            data_points_class.append(0)
+        correct_student = int(user.resultcollection.results.filter(question__title__in=q_list).filter(resultVal=True)
+                              .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        possible_student = int(user.resultcollection.results.filter(question__title__in=q_list)
+                               .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if possible_student != 0:
+            data_points_student.append(int((correct_student/possible_student)*100))
+        else:
+            data_points_student.append(0)
+    return exercise_list, data_points_class, data_points_student
 
-def gen_student_time(course_name):
-    pass
+
+def gen_student_theme(course_name, username):
+    user = User.objects.get(username=username)
+    data_points_stud = []
+    data_points_class = []
+    # TODO: Optimaliser
+    # Finn spørsmål som hører til faget
+    q_list = list(Question.objects.filter(belongsTo__name=course_name).values_list('title', flat=True))
+    # Finn tags som hører til disse spørsmålene
+    tag_list = []
+    for q in q_list:
+        tag_list.extend(Question.objects.get(title=q).themeTags.exclude(name__in=tag_list)
+                        .values_list('name', flat=True))
+    # Finn performance for hver av disse tag-ene
+    print(tag_list)
+    for tag in tag_list:
+        print(tag)
+        correct_class = int(Result.objects.filter(question__belongsTo__name=course_name)
+                            .filter(question__themeTags__name__contains=tag).filter(resultVal=True)
+                            .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        possible_class = int(Result.objects.filter(question__belongsTo__name=course_name)
+                             .filter(question__themeTags__name=tag)
+                             .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if possible_class != 0:
+            data_points_class.append(int((correct_class / possible_class) * 100))
+        else:
+            data_points_class.append(0)
+        correct_stud = int(user.resultcollection.results.filter(question__belongsTo__name=course_name)
+                           .filter(question__themeTags__name__contains=tag).filter(resultVal=True)
+                           .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        possible_stud = int(user.resultcollection.results.filter(question__belongsTo__name=course_name)
+                            .filter(question__themeTags__name=tag)
+                            .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        if possible_stud != 0:
+            data_points_stud.append(int((correct_stud / possible_stud) * 100))
+        else:
+            data_points_stud.append(0)
+    return tag_list, data_points_class, data_points_stud
+
+
+# def gen_student_time(course_name):
+#    pass
 
 def main():
     rec = make_rec('Pål', 'TDT4140')
     gen_exercise(2, rec, 'Pål', 'TDT4140')
     gen_reading_rec(3, rec)
-    print(gen_lecturer_exercise('TDT4140'))
+    print(gen_student_theme('TDT4140', 'Pål'))
 
 
 if __name__ == '__main__':
