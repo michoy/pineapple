@@ -11,13 +11,12 @@ class TestForm(forms.Form):
     num = forms.IntegerField()
 
 
-class QuestionForm(forms.ModelForm):
-    class Meta:
-        model = Question
-        fields = '__all__'
-
-
-def make_answer_form(choices):
-    class AnswerForm(forms.Form):
+def make_question_form(choices) :
+    """ used to display questions. Needs to be identical to AnswerForm """
+    class QuestionForm(forms.Form):
         Answer = forms.ChoiceField(choices=choices, widget=forms.RadioSelect)
-    return AnswerForm
+    return QuestionForm
+
+
+class AnswerForm(forms.Form):
+    Answer = forms.CharField()

@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from exercise.models import Question, Exercise, ResultCollection, Result
-from exercise.forms import QuestionForm, make_answer_form
-from django.db.models import Q
+from exercise.forms import AnswerForm, make_question_form
+from django.db import connection
 
 
 def base(request):
@@ -11,24 +11,62 @@ def base(request):
 
 
 @login_required()
-def do_exercise(request):
-    """ Displayes the question in the answer-question site """
+def do_exercise(request, exer_id):
+    """ 1. Sends form with alternatives through context. Receives answer alternative.
+     2. Evaluates it and saves the result. Sends context with correct value and empty form.
+     3. recieves request without post. Send context with new alternatives (1.) """
     current_user = request.user
     if request.method == 'POST':
-        pass
+        correct = False
+        wrong = False
+        form = AnswerForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data    # gives an alt_#
+            if request.POST['submit']:
+                que_pk = request.POST['submit']
+                que = Question.objects.get(title=que_pk)
+                if int(data['Answer']) == que.correct_alternative:
+                    # todo: save
+                    correct = True
+                else:
+                    wrong = True
+            form = []
+        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong})
     else:
-        result_cols = ResultCollection.results
-        exercise = Exercise.objects.first()
-        #question = exercise.contains.exclude.first()
-        stuff = result_cols
-        choices = (
-            ('alt_1', 'Blue'),
-            ('alt_2', 'Green'),
-            ('alt_3', 'Black'),
+        # todo: retrieve a valid question
+        questions = ResultCollection.objects.raw(
+            'SELECT DISTINCT R.id, R.question_id '
+            'FROM exercise_resultcollection AS Rc '
+            'JOIN exercise_resultcollection_results AS RcR ON Rc.id = RcR.resultcollection_id '
+            'JOIN exercise_result AS R ON RcR.result_id = R.id '
+            'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
+            'WHERE EC.exercise_id = %s AND Rc.student_id = %s', [exer_id, current_user.id]
         )
-        que_form = make_answer_form(choices)
+        '''
+        cursor = connection.cursor()
+        cursor.execute(
+            'SELECT DISTINCT EC.question_id '
+            'FROM exercise_resultcollection AS Rc '
+            'JOIN exercise_resultcollection_results AS RcR ON Rc.id = RcR.resultcollection_id '
+            'JOIN exercise_result AS R ON RcR.result_id = R.id '
+            'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
+            'WHERE EC.exercise_id = %s', [exer_id]
+        )
+        stuff = cursor.fetchall()
+        '''
+        stuff = questions.columns
+        que = Question.objects.first()
+        choices = (
+            ('1', que.alternative_1),
+            ('2', que.alternative_2),
+            ('3', que.alternative_3),
+            ('4', que.alternative_4),
+        )
+        que_form = make_question_form(choices)
         context = {
             'form': que_form,
-            'stuff': stuff,
+            'que_pk': que.title,
+            #'question': title,
+            #'stuff': stuff,
         }
         return render(request, 'exercise.html', context)

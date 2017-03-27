@@ -1,13 +1,44 @@
 {% extends "base.html" %}
 
-{% block title %}Overview{% endblock %}
+{% block pagename %}Overview{% endblock %}
+
+{% block p_heading %}Programvareutvikling{% endblock %}
+
+{% block p_2heading %}TMA4140{% endblock %}
 
 {% block content %}
-    {% for course in courseList %}
-        <form action="" method="post">
-            {% csrf_token %}
-            <button name='course-select' class="btn btn-primary btn-lg " value={{ course.0 }}>Go To {{ course.0 }}</button>
-        </form>
-        <p>{{ course.1 }}</p>
-    {% endfor %}
+    <div class="row">
+        <div class="md-form col-12">
+            <input type="text" id="form1" class="form-control">
+            <label for="form1" class="">Type in subject ID</label>
+        </div>
+    </div>
+    <!--Card-->
+    <div class="row">
+        {% for course in courseList %}
+            <div class="card col-lg-3 col-md-6 col-sm-12" style="
+                padding-left: 0px;
+                padding-right: 0px;
+                margin-left: 10px;
+                margin-right: 10px">
+                <!--Card image-->
+                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
+                <!--/.Card image-->
+
+                <!--Card content-->
+                <div class="card-block">
+                    <!--Title-->
+                    <h4 class="card-title">{{ course.0 }}</h4>
+                    <!--Text-->
+                    <p class="card-text">{{ course.1 }}</p>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <button name='course-select' class="btn btn-success" value={{ course.0 }}>Go To {{ course.0 }}</button>
+                    </form>
+                </div>
+                <!--/.Card content-->
+            </div>
+        {% endfor %}
+    </div>
+    <!--/.Card-->
 {% endblock %}

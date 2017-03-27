@@ -6,7 +6,6 @@
 
 {% block content %}
 {% csrf_token %}
-
     <!-- Exercise pluss chart row -->
     <div class="container">
         <div class="row">
@@ -33,9 +32,12 @@
                     <!--/.Card-->
                 {% endfor %}
             </div>
-
-
         </div>
     </div>
-    <!-- End: Exercise pluss chart row -->
+    <canvas id="lineChart" height="400" width="400" style="border: dotted"></canvas>
+
 {% endblock %}
+
+    <script type="text/javascript" src="/static/js/lecturer_course.js"></script>
+        <!-- Charts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.bundle.js"></script>
