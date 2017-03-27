@@ -9,8 +9,6 @@
 {% block title %}{{ course }}{% endblock %}
 
 {% block content %}
-
-
     <!-- Exercise pluss chart row -->
     <div class="row">
         {% for each in exercises %}
@@ -30,7 +28,7 @@
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
                     <form action="" method="post">
                         {% csrf_token %}
-                        <button name='course-select' class="btn btn-success" value={{ each }}>Go To Exercise!</button>
+                        <button name='course-select' class="btn btn-success" value=value="{{ each|cut:" " }}">Go To Exercise!</button>
                     </form>
                 </div>
             </div>
