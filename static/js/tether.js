@@ -833,7 +833,7 @@ var TetherClass = (function () {
       tethers.forEach(function (tether, i) {
         if (tether === _this3) {
           tethers.splice(i, 1);
-          return;
+
         }
       });
     }
@@ -968,7 +968,7 @@ var TetherClass = (function () {
         if (ret === false) {
           return false;
         } else if (typeof ret === 'undefined' || typeof ret !== 'object') {
-          continue;
+
         } else {
           top = ret.top;
           left = ret.left;

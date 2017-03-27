@@ -1,7 +1,5 @@
 import os
-
 import django
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 django.setup()  # Don't mess with this, unless you know what you're doing
 from exercise.populate import add_exercisecollection
