@@ -105,6 +105,7 @@ def add_user_group(name):
     newGroup = Group()
     newGroup.name = name
     newGroup.save()
+    return newGroup
 
 
 def main():

@@ -40,12 +40,12 @@ class Question(models.Model):
         (3, 'Alternative 3'),
         (4, 'Alternative 4'),
     )
-    title = models.CharField(max_length=30, primary_key=True)
-    question = models.CharField(max_length=80)
-    alternative_1 = models.CharField(max_length=20)
-    alternative_2 = models.CharField(max_length=20)
-    alternative_3 = models.CharField(max_length=20)
-    alternative_4 = models.CharField(max_length=20)
+    title = models.CharField(max_length=100, primary_key=True)
+    question = models.CharField(max_length=300)
+    alternative_1 = models.CharField(max_length=50)
+    alternative_2 = models.CharField(max_length=50)
+    alternative_3 = models.CharField(max_length=50)
+    alternative_4 = models.CharField(max_length=50)
     correct_alternative = models.IntegerField(default=1, choices=answer_choices)
     is_worth = models.IntegerField()
     # Relationships:

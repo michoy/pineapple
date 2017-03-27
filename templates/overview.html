@@ -6,7 +6,7 @@
     {% for course in courseList %}
         <form action="" method="post">
             {% csrf_token %}
-            <button name='course-select' value={{ course.0 }}>Go To {{ course.0 }}</button>
+            <button name='course-select' class="btn btn-primary btn-lg " value={{ course.0 }}>Go To {{ course.0 }}</button>
         </form>
         <p>{{ course.1 }}</p>
     {% endfor %}

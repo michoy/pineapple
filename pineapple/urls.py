@@ -29,8 +29,8 @@ urlpatterns = [
     url(r'^overview/$', overview.views.courses),
     #url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
     url(r'^login/$', about.views.login_view, name='/login/'),
-    url(r'^course/$', course.views.lecturer_course_view, name='/course/'),
     url(r'^course/(?P<fagkode>[\w]{7})/$', course.views.delegate_course_view), # TODO VI KAN KUN HA 7-TEGN FAGKODER!
+    url(r'^course/$', course.views.lecturer_course_view, name='/course/'),
     url(r'^about/$', about.views.about),
     url(r'^exercise/$', exercise.views.do_exercise),
     ]

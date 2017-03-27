@@ -24,7 +24,8 @@
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
                             <!--Button-->
                             <form action="" method="post">
-                                <button type="button" name="exercise-select" value={{ each }} class="btn btn-primary btn-lg btn-block">Go to Exercise!</button>
+                                {% csrf_token %}
+                                <button name="exercise-select"  class="btn btn-primary btn-lg btn-block"  value="{{ each|cut:" " }}" >Go to Exercise!</button>
                             </form>
                         </div>
                         <!--/.Card content-->
