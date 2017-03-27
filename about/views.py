@@ -8,8 +8,6 @@ from about.forms import RegisterForm
 
 
 def about(request):
-    if request.method == 'POST':
-        pass
     return render(request, 'about.html')
 
 
