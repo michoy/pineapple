@@ -46,9 +46,12 @@
                 <button class="btn btn-deep-purple" type="submit" value="login">Login</button>
             </div>
 
-                {% if error %}
+            {% if error %}
+                <div class="text-center">
                     <p>Username and password do not match</p>
-                {% endif %}
+                </div>
+            {% endif %}
+
 
             </form>
         </div>

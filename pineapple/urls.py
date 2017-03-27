@@ -30,7 +30,7 @@ urlpatterns = [
     #url(r'^login/$', about.views.login_view, name='/login/'),
     url(r'^login/$', about.views.do_login),
     url(r'^logout/$', about.views.do_logout),
-    url(r'^register/$', about.views.register),
+    url(r'^register/$', about.views.do_register),
     url(r'^about/', about.views.about),
     url(r'^overview/$', overview.views.courses),
     url(r'^course/$', course.views.lecturer_course_view, name='/course/'),
