@@ -258,17 +258,6 @@ def main():
     studentgroup = add_user_group('Student')
 
     # Lecturers
-<<<<<<< HEAD
-    group = Group.objects.get(name='Lecturer')
-    lect = User.objects.create_user(username='Pekka', email='the@man.com', password='kanban')
-    lect.groups.add(group)
-    lect = User.objects.create_user(username='RandomStudAss', email='red@shirt.com', password='ctrlCctrlV')
-    lect.groups.add(group)
-    lect = User.objects.create_user(username='Magnus', email='magnus@ntnu.no', password='magnus')
-    lect.groups.add(group)
-    lect = User.objects.create_user(username='Bovim', email='rektor@ntnu.no', password='bovim')
-    lect.groups.add(group)
-=======
     add_user(
         username='Pekka',
         email='the@man.com',
@@ -287,7 +276,26 @@ def main():
         result_pk_list=[],
         group_name_list=['Lecturer', 'Student'],
     )
->>>>>>> refs/remotes/origin/master
+
+    add_user(
+        username='Magnus',
+        email='red@shirt.com',
+        password='ctrlCctrlV',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
+    )
+
+    add_user(
+        username='Bovim',
+        email='red@shirt.com',
+        password='ctrlCctrlV',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
+    )
 
     # Course:
     add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
@@ -295,14 +303,6 @@ def main():
     add_course('TFY4125', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
     add_course('TDT4145', ['Bovim'], [], 'Databaser for n00bs')
 
-<<<<<<< HEAD
-    # Course collections:
-    add_coursecollection('Per', ['TDT4140'])
-    add_coursecollection('Pål', ['TDT4140', 'TMA4100', 'TFY4125', 'TDT4145'])
-    add_coursecollection('Sofie', ['TDT4140'])
-    add_coursecollection('Pekka', [])
-    add_coursecollection('RandomStudAss', ['TMA4100'])
-=======
     # Students
     add_user(
         username='Per',
@@ -317,7 +317,7 @@ def main():
         username='Pål',
         email='pål@son.no',
         password='ape',
-        course_list=['TDT4140', 'NyttFag'],
+        course_list=['TDT4140'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -332,8 +332,6 @@ def main():
         group_name_list=['Student']
     )
 
-    add_coursecollection('RandomStudAss', ['NyttFag'])
->>>>>>> refs/remotes/origin/master
 
     # Question:
     add_question(
@@ -369,7 +367,7 @@ def main():
         'What is Newtons secound law of physics?',
         ['E=mc^2','B=aD','F=ma','F=0.5mv^2'],
         3,
-        ['Newtons Laws'],
+        ['Mechanics'],
         'TFY4125',
         5
     )
@@ -378,7 +376,7 @@ def main():
         'What is the speed of light?',
         ['300 m/s','10^8 m/s','300 000 km/s', '3*10^9 m/s'],
         3,
-        physics_reading_material_list,
+        ['Mechanics'],
         'TFY4125',
         5
     )
@@ -387,7 +385,7 @@ def main():
         'Work is ...',
         ['Displacement times force', 'Hard!','Measured in newton', 'invers proportional to force'],
         1,
-        ['Work, energy, power'],
+        ['Mechanics'],
         'TFY4125',
         5
     )
