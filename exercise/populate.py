@@ -81,11 +81,18 @@ def add_result(val, question, student):
 
 
 def add_coursecollection(student, course_list):
-    course_col = CourseCollection(student=User.objects.get(username=student))
-    course_col.save()
-    for each in course_list:
-        course_col.courses.add(Course.objects.get(name=each))
-    course_col.save()
+    user = User.objects.get(username=student)
+    try:
+        course_col = user.coursecollection
+        for each in course_list:
+            course_col.courses.add(Course.objects.get(name=each))
+        course_col.save()
+    except:
+        course_col = CourseCollection(student=User.objects.get(username=student))
+        course_col.save()
+        for each in course_list:
+            course_col.courses.add(Course.objects.get(name=each))
+        course_col.save()
     return course_col
 
 
@@ -113,6 +120,15 @@ def add_user_group(name):
     new_group.save()
     return new_group
 
+
+def add_user(username, email, password, course_list, result_pk_list, pers_exercise_list, group_name_list):
+    user = User.objects.create_user(username=username, email=email, password=password)
+    add_exercisecollection(student=username, exercise_list=pers_exercise_list)
+    add_coursecollection(student=username, course_list=course_list)
+    add_resultcollection(student=username, result_pk_list=result_pk_list)
+    for each in group_name_list:
+        user.groups.add(Group.objects.get(name=each))
+    return user
 
 def main():
     # Delete existing entries
@@ -185,6 +201,22 @@ def main():
         'Software Quality Assurance',
         'https://ntnu.itslearning.com/file/download.aspx?FileID=4747391&FileVersionID=-1&ChildID=-1'
     )
+    add_reading_material(
+        'Newtons Laws of Gravity',
+        'https://www.grc.nasa.gov/www/k-12/airplane/newton.html'
+    )
+    add_reading_material(
+        'Work, energy, power',
+        'http://hyperphysics.phy-astr.gsu.edu/hbase/work.html'
+    )
+    add_reading_material(
+        'Newtons Laws',
+        'http://hyperphysics.phy-astr.gsu.edu/hbase/Newt.html'
+    )
+    add_reading_material(
+        'Thermodynamics Khan Academy',
+        'https://nb.khanacademy.org/science/chemistry/thermodynamics-chemistry'
+    )
     # Tags:
     add_tag('basicStuff', ['google', 'wikipedia', 'its'])
     pu_prosjekt_list = [
@@ -194,6 +226,12 @@ def main():
         'TDT4140 Poster Layout',
         'Improving Needed Posters'
     ]
+    physics_reading_material_list = [
+        'Newtons Laws of Gravity',
+        'Work, energy, power',
+        'Newtons Laws'
+    ]
+    add_tag('Mechanics', physics_reading_material_list)
     add_tag('PU-prosjekt', pu_prosjekt_list)
     add_tag('Exercise Lecture 1', ['Exercise class 1 - exploration phase'])
     add_tag('Exercise Lecture 2', ['Bot Technologies', 'Bot Code Examples'])
@@ -220,30 +258,80 @@ def main():
     studentgroup = add_user_group('Student')
 
     # Lecturers
-    group = Group.objects.get(name='Lecturer')
-    lect = User.objects.create_user(username='Pekka', email='the@man.com', password='kanban')
-    lect.groups.add(group)
-    lect = User.objects.create_user(username='RandomStudAss', email='red@shirt.com', password='ctrlCctrlV')
-    lect.groups.add(group)
+    add_user(
+        username='Pekka',
+        email='the@man.com',
+        password='kanban',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer'],
+    )
+    add_user(
+        username='RandomStudAss',
+        email='red@shirt.com',
+        password='ctrlCctrlV',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
+    )
 
-    # Students
-    group = Group.objects.get(name='Student')
-    stud = User.objects.create_user(username='Per', email='pers@son.no', password='personifikasjon')
-    stud.groups.add(group)
-    stud = User.objects.create_user(username='Pål', email='pål@son.no', password='ape')
-    stud.groups.add(group)
-    stud = User.objects.create_user(username='Sofie', email='sofie@notstud.ntnu.no', password='apple')
-    stud.groups.add(group)
+    add_user(
+        username='Magnus',
+        email='red@shirt.com',
+        password='ctrlCctrlV',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
+    )
+
+    add_user(
+        username='Bovim',
+        email='red@shirt.com',
+        password='ctrlCctrlV',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
+    )
+
     # Course:
     add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
-    add_course('NyttFag', ['Pekka'], [], 'Someone forgot to add a description')
+    add_course('TMA4100', ['Pekka'], [], 'Matte 1')
+    add_course('TFY4125', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
+    add_course('TDT4145', ['Bovim'], [], 'Databaser for n00bs')
+    
+    # Students
+    add_user(
+        username='Per',
+        email='pers@son.no',
+        password='personifikasjon',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Pål',
+        email='pål@son.no',
+        password='ape',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Sofie',
+        email='sofie@notstud.ntnu.no',
+        password='apple',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
 
-    # Course collections:
-    add_coursecollection('Per', ['TDT4140'])
-    add_coursecollection('Pål', ['TDT4140', 'NyttFag'])
-    add_coursecollection('Sofie', ['TDT4140'])
-    add_coursecollection('Pekka', [])
-    add_coursecollection('RandomStudAss', ['NyttFag'])
 
     # Question:
     add_question(
@@ -274,9 +362,39 @@ def main():
         5
     )
 
+    add_question(
+        'TFY4125_Q1',
+        'What is Newtons secound law of physics?',
+        ['E=mc^2','B=aD','F=ma','F=0.5mv^2'],
+        3,
+        ['Mechanics'],
+        'TFY4125',
+        5
+    )
+    add_question(
+        'TFY4125_Q2',
+        'What is the speed of light?',
+        ['300 m/s','10^8 m/s','300 000 km/s', '3*10^9 m/s'],
+        3,
+        ['Mechanics'],
+        'TFY4125',
+        5
+    )
+    add_question(
+        'TFY4125_Q3',
+        'Work is ...',
+        ['Displacement times force', 'Hard!','Measured in newton', 'invers proportional to force'],
+        1,
+        ['Mechanics'],
+        'TFY4125',
+        5
+    )
+
     # Exercises:
     add_exercise('Quiz 1', 'TDT4140', ['Q1', 'Q2', 'Q3'])
     add_exercise('New and empty', 'TDT4140', [])
+    add_exercise('TFY4125_Exercise1', 'TFY4125', ['TFY4125_Q1', 'TFY4125_Q2', 'TFY4125_Q3'])
+
     # Results:
     add_result(True, 'Q1', 'Per')
     add_result(True, 'Q1', 'Pål')

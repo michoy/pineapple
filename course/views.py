@@ -11,7 +11,11 @@ def student_course_view(request, fagkode):
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'POST':
+<<<<<<< HEAD
         if request.POST.get('exercise-select', False):
+=======
+        if request.POST['exercise-select']:
+>>>>>>> refs/remotes/origin/master
             selected_ex = request.POST['exercise-select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
         elif request.POST.get('generate_exercise', False):
