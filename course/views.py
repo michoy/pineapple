@@ -22,6 +22,8 @@ def student_course_view(request, fagkode):
             return HttpResponseRedirect('/course/' + fagkode + '/')
     else:
         exercises = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
+        user = User.objects.get(username=request.user)
+        exercises.extend(user.pecollector.exercises.filter(course=fagkode))
         context = {
             'exercises': exercises,
             'course': fagkode,
