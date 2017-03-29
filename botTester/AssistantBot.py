@@ -14,6 +14,8 @@ def gen_exercise(num, dist_dict, username, course):
     Generates a new exercise for a student 
     
     Args:
+        :param course: 
+        :param username: 
         :param num: number of questions
         :param dist_dict: dictt containing themetags and a num describing importance for student. Retreive from make_rec
         
