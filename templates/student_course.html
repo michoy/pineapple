@@ -11,7 +11,7 @@
 {% block content %}
     <!-- Exercise pluss chart row -->
     <div class="row">
-        {% for each in exercises %}
+        {% for entry in exercises %}
             <div class="card col-lg-3 col-md-6 col-sm-12" style="
                 padding-left: 0;
                 padding-right: 0;
@@ -23,12 +23,12 @@
                 <!--Card content-->
                 <div class="card-block">
                     <!--Title-->
-                    <h4 class="card-title">{{ each }}</h4>
+                    <h4 class="card-title">{{ entry.title }}</h4>
                     <!--Text-->
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
                     <form action="" method="post">
                         {% csrf_token %}
-                        <button name='exercise-select' class="btn btn-success" value="{{ each|cut:" " }}">Go To Exercise!</button>
+                        <button name='exercise_select' class="btn btn-success" value="{{ entry.id }}">Go To Exercise!</button>
                     </form>
                 </div>
             </div>

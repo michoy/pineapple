@@ -100,10 +100,10 @@ def gen_graph_data(mode, username):
 
 def gen_lecturer_exercise(course_name):
     exercise_list = list(Exercise.objects.filter(course__name=course_name)
-                         .filter(private=False).values_list('title', flat=True))
+                         .filter(private=False).values_list('id', flat=True))
     data_points = []
-    for ex_name in exercise_list:
-        q_list = list(Exercise.objects.get(title=ex_name).contains.all().values_list('title', flat=True))
+    for ex_id in exercise_list:
+        q_list = list(Exercise.objects.get(id=ex_id).contains.all().values_list('id', flat=True))
         correct = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
                       .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
         possible = int(Result.objects.filter(question__title__in=q_list)
@@ -146,11 +146,11 @@ def gen_lecturer_theme(course_name):
 def gen_student_exercise(course_name, username):
     user = User.objects.get(username=username)
     exercise_list = list(Exercise.objects.filter(course__name=course_name)
-                         .filter(private=False).values_list('title', flat=True))
+                         .filter(private=False).values_list('id', flat=True))
     data_points_class = []
     data_points_student = []
-    for ex_name in exercise_list:
-        q_list = list(Exercise.objects.get(title=ex_name).contains.all().values_list('title', flat=True))
+    for ex_id in exercise_list:
+        q_list = list(Exercise.objects.get(id=ex_id).contains.all().values_list('id', flat=True))
         correct_class = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
                             .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
         possible_class = int(Result.objects.filter(question__title__in=q_list)
