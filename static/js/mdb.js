@@ -4569,7 +4569,6 @@ $(function () {
  * https://github.com/fians/Waves/blob/master/LICENSE
  */
 
-;
 (function (window, factory) {
     'use strict';
 

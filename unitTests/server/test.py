@@ -1,6 +1,8 @@
+import django
+import os
 from django.test import Client
 from django.test import TestCase
-import django, os
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 
 

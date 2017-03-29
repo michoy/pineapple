@@ -1,5 +1,4 @@
 from django import forms
-from exercise.models import Course
 
 
 class StudentAddCourseForm(forms.Form):

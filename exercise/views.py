@@ -1,9 +1,8 @@
-from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from exercise.models import Question, Exercise, ResultCollection, Result
+
 from exercise.forms import AnswerForm, make_question_form
-from django.db import connection
+from exercise.models import Question, ResultCollection
 
 
 def base(request):
@@ -21,7 +20,7 @@ def do_exercise(request, exer_id):
         wrong = False
         form = AnswerForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data    # gives an alt_#
+            data = form.cleaned_data  # gives an alt_#
             if request.POST['submit']:
                 que_pk = request.POST['submit']
                 que = Question.objects.get(title=que_pk)
@@ -66,7 +65,7 @@ def do_exercise(request, exer_id):
         context = {
             'form': que_form,
             'que_pk': que.title,
-            #'question': title,
-            #'stuff': stuff,
+            # 'question': title,
+            # 'stuff': stuff,
         }
         return render(request, 'exercise.html', context)
