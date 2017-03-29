@@ -100,7 +100,7 @@ def add_exercisecollection(student, exercise_list):
     exercise_col = PECollector(student=User.objects.get(username=student))
     exercise_col.save()
     for each in exercise_list:
-        exercise_col.exercises.add(Exercise.objects.get(name=each))
+        exercise_col.exercises.add(Exercise.objects.get(id=each))
     exercise_col.save()
     return exercise_col
 
