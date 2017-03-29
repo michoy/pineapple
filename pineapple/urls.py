@@ -23,6 +23,7 @@ import course.views
 import botTester.views
 
 urlpatterns = [
+    url(r'^$', about.views.about),
     url(r'^admin/', admin.site.urls),
     url(r'^base/', exercise.views.base),
     # url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),

@@ -99,9 +99,7 @@ class ServerTestCase(TestCase):
 
     # Test server connectivity
     # def testAdd_question(self):
-    #    resp = self.client.get('/add_question/')
-    #    # Kan quizsiden nås?
-    #    self.assertEqual(200, resp.status_code)
+
 
 
 def main():
