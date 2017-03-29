@@ -302,7 +302,7 @@ def main():
     add_course('TMA4100', ['Pekka'], [], 'Matte 1')
     add_course('TFY4125', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
     add_course('TDT4145', ['Bovim'], [], 'Databaser for n00bs')
-
+    
     # Students
     add_user(
         username='Per',
