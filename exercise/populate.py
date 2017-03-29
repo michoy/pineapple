@@ -258,7 +258,6 @@ def main():
     studentgroup = add_user_group('Student')
 
     # Lecturers
-<<<<<<< HEAD
     group = Group.objects.get(name='Lecturer')
     lect = User.objects.create_user(username='Pekka', email='the@man.com', password='kanban')
     lect.groups.add(group)
@@ -268,7 +267,7 @@ def main():
     lect.groups.add(group)
     lect = User.objects.create_user(username='Bovim', email='rektor@ntnu.no', password='bovim')
     lect.groups.add(group)
-=======
+
     add_user(
         username='Pekka',
         email='the@man.com',
@@ -287,7 +286,6 @@ def main():
         result_pk_list=[],
         group_name_list=['Lecturer', 'Student'],
     )
->>>>>>> refs/remotes/origin/master
 
     # Course:
     add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
@@ -295,14 +293,14 @@ def main():
     add_course('TFY4125', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
     add_course('TDT4145', ['Bovim'], [], 'Databaser for n00bs')
 
-<<<<<<< HEAD
+
     # Course collections:
     add_coursecollection('Per', ['TDT4140'])
     add_coursecollection('Pål', ['TDT4140', 'TMA4100', 'TFY4125', 'TDT4145'])
     add_coursecollection('Sofie', ['TDT4140'])
     add_coursecollection('Pekka', [])
     add_coursecollection('RandomStudAss', ['TMA4100'])
-=======
+
     # Students
     add_user(
         username='Per',
@@ -333,7 +331,7 @@ def main():
     )
 
     add_coursecollection('RandomStudAss', ['NyttFag'])
->>>>>>> refs/remotes/origin/master
+
 
     # Question:
     add_question(
