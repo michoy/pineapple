@@ -148,4 +148,5 @@ STATICFILES_DIRS = [
 
 # Login page
 LOGIN_URL = '/login/'  # Url der innlogging skjer
+
 LOGIN_REDIRECT_URL = '/overview/'  # Url som det redirectes til etter successfull innlogging

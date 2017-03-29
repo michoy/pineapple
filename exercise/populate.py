@@ -1,11 +1,13 @@
 import os
+
 import django
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 django.setup()  # Don't mess with this, unless you know what you're doing
 from django.contrib.auth.models import Group
 from exercise.models import *
 
-from django.db import connection
+
 # Simple script to populate the database with objects for testing and demonstration
 
 def add_reading_material(title, link):
@@ -21,6 +23,7 @@ def add_tag(name, material_list):
         tag.material.add(ReadingMaterial.objects.get(title=each))
     tag.save()
     return tag
+
 
 def add_course(name, admin_list, material_list, description):
     course = Course(name=name, description=description)
@@ -76,6 +79,7 @@ def add_result(val, question, student):
         col = add_resultcollection(user.get_username(), [result.pk])
     return result
 
+
 def add_coursecollection(student, course_list):
     user = User.objects.get(username=student)
     try:
@@ -91,6 +95,7 @@ def add_coursecollection(student, course_list):
         course_col.save()
     return course_col
 
+
 def add_exercisecollection(student, exercise_list):
     exercise_col = PECollector(student=User.objects.get(username=student))
     exercise_col.save()
@@ -98,6 +103,7 @@ def add_exercisecollection(student, exercise_list):
         exercise_col.exercises.add(Exercise.objects.get(name=each))
     exercise_col.save()
     return exercise_col
+
 
 def add_resultcollection(student, result_pk_list):
     result_col = ResultCollection(student=User.objects.get(username=student))
@@ -107,11 +113,12 @@ def add_resultcollection(student, result_pk_list):
     result_col.save()
     return result_col
 
+
 def add_user_group(name):
-    newGroup = Group()
-    newGroup.name = name
-    newGroup.save()
-    return newGroup
+    new_group = Group()
+    new_group.name = name
+    new_group.save()
+    return new_group
 
 
 def add_user(username, email, password, course_list, result_pk_list, pers_exercise_list, group_name_list):
@@ -202,7 +209,7 @@ def main():
         'TDT4140 Project Description',
         'TDT4140 Poster Layout',
         'Improving Needed Posters'
-        ]
+    ]
     add_tag('PU-prosjekt', pu_prosjekt_list)
     add_tag('Exercise Lecture 1', ['Exercise class 1 - exploration phase'])
     add_tag('Exercise Lecture 2', ['Bot Technologies', 'Bot Code Examples'])
@@ -220,11 +227,11 @@ def main():
         'Unit testing code examples',
         'Software Architecture',
         'Software Quality Assurance'
-         ]
+    ]
     add_tag('Exercise Lectures', exercise_list)
 
     # Add groups (needed for unit testing)
-    #TODO add permissions
+    # TODO add permissions
     lecturergroup = add_user_group('Lecturer')
     studentgroup = add_user_group('Student')
 
@@ -250,7 +257,7 @@ def main():
 
     # Course:
     add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
-    add_course('NyttFag',['Pekka'],[], 'Someone forgot to add a description')
+    add_course('NyttFag', ['Pekka'], [], 'Someone forgot to add a description')
 
     # Students
     add_user(
@@ -280,6 +287,7 @@ def main():
         result_pk_list=[],
         group_name_list=['Student']
     )
+
     add_coursecollection('RandomStudAss', ['NyttFag'])
 
     # Question:
@@ -324,17 +332,20 @@ def main():
     add_result(True, 'Q3', 'Per')
     add_result(True, 'Q3', 'Pål')
 
-    #cursor=connection.cursor()
-    #cursor.execute(
+    # cursor=connection.cursor()
+    # cursor.execute(
     #    'SELECT title '
-    #    'FROM auth_user  JOIN (exercise_resultcollection, exercise_resultcollection_results,exercise_result, exercise_question) '
+    #    'FROM auth_user  JOIN (
+    #               exercise_resultcollection, exercise_resultcollection_results,exercise_result, exercise_question) '
     #    'ON (auth_user.id = exercise_resultcollection.student_id) AND '
     #    '(exercise_resultcollection.id = exercise_resultcollection_results.resultcollection_id) AND '
     #    '(exercise_resultcollection_results.result_id = exercise_result.id) AND '
     #    'exercise_result.question_id = exercise_question.title '
     #    '')
-    #x = cursor.fetchall()
-    #print(x)
-    #Joiner feil her, kim enn som løyse det e ein gud
+    # x = cursor.fetchall()
+    # print(x)
+    # Joiner feil her, kim enn som løyse det e ein gud
+
+
 if __name__ == '__main__':
     main()

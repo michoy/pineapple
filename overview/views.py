@@ -1,16 +1,17 @@
-from .forms import StudentAddCourseForm
 from course.forms import CourseForm
 from course.views import *
+from .forms import StudentAddCourseForm
+
 
 
 def get_course_list(username):
     user = User.objects.get(username=username)
-    userGroups = list(user.groups.all().values_list('name', flat=True))
+    user_groups = list(user.groups.all().values_list('name', flat=True))
     course_list = []
-    if 'Student' in userGroups:
+    if 'Student' in user_groups:
         for each in user.coursecollection.courses.all():
             course_list.append((each.name, each.description))
-    if 'Lecturer' in userGroups:
+    if 'Lecturer' in user_groups:
         for each in user.coursecollection.courses.all():
             course_list.append((each.name, each.description))
         for each in Course.objects.all():
@@ -23,17 +24,16 @@ def get_course_list(username):
 def courses(request):
     current_user = request.user
     if request.method == 'POST':
-        if request.POST['course-select']:
+        if request.POST.get('course_name', False):  # add new course to student
+            course_name = request.POST['course_name']
+            if Course.objects.filter(name=course_name).exists():
+                new_course = Course.objects.get(name=course_name)
+                current_user.coursecollection.courses.add(new_course)
+        elif request.POST.get('course-select', False):   # navigate to selected course
             selected_course = request.POST['course-select']
             if current_user.groups.filter(name='Lecturer').exists():
-                return HttpResponseRedirect('/course/'+selected_course+'/')
+                return HttpResponseRedirect('/course/' + selected_course + '/')
             else:
-                return HttpResponseRedirect('/course/'+selected_course+'/')
-
-    else:
-        if current_user.groups.filter(name='Lecturer').exists():
-            form = CourseForm()
-        else:
-            form = StudentAddCourseForm()
-    course_list = get_course_list(request.user.username)
-    return render(request, 'overview.html', {'courseList': course_list, 'form': form})
+                return HttpResponseRedirect('/course/' + selected_course + '/')
+    course_list = get_course_list(current_user.username)
+    return render(request, 'overview.html', {'courseList': course_list})
