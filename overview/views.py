@@ -3,6 +3,7 @@ from course.views import *
 from .forms import StudentAddCourseForm
 
 
+
 def get_course_list(username):
     user = User.objects.get(username=username)
     user_groups = list(user.groups.all().values_list('name', flat=True))

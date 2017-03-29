@@ -81,11 +81,18 @@ def add_result(val, question, student):
 
 
 def add_coursecollection(student, course_list):
-    course_col = CourseCollection(student=User.objects.get(username=student))
-    course_col.save()
-    for each in course_list:
-        course_col.courses.add(Course.objects.get(name=each))
-    course_col.save()
+    user = User.objects.get(username=student)
+    try:
+        course_col = user.coursecollection
+        for each in course_list:
+            course_col.courses.add(Course.objects.get(name=each))
+        course_col.save()
+    except:
+        course_col = CourseCollection(student=User.objects.get(username=student))
+        course_col.save()
+        for each in course_list:
+            course_col.courses.add(Course.objects.get(name=each))
+        course_col.save()
     return course_col
 
 
@@ -113,6 +120,15 @@ def add_user_group(name):
     new_group.save()
     return new_group
 
+
+def add_user(username, email, password, course_list, result_pk_list, pers_exercise_list, group_name_list):
+    user = User.objects.create_user(username=username, email=email, password=password)
+    add_exercisecollection(student=username, exercise_list=pers_exercise_list)
+    add_coursecollection(student=username, course_list=course_list)
+    add_resultcollection(student=username, result_pk_list=result_pk_list)
+    for each in group_name_list:
+        user.groups.add(Group.objects.get(name=each))
+    return user
 
 def main():
     # Delete existing entries
@@ -220,29 +236,58 @@ def main():
     studentgroup = add_user_group('Student')
 
     # Lecturers
-    group = Group.objects.get(name='Lecturer')
-    lect = User.objects.create_user(username='Pekka', email='the@man.com', password='kanban')
-    lect.groups.add(group)
-    lect = User.objects.create_user(username='RandomStudAss', email='red@shirt.com', password='ctrlCctrlV')
-    lect.groups.add(group)
+    add_user(
+        username='Pekka',
+        email='the@man.com',
+        password='kanban',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer'],
+    )
+    add_user(
+        username='RandomStudAss',
+        email='red@shirt.com',
+        password='ctrlCctrlV',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
+    )
 
-    # Students
-    group = Group.objects.get(name='Student')
-    stud = User.objects.create_user(username='Per', email='pers@son.no', password='personifikasjon')
-    stud.groups.add(group)
-    stud = User.objects.create_user(username='Pål', email='pål@son.no', password='ape')
-    stud.groups.add(group)
-    stud = User.objects.create_user(username='Sofie', email='sofie@notstud.ntnu.no', password='apple')
-    stud.groups.add(group)
     # Course:
     add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
     add_course('NyttFag', ['Pekka'], [], 'Someone forgot to add a description')
 
-    # Course collections:
-    add_coursecollection('Per', ['TDT4140'])
-    add_coursecollection('Pål', ['TDT4140', 'NyttFag'])
-    add_coursecollection('Sofie', ['TDT4140'])
-    add_coursecollection('Pekka', [])
+    # Students
+    add_user(
+        username='Per',
+        email='pers@son.no',
+        password='personifikasjon',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Pål',
+        email='pål@son.no',
+        password='ape',
+        course_list=['TDT4140', 'NyttFag'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Sofie',
+        email='sofie@notstud.ntnu.no',
+        password='apple',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+
     add_coursecollection('RandomStudAss', ['NyttFag'])
 
     # Question:
