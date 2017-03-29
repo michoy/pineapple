@@ -10,6 +10,16 @@ from django.db.models import Sum
 
 
 def gen_exercise(num, dist_dict, username, course):
+    """ 
+    Generates a new exercise for a student 
+    
+    Args:
+        :param num: number of questions
+        :param dist_dict: dictt containing themetags and a num describing importance for student. Retreive from make_rec
+        
+    Return:
+        New exercise
+    """
     # Test that percentages add up to 100
     total = 0
     for key in dist_dict:
@@ -40,7 +50,14 @@ def gen_exercise(num, dist_dict, username, course):
 
 
 def make_rec(username, course):
-    # Creates a distribution which can be fed to the gen_* methods
+    """ 
+    Creates a distribution which can be fed to the gen_* methods
+    Args:
+        :param username: 
+        :param course: 
+    Return:
+        dict: containing themetags and their importance to the user 
+    """
     # Figure out how many percent to dedicate to topic
     user = User.objects.get(username=username)
     tag_list = list(user.resultcollection.results.filter(question__belongsTo=course).
