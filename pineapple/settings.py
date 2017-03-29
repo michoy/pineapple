@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -27,7 +26,6 @@ DEBUG = True
 
 # Seems 'testserver needs to be here for unit testing:
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -76,20 +74,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pineapple.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-#MySQL config. For at denne skal fynke, må du ha laget en lokal database med rett navn og privilegier.
-#Kort guide, det er antatt at mysql er installert og at du har laget en root konto:
-    #åpne CMD
-    #Logg inn på MySQL som administrator:
-        # mysql -u root -p
-        #(Skriv inn passord)
-    #Lag ny database med navn "pinedatabase":
-        #CREATE DATABASE pinedatabase CHARACTER SET utf8;
-    #Gi databasen rett privilegier (username og passord er "admin":
-        #GRANT ALL PRIVILEGES ON pinedatabase.* To 'admin'@'127.0.0.1' IDENTIFIED BY 'admin';
+# MySQL config. For at denne skal fynke, må du ha laget en lokal database med rett navn og privilegier.
+# Kort guide, det er antatt at mysql er installert og at du har laget en root konto:
+# åpne CMD
+# Logg inn på MySQL som administrator:
+# mysql -u root -p
+# (Skriv inn passord)
+# Lag ny database med navn "pinedatabase":
+# CREATE DATABASE pinedatabase CHARACTER SET utf8;
+# Gi databasen rett privilegier (username og passord er "admin":
+# GRANT ALL PRIVILEGES ON pinedatabase.* To 'admin'@'127.0.0.1' IDENTIFIED BY 'admin';
 
 DATABASES = {
     'default': {
@@ -128,7 +125,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -142,7 +138,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 STATIC_URL = '/static/'
@@ -152,5 +147,5 @@ STATICFILES_DIRS = [
 ]
 
 # Login page
-LOGIN_URL = '/login/' #  Url der innlogging skjer
-LOGIN_REDIRECT_URL = '/overview' #  Url som det redirectes til etter successfull innlogging
+LOGIN_URL = '/login/'  # Url der innlogging skjer
+LOGIN_REDIRECT_URL = '/overview/'  # Url som det redirectes til etter successfull innlogging

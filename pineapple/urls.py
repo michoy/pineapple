@@ -27,8 +27,8 @@ urlpatterns = [
     url(r'^$', about.views.about),
     url(r'^admin/', admin.site.urls),
     url(r'^base/', exercise.views.base),
-    #url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
-    url(r'^login/$', about.views.login_view, name='/login/'),
+    url(r'^login/$', auth_views.login, {'template_name':'registration/login.html'}, name='login'),
+    #url(r'^login/$', about.views.login_view, name='/login/'),
     url(r'^about/', about.views.about),
     url(r'^exercise/(?P<exer_id>[0-9]+)/$', exercise.views.do_exercise),
     url(r'^course/(?P<fagkode>[\w]{7})/$', course.views.delegate_course_view), # TODO VI KAN KUN HA 7-TEGN FAGKODER!

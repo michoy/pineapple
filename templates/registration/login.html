@@ -6,35 +6,66 @@
 
 {% block content %}
 
-{% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
-{% endif %}
-
-{% if next %}
     {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
+        <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+        <form method="post" action="/logout/">
+            {% csrf_token %}
+            <div class="text-center">
+                <button class="btn btn-deep-purple" type="submit" value="login">Log out</button>
+            </div>
+        </form>
     {% else %}
-    <p>Please login to see this page.</p>
+
+    <!--Form without header-->
+    <div class="card">
+        <div class="card-block">
+
+            <!--Header-->
+            <div class="text-center">
+                <h3><i class="fa fa-lock"></i> Login:</h3>
+                <hr class="mt-2 mb-2">
+            </div>
+
+            <!--Body-->
+            <form method="post" action="/login/">
+            {% csrf_token %}
+
+            <div class="md-form">
+                <i class="fa fa-user prefix"></i>
+                <input type="text" id="form1" name="username" class="form-control">
+                <label for="form1">Your username</label>
+            </div>
+
+            <div class="md-form">
+                <i class="fa fa-lock prefix"></i>
+                <input type="password" id="form2" name="password" class="form-control">
+                <label for="form2">Your password</label>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-deep-purple" type="submit" value="login">Login</button>
+            </div>
+
+            {% if error %}
+                <div class="text-center">
+                    <p>Username and password do not match</p>
+                </div>
+            {% endif %}
+
+
+            </form>
+        </div>
+
+        <!--Footer-->
+        <div class="modal-footer">
+            <div class="options">
+                <p>Not a member? <a href="/register">Sign Up</a></p>
+            </div>
+        </div>
+
+    </div>
+    <!--/Form without header-->
+
     {% endif %}
-{% endif %}
-
-<form method="post" action="{% url '/login/' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
-
 
 {% endblock %}

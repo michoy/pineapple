@@ -114,11 +114,13 @@ def add_user_group(name):
     return newGroup
 
 
-def add_user(username, email, password, course_list, result_pk_list, pers_exercise_list):
+def add_user(username, email, password, course_list, result_pk_list, pers_exercise_list, group_name_list):
     user = User.objects.create_user(username=username, email=email, password=password)
     add_exercisecollection(student=username, exercise_list=pers_exercise_list)
     add_coursecollection(student=username, course_list=course_list)
     add_resultcollection(student=username, result_pk_list=result_pk_list)
+    for each in group_name_list:
+        user.groups.add(Group.objects.get(name=each))
     return user
 
 def main():
@@ -227,59 +229,57 @@ def main():
     studentgroup = add_user_group('Student')
 
     # Lecturers
-    group = Group.objects.get(name='Lecturer')
-    lect = add_user(
+    add_user(
         username='Pekka',
         email='the@man.com',
         password='kanban',
         course_list=[],
         pers_exercise_list=[],
-        result_pk_list=[]
+        result_pk_list=[],
+        group_name_list=['Lecturer'],
     )
-    lect.groups.add(group)
-    lect = add_user(
+    add_user(
         username='RandomStudAss',
         email='red@shirt.com',
         password='ctrlCctrlV',
         course_list=[],
         pers_exercise_list=[],
-        result_pk_list=[]
+        result_pk_list=[],
+        group_name_list=['Lecturer', 'Student'],
     )
-    lect.groups.add(group)
 
     # Course:
     add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
     add_course('NyttFag',['Pekka'],[], 'Someone forgot to add a description')
 
     # Students
-    group = Group.objects.get(name='Student')
-    stud = add_user(
+    add_user(
         username='Per',
         email='pers@son.no',
         password='personifikasjon',
         course_list=['TDT4140'],
         pers_exercise_list=[],
-        result_pk_list=[]
+        result_pk_list=[],
+        group_name_list=['Student']
     )
-    stud.groups.add(group)
-    stud = add_user(
+    add_user(
         username='Pål',
         email='pål@son.no',
         password='ape',
         course_list=['TDT4140', 'NyttFag'],
         pers_exercise_list=[],
-        result_pk_list=[]
+        result_pk_list=[],
+        group_name_list=['Student']
     )
-    stud.groups.add(group)
-    stud = add_user(
+    add_user(
         username='Sofie',
         email='sofie@notstud.ntnu.no',
         password='apple',
         course_list=['TDT4140'],
         pers_exercise_list=[],
-        result_pk_list=[]
+        result_pk_list=[],
+        group_name_list=['Student']
     )
-    stud.groups.add(group)
     add_coursecollection('RandomStudAss', ['NyttFag'])
 
     # Question:

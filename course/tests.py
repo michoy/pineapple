@@ -14,16 +14,16 @@ class ServerTestCase(TestCase):
         django.setup()
         self.client = Client()
         # Create test lecturer and the corresponding lecturer group.
-        u = populate.add_user(
+        populate.add_user_group('Lecturer')
+        populate.add_user(
             username='theTeach',
             email='teach@me.com',
             password='schooled',
             course_list=[],
             pers_exercise_list=[],
-            result_pk_list=[]
+            result_pk_list=[],
+            group_name_list=['Lecturer']
         )
-        g = populate.add_user_group('Lecturer')
-        u.groups.add(g)
         # Create test course to select later
         populate.add_course(
             name='TDTT3st',
@@ -31,17 +31,17 @@ class ServerTestCase(TestCase):
             material_list=[],
             description='For testing purposes'
         )
-        # Create test student
-        u = populate.add_user(
+        # Create test student and the corresponding user group
+        populate.add_user_group('Student')
+        populate.add_user(
             username='theMan',
             email='the@man.no',
             password='thePa$$word',
             course_list=[],
             pers_exercise_list=[],
-            result_pk_list=[]
+            result_pk_list=[],
+            group_name_list=['Student']
         )
-        g = populate.add_user_group('Student')
-        u.groups.add(g)
         populate.add_question(
             title='test Q',
             question='Will this humble test bless us by working as intended?',
