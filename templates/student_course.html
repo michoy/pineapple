@@ -36,4 +36,14 @@
         {% endfor %}
     </div>
     <!-- End: Exercise pluss chart row -->
+
+    <!-- Generate exercise button -->
+    <hr>
+    <form action="" method="post">
+    {% csrf_token %}
+        <div class="text-center">
+            <button name="generate_exercise" class="btn btn-secondary" value="generate_exercise">Genereate exercise</button>
+        </div>
+    </form>
+
 {% endblock %}

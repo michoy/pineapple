@@ -1,17 +1,25 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from exercise.models import *
 from django.http import HttpResponseRedirect
+from exercise.models import *
+from botTester.AssistantBot import gen_exercise, make_rec
 
 
 @login_required
 def student_course_view(request, fagkode):
+    current_user = request.user
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'POST':
-        if request.POST['exercise-select']:
+        print('post')
+        if request.POST.get('exercise-select', False):
             selected_ex = request.POST['exercise-select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
+        elif request.POST.get('generate_exercise', False):
+            reccomendation = make_rec(current_user.username, fagkode)
+            new_exercise = gen_exercise(10, reccomendation, current_user.username, fagkode)
+            current_user.pecollector.exercises.add(new_exercise)
+            return HttpResponseRedirect('/course/' + fagkode + '/')
     else:
         exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
                                   .values_list('title', flat=True))
