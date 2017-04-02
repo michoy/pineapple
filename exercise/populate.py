@@ -141,9 +141,9 @@ def main():
     Exercise.objects.all().delete()
     Result.objects.all().delete()
     # Reading material:
-    add_reading_material('google', 'www.google.com')
-    add_reading_material('wikipedia', 'www.wikipedia.com')
-    add_reading_material('its', 'www.itslearning.com')
+    add_reading_material('google', 'http://www.google.com')
+    add_reading_material('wikipedia', 'http://www.wikipedia.com')
+    add_reading_material('its', 'http://www.itslearning.com')
     add_reading_material(
         'TDT4140 Assessment Criteria',
         'https://ntnu.itslearning.com/file/download.aspx?FileID=4682507&FileVersionID=-1&ChildID=-1'

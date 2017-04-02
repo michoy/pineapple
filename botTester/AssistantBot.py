@@ -22,6 +22,8 @@ def gen_exercise(num, dist_dict, username, course):
     Return:
         New exercise
     """
+    if len(dist_dict) == 0:
+        raise ValueError('Distribution dictionary is empty, no exercise can be generated.')
     # Test that percentages add up to 100
     total = 0
     for key in dist_dict:
@@ -67,11 +69,14 @@ def make_rec(username, course):
     out_dict = {}
     work_sum = 0
     for each in tag_list:
-        correct = int(user.resultcollection.results.filter(question__themeTags__name=each).filter(resultVal=True).
+        correct = int(user.resultcollection.results.filter(question__themeTags__name=each).filter(resultVal=True)[5:].
                       aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
-        possible = int(user.resultcollection.results.filter(question__themeTags__name=each).
+        possible = int(user.resultcollection.results.filter(question__themeTags__name=each)[5:].
                        aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
-        new_val = (1-(correct/possible))
+        if possible == 0:
+            new_val = 1
+        else:
+            new_val = (1-(correct/possible))
         work_sum += new_val
         out_dict[each] = new_val
     for each in out_dict:
@@ -84,15 +89,18 @@ def gen_reading_rec(num, dist_dict):
     total = 0
     for key in dist_dict:
         total += dist_dict[key]
-    if int(total) != 1:
-        raise ValueError('Distribution does not add up to 100!')
+    if len(dist_dict) != 0 and int(total) != 1 :
+        raise ValueError('Distribution does not add up to 100! Rather: ' + str(total) )
     # Find reading material
     selected_pks = []
     for key in dist_dict:
         x = int(round((dist_dict[key] * num)))
         tag_pks = list(ThemeTag.objects.get(name=key).material.all().values_list('pk', flat=True))
         selected_pks.extend(random.sample(tag_pks, min(x, len(tag_pks))))
-    return selected_pks
+    selected_materials = []
+    for pk in selected_pks:
+        selected_materials.append((pk, ReadingMaterial.objects.get(pk=pk).link))
+    return selected_materials
 
 
 def gen_graph_data(mode, username):
@@ -214,6 +222,7 @@ def gen_student_theme(course_name, username):
 # def gen_student_time(course_name):
 #    pass
 
+# TODO: make graphs only let the last x results count
 def main():
     rec = make_rec('Pål', 'TDT4140')
     gen_exercise(2, rec, 'Pål', 'TDT4140')

@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
-{% block pagename %}Fagkode{%  endblock %}
+{% block pagename %}{{ course }}{%  endblock %}
 
-{% block p_heading %}Fagnavn{%  endblock %}
+{% block p_heading %}{{ course }}{%  endblock %}
 
-{% block p_2heading %}Fagkode{%  endblock %}
+{% block p_2heading %}{{ course }}{%  endblock %}
 
 {% block title %}{{ course }}{% endblock %}
 
@@ -34,8 +34,36 @@
             </div>
             <!--/.Card content-->
         {% endfor %}
+        <div class="card col-lg-3 col-md-6 col-sm-12" style="
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 10px;
+            margin-right: 10px">
+            <div class="card-block">
+                <!--Title-->
+                <h4 class="card-title">Reading recommendations:</h4>
+                <!--Text-->
+                {% for recommendation in rec_list %}
+                    <a href="{{ recommendation.1 }}">{{ recommendation.0 }}</a>
+                    <p></p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <!-- End: Exercise pluss chart row -->
+    <div class="row">
+        <div style="height: 500px; width: 500px;">
+            <canvas id="stud_ex_chart" style="border: dotted;"></canvas>
+        </div>
+        <div style="height: 500px; width: 500px;">
+            <canvas id="stud_tag_chart" style="border: dotted"></canvas>
+        </div>
+    </div>
+    <!-- Charts js-->
+     <script type="text/javascript" src="/static/js/student_graph.js"></script>
+     <script type="text/javascript">
+        genStudEx.genGraph({% autoescape off %}{{ ex_graph_data.0 }} {% endautoescape %}, {{ ex_graph_data.1}}, {{ ex_graph_data.2 }} );
+        genStudTag.genGraph({% autoescape off %}{{ tag_graph_data.0 }} {% endautoescape %}, {{ tag_graph_data.1}}, {{ tag_graph_data.2 }});
+     </script>
 
     <!-- Generate exercise button -->
     <hr>
