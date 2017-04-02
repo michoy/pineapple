@@ -1,20 +1,27 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from exercise.models import *
 from django.http import HttpResponseRedirect
 from botTester import AssistantBot
+from exercise.models import *
+
 
 @login_required
 def student_course_view(request, fagkode):
+    current_user = request.user
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'POST':
-        if request.POST['exercise-select']:
-            selected_ex = request.POST['exercise-select']
+        if request.POST.get('exercise_select', False):
+            selected_ex = request.POST['exercise_select']
+            print(selected_ex)
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
+        elif request.POST.get('generate_exercise', False):
+            reccomendation = make_rec(current_user.username, fagkode)
+            new_exercise = gen_exercise(10, reccomendation, current_user.username, fagkode)
+            current_user.pecollector.exercises.add(new_exercise)
+            return HttpResponseRedirect('/course/' + fagkode + '/')
     else:
-        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
-                                  .values_list('title', flat=True))
+        exercises = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
         user = User.objects.get(username=request.user)
         # Collect data
         exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
@@ -45,8 +52,8 @@ def lecturer_course_view(request, fagkode=''):
             selected_ex = request.POST['exercise-select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
     else:
-        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
-                                  .values_list('title', flat=True))
+        exercise_id_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
+                                  .values_list('id', flat=True))
         user = User.objects.get(username=request.user)
         # Collect data for graphs
         exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
