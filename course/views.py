@@ -16,12 +16,12 @@ def student_course_view(request, fagkode):
             print(selected_ex)
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
         elif request.POST.get('generate_exercise', False):
-            reccomendation = make_rec(current_user.username, fagkode)
-            new_exercise = gen_exercise(10, reccomendation, current_user.username, fagkode)
+            reccomendation = AssistantBot.make_rec(current_user.username, fagkode)
+            new_exercise = AssistantBot.gen_exercise(10, reccomendation, current_user.username, fagkode)
             current_user.pecollector.exercises.add(new_exercise)
             return HttpResponseRedirect('/course/' + fagkode + '/')
     else:
-        exercises = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
+        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
         user = User.objects.get(username=request.user)
         # Collect data
         exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
@@ -52,7 +52,7 @@ def lecturer_course_view(request, fagkode=''):
             selected_ex = request.POST['exercise-select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
     else:
-        exercise_id_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
+        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
                                   .values_list('id', flat=True))
         user = User.objects.get(username=request.user)
         # Collect data for graphs
