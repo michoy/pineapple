@@ -113,7 +113,7 @@ def gen_lecturer_exercise(course_name):
                          .filter(private=False).values_list('id', flat=True))
     data_points = []
     for ex_id in exercise_list:
-        q_list = list(Exercise.objects.get(id=ex_id).contains.all().values_list('id', flat=True))
+        q_list = list(Exercise.objects.get(pk=ex_id).contains.all().values_list('pk', flat=True))
         correct = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
                       .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
         possible = int(Result.objects.filter(question__title__in=q_list)
@@ -160,7 +160,7 @@ def gen_student_exercise(course_name, username):
     data_points_class = []
     data_points_student = []
     for ex_id in exercise_list:
-        q_list = list(Exercise.objects.get(id=ex_id).contains.all().values_list('id', flat=True))
+        q_list = list(Exercise.objects.get(pk=ex_id).contains.all().values_list('pk', flat=True))
         correct_class = int(Result.objects.filter(question__title__in=q_list).filter(resultVal=True)
                             .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
         possible_class = int(Result.objects.filter(question__title__in=q_list)
