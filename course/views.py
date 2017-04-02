@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from exercise.models import *
 from django.http import HttpResponseRedirect
-
+from botTester import AssistantBot
 
 @login_required
 def student_course_view(request, fagkode):
@@ -16,8 +16,24 @@ def student_course_view(request, fagkode):
         exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
                                   .values_list('title', flat=True))
         user = User.objects.get(username=request.user)
+        # Collect data
         exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
-        return render(request, 'student_course.html', {'exercises': exercise_name_list, 'course': fagkode})
+        recommendations_list = AssistantBot.gen_reading_rec(
+            num=5,
+            dist_dict=AssistantBot.make_rec(username=user.username, course=fagkode)
+        )
+        ex_graph_data = AssistantBot.gen_student_exercise(course_name=fagkode, username=request.user)
+        tag_graph_data = AssistantBot.gen_student_theme(course_name=fagkode, username=request.user)
+        print(recommendations_list)
+        return render(
+            request,
+            'student_course.html',
+            {'exercises': exercise_name_list,
+             'rec_list': recommendations_list,
+             'course': fagkode,
+             'ex_graph_data': ex_graph_data,
+             'tag_graph_data': tag_graph_data}
+        )
 
 
 @login_required
@@ -32,8 +48,18 @@ def lecturer_course_view(request, fagkode=''):
         exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
                                   .values_list('title', flat=True))
         user = User.objects.get(username=request.user)
+        # Collect data for graphs
         exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
-        return render(request, 'student_course.html', {'exercises': exercise_name_list, 'course': fagkode})
+        ex_graph_data = AssistantBot.gen_lecturer_exercise(course_name=fagkode)
+        tag_graph_data = AssistantBot.gen_lecturer_theme(course_name=fagkode)
+        return render(
+            request,
+            'lecturer_course.html',
+            {'exercises': exercise_name_list,
+             'course': fagkode,
+             'ex_graph_data': ex_graph_data,
+             'tag_graph_data': tag_graph_data}
+        )
 
 
 @login_required
