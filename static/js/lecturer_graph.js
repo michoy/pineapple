@@ -20,7 +20,7 @@ var genLectEx = genLectEx || (function(){
                             borderDashOffset: 0.0,
                             borderJoinStyle: 'miter',
                             pointBorderColor: "rgba(255,117,0,1)",
-                            pointBackgroundColor: "#fff",
+                            pointBackgroundColor: "#ffa1dc",
                             pointBorderWidth: 1,
                             pointHoverRadius: 5,
                             pointHoverBackgroundColor: "rgba(75,192,192,1)",
@@ -76,6 +76,9 @@ var genLectTag = genLectTag || (function(){
         }
     };
 }());
+
+
+
 
 var genCardPie = genCardPie || (function(){
     return {
