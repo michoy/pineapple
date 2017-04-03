@@ -10,45 +10,49 @@
 
     <form action="" method="post">
         {% csrf_token %}
-        <div class="row">
-            <div class="md-form col-10">
-                <input type="text" id="form1" class="form-control" name="course_name">
-                <label for="form1">Add new course</label>
-            </div>
-            <div class="col-2">
-                <button name='add_course' class="btn btn-secondary">Add</button>
+        <div class="container">
+            <div class="row">
+                <div class="md-form col-10">
+                    <input type="text" id="form1" class="form-control" name="course_name">
+                    <label for="form1">Add new course</label>
+                </div>
+                <div class="col-2">
+                    <button name='add_course' class="btn btn-secondary">Add</button>
+                </div>
             </div>
         </div>
+
     </form>
     <!--Cards-->
-    <div class="row">
-        {% for course in courseList %}
-            <div class="container  col-lg-3 col-md-6 col-sm-12">
-            <div class="card" style="
-                padding-left: 0;
-                padding-right: 0;
-                margin-left: 10px;
-                margin-right: 10px">
+    <div class="container">
+        <div class="row">
+            {% for course in courseList %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card" style="
+                        padding-left: 0;
+                        padding-right: 0;
+                        margin-left: 10px;
+                        margin-right: 10px">
 
-                <!--Card image-->
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
-                <!--/.Card image-->
+                        <!--Card image-->
+                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
+                        <!--/.Card image-->
 
-                <!--Card content-->
-                <div class="card-block">
-                    <!--Title-->
-                    <h4 class="card-title">{{ course.0 }}</h4>
-                    <!--Text-->
-                    <p class="card-text">{{ course.1 }}</p>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <button name='course-select' class="btn btn-primary" value={{ course.0 }}>Go To {{ course.0 }}</button>
-                    </form>
+                        <!--Card content-->
+                        <div class="card-block">
+                            <!--Title-->
+                            <h4 class="card-title">{{ course.0 }}</h4>
+                            <!--Text-->
+                            <p class="card-text">{{ course.1 }}</p>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button name='course-select' class="btn btn-primary" value={{ course.0 }}>Go To {{ course.0 }}</button>
+                            </form>
+                        </div>
+                        <!--/.Card content-->
+                    </div>
                 </div>
-                <!--/.Card content-->
-            </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
     <!--/.Cards-->
