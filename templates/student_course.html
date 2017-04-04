@@ -10,52 +10,57 @@
 
 {% block content %}
     <!-- Exercise pluss chart row -->
-    <div class="row">
-        {% for entry in exercises %}
+    <div class="container">
+        <div class="row">
+            {% for entry in exercises %}
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                    <div class="card" style="
+                        padding-left: 0;
+                        padding-right: 0;
+                        margin-left: 10px;
+                        margin-right: 10px">
+                        <!--Card image-->
+                        <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
+                        <!--/.Card image-->
+                        <!--Card content-->
+                        <div class="card-block">
+                            <!--Title-->
+                            <h4 class="card-title">{{ entry.title }}</h4>
+                            <!--Text-->
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button name='exercise_select' class="btn btn-success" value="{{ entry.id }}">Go To Exercise!</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!--/.Card content-->
+            {% endfor %}
             <div class="card col-lg-3 col-md-6 col-sm-12" style="
                 padding-left: 0;
                 padding-right: 0;
                 margin-left: 10px;
                 margin-right: 10px">
-                <!--Card image-->
-                <img class="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20%282%29.jpg" alt="Card image cap">
-                <!--/.Card image-->
-                <!--Card content-->
                 <div class="card-block">
                     <!--Title-->
-                    <h4 class="card-title">{{ entry.title }}</h4>
+                    <h4 class="card-title">Reading recommendations:</h4>
                     <!--Text-->
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <button name='exercise-select' class="btn btn-success" value="{{ entry.id }}">Go To Exercise!</button>
-                    </form>
+                    {% for recommendation in rec_list %}
+                        <a href="{{ recommendation.1 }}">{{ recommendation.0 }}</a>
+                        <p></p>
+                    {% endfor %}
                 </div>
             </div>
-            <!--/.Card content-->
-        {% endfor %}
-        <div class="card col-lg-3 col-md-6 col-sm-12" style="
-            padding-left: 0;
-            padding-right: 0;
-            margin-left: 10px;
-            margin-right: 10px">
-            <div class="card-block">
-                <!--Title-->
-                <h4 class="card-title">Reading recommendations:</h4>
-                <!--Text-->
-                {% for recommendation in rec_list %}
-                    <a href="{{ recommendation.1 }}">{{ recommendation.0 }}</a>
-                    <p></p>
-                {% endfor %}
+        </div>
+
+        <div class="row">
+            <div style="height: 500px; width: 500px;">
+                <canvas id="stud_ex_chart" style="border: dotted;"></canvas>
             </div>
-        </div>
-    </div>
-    <div class="row">
-        <div style="height: 500px; width: 500px;">
-            <canvas id="stud_ex_chart" style="border: dotted;"></canvas>
-        </div>
-        <div style="height: 500px; width: 500px;">
-            <canvas id="stud_tag_chart" style="border: dotted"></canvas>
+            <div style="height: 500px; width: 500px;">
+                <canvas id="stud_tag_chart" style="border: dotted"></canvas>
+            </div>
         </div>
     </div>
     <!-- Charts js-->
