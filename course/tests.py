@@ -59,7 +59,7 @@ class ServerTestCase(TestCase):
         resp = self.client.get('/course/TDTT3st/')
         self.assertEqual(200, resp.status_code)
         # Select an exercise
-        resp = self.client.post('/course/TDTT3st/', {'exercise-select':'testE'})
+        resp = self.client.post('/course/TDTT3st/', {'exercise-select': 'testE'})
         self.assertEqual(302, resp.status_code)
         self.assertEqual('/exercise/testE/', resp.url)
 
@@ -69,6 +69,6 @@ class ServerTestCase(TestCase):
         resp = self.client.get('/course/TDTT3st/')
         self.assertEqual(200, resp.status_code)
         # Select an exercise
-        resp = self.client.post('/course/TDTT3st/', {'exercise-select':'testE'})
+        resp = self.client.post('/course/TDTT3st/', {'exercise-select': 'testE'})
         self.assertEqual(302, resp.status_code)
         self.assertEqual('/exercise/testE/', resp.url)

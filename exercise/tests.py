@@ -23,12 +23,24 @@ class ServerTestCase(TestCase):
         # Attempt to add entries
         populate.add_reading_material('NewMaterial', 'www.google.com')  # Reading material
         populate.add_tag('TestTag', ['NewMaterial'])  # Theme Tag
-        g = populate.add_user_group('Lecturer')  # Group
-        u = User.objects.create_user(username='Pekka', email='the@man.com', password='kanban')
-        u.groups.add(g)
-        populate.add_course('TDT4140', ['Pekka'], ['NewMaterial'], 'Beware the 27.4')
         populate.add_course('NewCourse', [], [], '')
-        populate.add_coursecollection('Pekka', ['NewCourse'])
+        populate.add_user_group('Lecturer')  # Group
+        populate.add_user_group('Student')
+        populate.add_user(
+            username='Pekka',
+            email='the@man.com',
+            password='kanban',
+            course_list=['NewCourse'],
+            group_name_list=['Lecturer', 'Student'],
+            pers_exercise_list=[],
+            result_pk_list=[],
+        )
+        populate.add_course(
+            name='TDT4140',
+            admin_list=['Pekka'],
+            material_list=['NewMaterial'],
+            description='Beware the 27.4',
+        )
         populate.add_question(
             'Q1',
             'My car says',
@@ -40,6 +52,7 @@ class ServerTestCase(TestCase):
         )
         populate.add_exercise('Quiz 1', 'NewCourse', ['Q1'])
         populate.add_result(True, 'Q1', 'Pekka')
+
     # Test if database entries can be found and if their values are correct
 
     def test_add_reading_material(self):
@@ -61,7 +74,8 @@ class ServerTestCase(TestCase):
         self.assertTrue(User.objects.all().__getitem__(0).groups.filter(name='Lecturer').exists())
 
     def test_add_course(self):
-        self.assertEqual('TDT4140', Course.objects.all().__getitem__(0).name)
+        self.assertEqual('NewCourse', Course.objects.all().__getitem__(0).name)
+        self.assertEqual('TDT4140', Course.objects.all().__getitem__(1).name)
         self.assertEqual(Course.objects.get(name='TDT4140').administrators.all().__getitem__(0),
                          User.objects.get(username='Pekka'))
         self.assertEqual(Course.objects.get(name='TDT4140').content.all().__getitem__(0).title, 'NewMaterial')
@@ -97,8 +111,9 @@ class ServerTestCase(TestCase):
         self.assertEqual('Q1', r.question.title)
         self.assertEqual(r, User.objects.get(username='Pekka').resultcollection.results.all().__getitem__(0))
 
+    # Test for exercise collection should be in botTester
+
     # Test server connectivity
-    # def testAdd_question(self):
 
 
 
