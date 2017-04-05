@@ -235,14 +235,18 @@ def gen_student_theme(course_name, username):
 
 
 def retrieve_question_material(question_title, num):
-    # Genererer anbefalt reading material, til bruk når student løser quiz
-    # Litt hacks, TODO: optimaliser
+    """
+    Genererer anbefalt reading material, til bruk når student løser quiz
+    Litt hacks
+    :return list with reading material pk's
+    """
     tag_list = Question.objects.get(title=question_title).themeTags.all()
     material_list = []
     for each in tag_list:
         material_list.extend(each.material.all().values_list('title',flat=True))
     out_list = random.sample(material_list, min(num, len(material_list)))
     return out_list
+
 
 # TODO: make graphs only let the last x results count
 def main():
