@@ -39,16 +39,21 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>
+                    <h4 class="modal-title w-100" id="myModalLabel">Hints</h4>
                 </div>
                 <!--Body-->
                 <div class="modal-body">
-                    ...
+                {% if read_mats %}
+                    <ul style="list-style-type: disc">
+                    {% for hint in read_mats %}
+                        <li><a href={{ hint.link }}>{{ hint.title }}</a></li>
+                    {% endfor %}
+                    </ul>
+                {% endif %}
                 </div>
                 <!--Footer-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
             <!--/.Content-->

@@ -67,10 +67,10 @@ def do_exercise(request, exer_id):
         que_form = make_question_form(choices)
 
         # reading material
-        reading_material_ids = retrieve_question_material(que, 5)
+        reading_material_ids = retrieve_question_material(que.title, 5)
         read_mats = []
         for rm_id in reading_material_ids:
-            read_mats.append(ReadingMaterial.objects.get(id=rm_id))
+            read_mats.append(ReadingMaterial.objects.get(title=rm_id))
 
         context = {
             'form': que_form,
