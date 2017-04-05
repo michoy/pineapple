@@ -11,8 +11,8 @@ def student_course_view(request, fagkode):
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'POST':
-        if request.POST.get('exercise-select', False):
-            selected_ex = request.POST['exercise-select']
+        if request.POST.get('exercise_select', False):
+            selected_ex = request.POST['exercise_select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
         elif request.POST.get('generate_exercise', False):
             reccomendation = AssistantBot.make_rec(current_user.username, fagkode)
@@ -47,8 +47,8 @@ def lecturer_course_view(request, fagkode=''):
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'POST':
-        if request.POST['exercise-select']:
-            selected_ex = request.POST['exercise-select']
+        if request.POST['exercise_select']:
+            selected_ex = request.POST['exercise_select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
     else:
         exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
