@@ -2,7 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from exercise.forms import AnswerForm, make_question_form
 from exercise.models import Question, ResultCollection, ReadingMaterial
+from exercise import populate
 from botTester.AssistantBot import retrieve_question_material
+
 
 
 def base(request):
@@ -27,12 +29,23 @@ def do_exercise(request, exer_id):
                 que_pk = request.POST['submit']
                 que = Question.objects.get(title=que_pk)
                 if int(data['Answer']) == que.correct_alternative:
-                    # todo: save
                     correct = True
+                    populate.add_result(
+                        val = True,
+                        question=que_pk,
+                        student=current_user,
+                        exercise=exer_id,
+                    )
                 else:
                     wrong = True
+                    populate.add_result(
+                        val=False,
+                        question=que_pk,
+                        student=current_user,
+                        exercise=exer_id,
+                    )
             form = []
-        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong})
+        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong,'que_pk': que.title, 'que_que': que.question,})
     else:
         # todo: retrieve a valid question
         # get right question
@@ -75,6 +88,7 @@ def do_exercise(request, exer_id):
         context = {
             'form': que_form,
             'que_pk': que.title,
+            'que_que': que.question,
             'read_mats': read_mats,
         }
         return render(request, 'exercise.html', context)

@@ -28,6 +28,7 @@ class ServerTestCase(TestCase):
         populate.add_tag(name='Nobody gets this', material_list=['TheThingNobodyReads'])
         populate.add_course(
             name='TDT0001',
+            full_name='This is a test course!',
             admin_list=[],
             material_list=['Robot toes', 'Cakes'],
             description='For bot-testing purposes'
@@ -74,7 +75,7 @@ class ServerTestCase(TestCase):
             belongs_to='TDT0001',
             is_worth=0,
         )
-        populate.add_exercise(
+        ex = populate.add_exercise(
             title='OopsAlmostForgotTheExercise',
             course='TDT0001',
             question_list=['RoboToes', 'Cupcakecakes', 'DoNotAnswerThis']
@@ -93,16 +94,19 @@ class ServerTestCase(TestCase):
             val=False,
             question='RoboToes',
             student='YoungAndNaive',
+            exercise=ex.pk,
         )
         populate.add_result(
             val=True,
             question='Cupcakecakes',
             student='YoungAndNaive',
+            exercise=ex.pk,
         )
         populate.add_result(
             val=True,
             question='DoNotAnswerThis',
             student='YoungAndNaive',
+            exercise=ex.pk,
         )
 
     def test_make_rec(self):

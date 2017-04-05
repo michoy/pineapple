@@ -25,8 +25,8 @@ def add_tag(name, material_list):
     return tag
 
 
-def add_course(name, admin_list, material_list, description):
-    course = Course(name=name, description=description)
+def add_course(name, full_name, admin_list, material_list, description):
+    course = Course(name=name, full_name=full_name, description=description)
     course.save()
     for each in admin_list:
         course.administrators.add(User.objects.get(username=each))
@@ -58,7 +58,10 @@ def add_question(title, question, alternative_list, correct_num, tag_list, belon
 
 
 def add_exercise(title, course, question_list, private=False):
-    exercise = Exercise(title=title, course=Course.objects.get(name=course), private=private)
+    exercise = Exercise(
+        title=title,
+        course=Course.objects.get(name=course),
+        private=private)
     exercise.save()
     for each in question_list:
         exercise.contains.add(Question.objects.get(title=each))
@@ -299,10 +302,10 @@ def main():
     )
 
     # Course:
-    add_course('TDT4140', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
-    add_course('TMA4100', ['Pekka'], [], 'Matte 1')
-    add_course('TFY4125', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
-    add_course('TDT4145', ['Bovim'], [], 'Databaser for n00bs')
+    add_course('TDT4140','Programvareutvikling' , ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
+    add_course('TMA4100', 'Matematikk 1', ['Pekka'], [], 'Matte 1')
+    add_course('TFY4125', 'Fysikk', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
+    add_course('TDT4145', 'Datamodellering og databasesystemer', ['Bovim'], [], 'Databaser for n00bs')
     
     # Students
     add_user(
