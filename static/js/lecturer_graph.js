@@ -90,11 +90,13 @@ var genCardPie = genCardPie || (function(){
                 data: {
                     labels: ['Correct', 'Incorrect'],
                     datasets: [
-                      {
-                            fillColor : "rgba(220,220,220,0.5)",
-                            strokeColor : "rgba(220,220,220,1)",
-                            pointColor : "rgba(220,220,220,1)",
-                            pointStrokeColor : "#fff",
+                        {
+                            backgroundColor: ["#ffbb33","#00C851"],
+                            boarderWidth: 1,
+                            fillColor : ["#007E33","#007E33"],
+                            strokeColor : ["#007E33","#007E33"],
+                            pointColor : ["#007E33","#007E33"],
+                            pointStrokeColor : "#007E33",
                             data : [success, 100-success]
                         },
                     ]
@@ -103,3 +105,5 @@ var genCardPie = genCardPie || (function(){
         }
     };
 }());
+
+
