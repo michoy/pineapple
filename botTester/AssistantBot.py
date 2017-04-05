@@ -28,7 +28,7 @@ def gen_exercise(num, dist_dict, username, course):
     total = 0
     for key in dist_dict:
         total += dist_dict[key]
-    if int(total) != 1:     # Kan være round må brukes her
+    if round(total, 2) != 1.00:
         raise ValueError('Distribution does not add up to 100!')
     # Make sure user has an exercise collector
     user = User.objects.get(username=username)
@@ -89,8 +89,8 @@ def gen_reading_rec(num, dist_dict):
     total = 0
     for key in dist_dict:
         total += dist_dict[key]
-    if len(dist_dict) != 0 and int(total) != 1:
-        raise ValueError('Distribution does not add up to 100! Rather: ' + str(total))
+    if len(dist_dict) != 0 and round(total, 2) != 1.00:
+        raise ValueError('Distribution does not add up to 1! Rather: ' + str(total))
     # Find reading material
     selected_pks = []
     for key in dist_dict:

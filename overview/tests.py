@@ -21,6 +21,7 @@ class ServerTestCase(TestCase):
         # Create test course to select later
         populate.add_course(
             name='TDTT3st',
+            full_name='L33t3st C0urse',
             admin_list=['theTeach'],
             material_list=[],
             description='For testing purposes'
