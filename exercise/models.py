@@ -70,6 +70,7 @@ class Result(models.Model):
     resultVal = models.BooleanField()
     # Relationships:
     question = models.ForeignKey(Question)
+    exercise = models.ForeignKey(Exercise)
 
     def __str__(self):
         return str(self.resultVal)
