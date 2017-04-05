@@ -2,15 +2,55 @@
 
 {% block pagename %}{{ course }}{%  endblock %}
 
-{% block p_heading %}{{ course }}{%  endblock %}
-
-{% block p_2heading %}{{ course }}{%  endblock %}
-
 {% block title %}{{ course }}{% endblock %}
 
 {% block content %}
-    <!-- Exercise pluss chart row -->
+    <div class="container" style="margin-top: 80px; margin-bottom: 30px">
+        <div class="h1-responsive">{{ course }}
+            <small class="title">{{ course.full_name }}</small>
+        </div>
+    </div>
+    <!-- Stats -->
     <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card " style="
+                    padding: 10px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    margin-bottom: 20px">
+                    <h4 class="card-title">Your performance:</h4>
+                        <hr>
+                    <canvas id="stud_ex_chart" style="margin-top: 10px; margin-bottom: 10px"></canvas>
+                    <canvas id="stud_tag_chart" style="margin-top: 10px; margin-bottom: 10px"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="card" style="
+                    padding-left: 0;
+                    padding-right: 0;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    margin-bottom: 20px">
+                    <div class="card-block">
+                        <!--Title-->
+                        <h4 class="card-title">Reading recommendations:</h4>
+                             <hr>
+                        <!--Text-->
+                        {% for recommendation in rec_list %}
+                            <a href="{{ recommendation.1 }}">{{ recommendation.0 }}</a>
+                            <p></p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+    <div class="h3-responsive" style="margin-bottom: 20px">Exercises</div>
+    <!-- Exercise pluss chart row -->
+    <div class="container" style="margin: 50px">
         <div class="row">
             {% for entry in exercises %}
                 <div class="col-lg-3 col-md-6 col-sm-12">
@@ -30,37 +70,13 @@
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <button name='exercise-select' class="btn btn-success" value="{{ entry.id }}">Go To Exercise!</button>
+                                <button name='exercise_select' class="btn btn-success" value="{{ entry.id }}">Go To Exercise!</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <!--/.Card content-->
             {% endfor %}
-            <div class="card col-lg-3 col-md-6 col-sm-12" style="
-                padding-left: 0;
-                padding-right: 0;
-                margin-left: 10px;
-                margin-right: 10px">
-                <div class="card-block">
-                    <!--Title-->
-                    <h4 class="card-title">Reading recommendations:</h4>
-                    <!--Text-->
-                    {% for recommendation in rec_list %}
-                        <a href="{{ recommendation.1 }}">{{ recommendation.0 }}</a>
-                        <p></p>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div style="height: 500px; width: 500px;">
-                <canvas id="stud_ex_chart" style="border: dotted;"></canvas>
-            </div>
-            <div style="height: 500px; width: 500px;">
-                <canvas id="stud_tag_chart" style="border: dotted"></canvas>
-            </div>
         </div>
     </div>
     <!-- Charts js-->
@@ -71,11 +87,10 @@
      </script>
 
     <!-- Generate exercise button -->
-    <hr>
     <form action="" method="post">
     {% csrf_token %}
-        <div class="text-center">
-            <button name="generate_exercise" class="btn btn-secondary" value="generate_exercise">Genereate exercise</button>
+        <div class="text-center" style="margin-bottom: 50px">
+            <button name="generate_exercise" class="btn btn-secondary" value="generate_exercise">Genereate new exercise</button>
         </div>
     </form>
 
