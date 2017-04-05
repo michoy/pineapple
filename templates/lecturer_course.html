@@ -8,42 +8,43 @@
 {% csrf_token %}
     <!-- Exercise pluss chart row -->
     <div class="container">
-        <div class="row">
-            <!-- Exercise card -->
-            <div class="col-4 offset-1" >
-                {% for each in exercises %}
-                    <div class="row">
-                        <!--Card-->
-                        <div class="card wow fadeInUp">
-                            <!--Card content-->
-                            <div class="card-block text-center">
-                                <!--Title-->
-                                <h4 class="card-title">{{ each }}</h4>
-                                <hr>
-                                <!--Text-->
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
-                                <!--Button-->
-                                <form action="" method="post">
-                                    {% csrf_token %}
-                                    <button name="exercise-select"  class="btn btn-primary btn-lg btn-block"  value="{{ each|cut:" " }}" >Go to Exercise!</button>
-                                </form>
-                            </div>
-                            <!--/.Card content-->
+        <!-- Exercise card -->
+        {% for each in exercises %}
+            <div class="row align-items-start ">
+                <div class="col-6" >
+                    <!--Card-->
+                    <div class="card wow fadeInUp">
+                        <!--Card content-->
+                        <div class="card-block text-center">
+                            <!--Title-->
+                            <h4 class="card-title">{{ each }}</h4>
+                            <hr>
+                            <!--Text-->
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
+                            <!--Button-->
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <button name="exercise-select"  class="btn btn-primary btn-lg btn-block"  value="{{ each|cut:" " }}" >Go to Exercise!</button>
+                            </form>
                         </div>
-                        <!-- Pie-chart for completion -->
-                        <div style="height: 200px; width: 200px;">
-                            <canvas id="{{ each }}+canvas" style="border: dotted"></canvas>
-                        </div>
-                             <script type="text/javascript" src="/static/js/lecturer_graph.js"></script>
-                             <script type="text/javascript">
-                                genCardPie.genGraph("{{ each }}+canvas", {{ ex_graph_data.1 }}[{{ forloop.counter0 }}]);
-                             </script>
+                        <!--/.Card content-->
                     </div>
-                    <!--/.Card-->
-                {% endfor %}
+                </div>
+                <div class="col-4 offset-1" >
+                    <!-- Pie-chart for completion -->
+                    <div style="height: 200px; width: 200px;">
+                        <canvas id="{{ each }}+canvas" ></canvas>
+                    </div>
+                         <script type="text/javascript" src="/static/js/lecturer_graph.js"></script>
+                         <script type="text/javascript">
+                            genCardPie.genGraph("{{ each }}+canvas", {{ ex_graph_data.1 }}[{{ forloop.counter0 }}]);
+                         </script>
+                </div>
             </div>
-        </div>
+            <!--/.Card-->
+        {% endfor %}
     </div>
+
     <div class="row">
         <div style="height: 500px; width: 500px;">
             <canvas id="lect_ex_chart" style="border: dotted;"></canvas>
@@ -52,6 +53,8 @@
             <canvas id="lect_tag_chart" style="border: dotted"></canvas>
         </div>
     </div>
+
+
     <!-- End: Exercise pluss chart row -->
     <!-- Charts js-->
      <script type="text/javascript" src="/static/js/lecturer_graph.js"></script>
