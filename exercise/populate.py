@@ -66,10 +66,11 @@ def add_exercise(title, course, question_list, private=False):
     return exercise
 
 
-def add_result(val, question, student):
+def add_result(val, question, student, exercise):
     result = Result(
         resultVal=val,
-        question=Question.objects.get(title=question)
+        question=Question.objects.get(title=question),
+        exercise=Exercise.objects.get(pk=exercise)
     )
     result.save()
     user = User.objects.get(username=student)
@@ -391,19 +392,19 @@ def main():
     )
 
     # Exercises:
-    add_exercise('Quiz 1', 'TDT4140', ['Q1', 'Q2', 'Q3'])
-    add_exercise('New and empty', 'TDT4140', [])
-    add_exercise('TFY4125_Exercise1', 'TFY4125', ['TFY4125_Q1', 'TFY4125_Q2', 'TFY4125_Q3'])
+    ex_1 = add_exercise('Quiz 1', 'TDT4140', ['Q1', 'Q2', 'Q3'])
+    ex_2 = add_exercise('New and empty', 'TDT4140', [])
+    ex_3 = add_exercise('TFY4125_Exercise1', 'TFY4125', ['TFY4125_Q1', 'TFY4125_Q2', 'TFY4125_Q3'])
 
     # Results:
-    add_result(True, 'Q1', 'Per')
-    add_result(True, 'Q1', 'Pål')
-    add_result(True, 'Q1', 'Sofie')
-    add_result(False, 'Q2', 'Per')
-    add_result(False, 'Q2', 'Pål')
-    add_result(True, 'Q2', 'Sofie')
-    add_result(True, 'Q3', 'Per')
-    add_result(True, 'Q3', 'Pål')
+    add_result(True, 'Q1', 'Per', ex_1.pk)
+    add_result(True, 'Q1', 'Pål', ex_1.pk)
+    add_result(True, 'Q1', 'Sofie', ex_1.pk)
+    add_result(False, 'Q2', 'Per', ex_1.pk)
+    add_result(False, 'Q2', 'Pål', ex_1.pk)
+    add_result(True, 'Q2', 'Sofie', ex_1.pk)
+    add_result(True, 'Q3', 'Per', ex_1.pk)
+    add_result(True, 'Q3', 'Pål', ex_1.pk)
 
 
 if __name__ == '__main__':
