@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
 from exercise.forms import AnswerForm, make_question_form
-from exercise.models import Question, ResultCollection
+from exercise.models import Question, ResultCollection, ReadingMaterial
+from botTester.AssistantBot import retrieve_question_material
 
 
 def base(request):
@@ -11,9 +11,11 @@ def base(request):
 
 @login_required()
 def do_exercise(request, exer_id):
-    """ 1. Sends form with alternatives through context. Receives answer alternative.
-     2. Evaluates it and saves the result. Sends context with correct value and empty form.
-     3. recieves request without post. Send context with new alternatives (1.) """
+    """ 
+    1. Sends form with alternatives through context. Receives answer alternative.
+    2. Evaluates it and saves the result. Sends context with correct value and empty form.
+    3. recieves request without post. Send context with new alternatives (1.) 
+    """
     current_user = request.user
     if request.method == 'POST':
         correct = False
@@ -33,6 +35,7 @@ def do_exercise(request, exer_id):
         return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong})
     else:
         # todo: retrieve a valid question
+        # get right question
         questions = ResultCollection.objects.raw(
             'SELECT DISTINCT R.id, R.question_id '
             'FROM exercise_resultcollection AS Rc '
@@ -62,10 +65,16 @@ def do_exercise(request, exer_id):
             ('4', que.alternative_4),
         )
         que_form = make_question_form(choices)
+
+        # reading material
+        reading_material_ids = retrieve_question_material(que.title, 5)
+        read_mats = []
+        for rm_id in reading_material_ids:
+            read_mats.append(ReadingMaterial.objects.get(title=rm_id))
+
         context = {
             'form': que_form,
             'que_pk': que.title,
-            # 'question': title,
-            # 'stuff': stuff,
+            'read_mats': read_mats,
         }
         return render(request, 'exercise.html', context)
