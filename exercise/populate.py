@@ -401,13 +401,13 @@ def main():
 
     # Results:
     add_result(True, 'Q1', 'Per', ex_1.pk)
-    add_result(True, 'Q1', 'Pål', ex_1.pk)
+    #add_result(True, 'Q1', 'Pål', ex_1.pk)
     add_result(True, 'Q1', 'Sofie', ex_1.pk)
     add_result(False, 'Q2', 'Per', ex_1.pk)
-    add_result(False, 'Q2', 'Pål', ex_1.pk)
+    #add_result(False, 'Q2', 'Pål', ex_1.pk)
     add_result(True, 'Q2', 'Sofie', ex_1.pk)
     add_result(True, 'Q3', 'Per', ex_1.pk)
-    add_result(True, 'Q3', 'Pål', ex_1.pk)
+    #add_result(True, 'Q3', 'Pål', ex_1.pk)
 
 
 if __name__ == '__main__':
