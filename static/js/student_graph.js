@@ -28,7 +28,7 @@ var genStudEx = genStudEx || (function(){
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: studData,
+                            data: classData,
                             spanGaps: false,
                         },
                         {
@@ -50,7 +50,7 @@ var genStudEx = genStudEx || (function(){
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: classData,
+                            data: studData,
                             spanGaps: false,
                         }
                     ]
@@ -89,7 +89,7 @@ var genStudTag = genStudTag || (function(){
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: studData,
+                            data: classData,
                             spanGaps: false,
                         },
                         {
@@ -111,7 +111,7 @@ var genStudTag = genStudTag || (function(){
                             pointHoverBorderWidth: 2,
                             pointRadius: 1,
                             pointHitRadius: 10,
-                            data: classData,
+                            data: studData,
                             spanGaps: false,
                         }
                     ]
