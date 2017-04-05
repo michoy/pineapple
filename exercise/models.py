@@ -18,6 +18,7 @@ class ThemeTag(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
+    full_name = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     # Relationships:
     administrators = models.ManyToManyField(User)  # Antar dette er greit,

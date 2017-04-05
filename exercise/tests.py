@@ -23,7 +23,7 @@ class ServerTestCase(TestCase):
         # Attempt to add entries
         populate.add_reading_material('NewMaterial', 'www.google.com')  # Reading material
         populate.add_tag('TestTag', ['NewMaterial'])  # Theme Tag
-        populate.add_course('NewCourse', [], [], '')
+        populate.add_course('NewCourse', 'This course is an example',[], [], '')
         populate.add_user_group('Lecturer')  # Group
         populate.add_user_group('Student')
         populate.add_user(
@@ -37,6 +37,7 @@ class ServerTestCase(TestCase):
         )
         populate.add_course(
             name='TDT4140',
+            full_name='Programvareutvikling',
             admin_list=['Pekka'],
             material_list=['NewMaterial'],
             description='Beware the 27.4',
@@ -50,8 +51,8 @@ class ServerTestCase(TestCase):
             'NewCourse',
             11
         )
-        populate.add_exercise('Quiz 1', 'NewCourse', ['Q1'])
-        populate.add_result(True, 'Q1', 'Pekka')
+        ex = populate.add_exercise('Quiz 1', 'NewCourse', ['Q1'])
+        populate.add_result(True, 'Q1', 'Pekka', ex.pk)
 
     # Test if database entries can be found and if their values are correct
 
