@@ -13,10 +13,10 @@ def base(request):
 
 @login_required()
 def do_exercise(request, exer_id):
-    """ 
+    """
     1. Sends form with alternatives through context. Receives answer alternative.
     2. Evaluates it and saves the result. Sends context with correct value and empty form.
-    3. recieves request without post. Send context with new alternatives (1.) 
+    3. recieves request without post. Send context with new alternatives (1.)
     """
     current_user = request.user
     if request.method == 'POST':
@@ -57,19 +57,6 @@ def do_exercise(request, exer_id):
             'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
             'WHERE EC.exercise_id = %s AND Rc.student_id = %s', [exer_id, current_user.id]
         )
-        '''
-        cursor = connection.cursor()
-        cursor.execute(
-            'SELECT DISTINCT EC.question_id '
-            'FROM exercise_resultcollection AS Rc '
-            'JOIN exercise_resultcollection_results AS RcR ON Rc.id = RcR.resultcollection_id '
-            'JOIN exercise_result AS R ON RcR.result_id = R.id '
-            'JOIN exercise_exercise_contains AS EC ON R.question_id = EC.question_id '
-            'WHERE EC.exercise_id = %s', [exer_id]
-        )
-        stuff = cursor.fetchall()
-        '''
-        stuff = questions.columns
         que = Question.objects.first()
         choices = (
             ('1', que.alternative_1),
@@ -88,7 +75,11 @@ def do_exercise(request, exer_id):
         # progress number
         done_questions = len(current_user.resultcollection.results.filter(exercise_id=exer_id))
         q_list = len(list(Exercise.objects.get(pk=exer_id).contains.all().values_list('pk', flat=True)))
-        prog_num = (done_questions / q_list) * 100
+        if q_list:
+            prog_num = (done_questions / q_list) * 100
+        else:
+            prog_num = 0
+
 
         context = {
             'form': que_form,
