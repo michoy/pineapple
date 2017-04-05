@@ -4,6 +4,15 @@
 
 {% block content %}
 
+
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow={{ prog_num }}
+      aria-valuemin="0" aria-valuemax="100" style="width:{{ prog_num }}%">
+          {{ prog_num }}%
+      </div>
+    </div>
+
     <h3>{{ que_pk }}</h3>
     <p>{{ que_que }}</p>
     {% if form %}

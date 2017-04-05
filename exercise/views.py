@@ -1,10 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from exercise.forms import AnswerForm, make_question_form
-from exercise.models import Question, ResultCollection, ReadingMaterial
+from exercise.models import Question, ResultCollection, ReadingMaterial, Exercise
 from exercise import populate
 from botTester.AssistantBot import retrieve_question_material
-
+from django.db.models import Sum
 
 
 def base(request):
@@ -85,10 +85,16 @@ def do_exercise(request, exer_id):
         for rm_id in reading_material_ids:
             read_mats.append(ReadingMaterial.objects.get(title=rm_id))
 
+        # progress number
+        done_questions = len(current_user.resultcollection.results.filter(exercise_id=exer_id))
+        q_list = len(list(Exercise.objects.get(pk=exer_id).contains.all().values_list('pk', flat=True)))
+        prog_num = (done_questions / q_list) * 100
+
         context = {
             'form': que_form,
             'que_pk': que.title,
             'que_que': que.question,
             'read_mats': read_mats,
+            'prog_num': prog_num,
         }
         return render(request, 'exercise.html', context)
