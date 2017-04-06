@@ -60,6 +60,57 @@
         {% endfor %}
     </div>
 
+    <!-- Add new cards -->
+    <div class="container">
+            <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
+                <!-- Add exercise-->
+                <div class="col-6" >
+                    <div class="card wow fadeInUp">
+                        <!--Card content-->
+                        <div class="card-block text-center">
+                            <!--Title-->
+                            <h4 class="card-title">New exercise</h4>
+                            <hr>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ exercise_form }}
+                                <br>
+                                <button type="submit" name="new_exercise" class="btn btn-secondary btn-lg btn-block" >
+                                    Add</button>
+                            </form>
+                            {% if added_exercise %}
+                                <p>Exercise added</p>
+                            {% endif %}
+                        </div>
+                        <!--/.Card content-->
+                    </div>
+                </div>
+                <!-- Add question -->
+                <div class="col-6" >
+                    <!--Card-->
+                    <div class="card wow fadeInUp">
+                        <!--Card content-->
+                        <div class="card-block text-center">
+                            <!--Title-->
+                            <h4 class="card-title">New Question</h4>
+                            <hr>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ question_form }}
+                                <br>
+                                <button type="submit" name="new_question" class="btn btn-secondary btn-lg btn-block" >
+                                    Add</button>
+                            </form>
+                            {% if added_question%}
+                                <p>Question added</p>
+                            {% endif %}
+                        </div>
+                        <!--/.Card content-->
+                    </div>
+                </div>
+            </div>
+    </div>
+    <!--/. Add new cards -->
 
     <!-- End: Exercise pluss chart row -->
     <!-- Charts js-->
@@ -68,6 +119,5 @@
         genLectEx.genGraph({% autoescape off %}{{ ex_graph_data.0 }} {% endautoescape %}, {{ ex_graph_data.1}} );
         genLectTag.genGraph({% autoescape off %}{{ tag_graph_data.0 }} {% endautoescape %}, {{ tag_graph_data.1}});
      </script>
-    
-{% endblock %}
 
+{% endblock %}
