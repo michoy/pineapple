@@ -44,47 +44,57 @@ def student_course_view(request, fagkode):
 
 @login_required
 def lecturer_course_view(request, fagkode=''):
+    added_exercise = False
+    added_question = False
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
     if request.method == 'POST':
-        if request.POST['exercise_select']:
-            selected_ex = request.POST['exercise_select']
+        if request.POST.get('exercise_select', False):
+            selected_ex = request.POST.get('exercise_select', False)
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
         elif request.POST.get('new_exercise', False):
             form = PartialExerciseForm(request.POST)
-            new_exercise = form.save(commit=False)
-            new_exercise.course = fagkode
-            new_exercise.save()
+            if form.is_valid():
+                new_exercise = form.save(commit=False)
+                new_exercise.course = Course.objects.get(navn=fagkode)
+                new_exercise.private = False
+                new_exercise.save()
+                added_exercise = True
         elif request.POST.get('new_question', False):
             form = PartialQuestionForm(request.POST)
-            new_question = form.save(commit=False)
-            new_question.belongsTo = fagkode    # todo: what more to exclude / include
-            new_question.save()
-    else:
-        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
-                                  .values_list('id', flat=True))
-        user = User.objects.get(username=request.user)
+            if form.is_valid():
+                new_question = form.save(commit=False)
+                new_question.belongsTo = Course.objects.get(name=fagkode)
+                new_question.is_worth = 10
+                new_question.save()
+                added_question = True
 
-        # Collect data for graphs
-        exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
-        ex_graph_data = AssistantBot.gen_lecturer_exercise(course_name=fagkode)
-        tag_graph_data = AssistantBot.gen_lecturer_theme(course_name=fagkode)
+    exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
+                              .values_list('id', flat=True))
+    user = User.objects.get(username=request.user)
 
-        # Add new exercise
-        exercise_form = PartialExerciseForm()
+    # Collect data for graphs
+    exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
+    ex_graph_data = AssistantBot.gen_lecturer_exercise(course_name=fagkode)
+    tag_graph_data = AssistantBot.gen_lecturer_theme(course_name=fagkode)
 
-        # Add new question
-        question_form = PartialQuestionForm()
+    # Add new exercise
+    exercise_form = PartialExerciseForm()
 
-        context = {
-            'exercises': exercise_name_list,
-            'course': fagkode,
-            'ex_graph_data': ex_graph_data,
-            'tag_graph_data': tag_graph_data,
-            'exercise_form': exercise_form,
-            'question_form': question_form,
-         }
-        return render(request, 'lecturer_course.html', context)
+    # Add new question
+    question_form = PartialQuestionForm()
+
+    context = {
+        'exercises': exercise_name_list,
+        'course': fagkode,
+        'ex_graph_data': ex_graph_data,
+        'tag_graph_data': tag_graph_data,
+        'exercise_form': exercise_form,
+        'question_form': question_form,
+        'added_exercise': added_exercise,
+        'added_question': added_question,
+    }
+    return render(request, 'lecturer_course.html', context)
 
 
 @login_required

@@ -67,61 +67,64 @@
         {% endfor %}
     </div>
 
-    <!-- Add exercise-->
-    <div class="card">
-        <div class="card-block">
-
-            <!--Header-->
-            <div class="text-center">
-                <h3><i class="fa fa-lock">New Exercise</i></h3>
-                <hr class="mt-2 mb-2">
-            </div>
-
-            <!--Body-->
-            <form method="post" action="">
-                {% csrf_token %}
-                {{exercise_form.as_table}}
-                <button name="new_exercise">Add</button>
-            </form>
-
-            {% if error %}
-                <div class="text-center">
-                    <p>Username and password do not match</p>
+<div class="container">
+        <!-- Exercise card -->
+            <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
+                <div class="col-12" >
+                    <!--Card-->
+                    <div class="card wow fadeInUp">
+                        <!--Card content-->
+                        <div class="card-block text-center">
+                            <!--Title-->
+                            <h4 class="card-title">New exercise</h4>
+                            <hr>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ exercise_form }}
+                                <br>
+                                <input type="submit" name="new_exercise" value="Add" class="btn btn-secondary btn-lg btn-block" >
+                            </form>
+                            {% if added_exercise %}
+                                <p>Exercise added</p>
+                            {% endif %}
+                        </div>
+                        <!--/.Card content-->
+                    </div>
                 </div>
-            {% endif %}
-
-        </div>
-
-    </div>
-    <!--/ Add exercise-->
-
-    <!-- Add question-->
-    <div class="card">
-        <div class="card-block">
-
-            <!--Header-->
-            <div class="text-center">
-                <h3><i class="fa fa-lock">New Question</i></h3>
-                <hr class="mt-2 mb-2">
             </div>
+            <hr>
+            <!--/.Card-->
+</div>
 
-            <!--Body-->
-            <form method="post" action="">
-                {% csrf_token %}
-                {{question_form.as_table}}
-                <button name="new_question">Add</button>
-            </form>
-
-            {% if error %}
-                <div class="text-center">
-                    <p>Username and password do not match</p>
+        <!-- Add question-->
+<div class="container">
+        <!-- Exercise card -->
+            <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
+                <div class="col-12" >
+                    <!--Card-->
+                    <div class="card wow fadeInUp">
+                        <!--Card content-->
+                        <div class="card-block text-center">
+                            <!--Title-->
+                            <h4 class="card-title">New Question</h4>
+                            <hr>
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                {{ question_form }}
+                                <br>
+                                <input type="submit" name="new_question" value="Add" class="btn btn-secondary btn-lg btn-block" >
+                            </form>
+                            {% if added_question%}
+                                <p>Question added</p>
+                            {% endif %}
+                        </div>
+                        <!--/.Card content-->
+                    </div>
                 </div>
-            {% endif %}
-
-        </div>
-
+            </div>
+            <hr>
+            <!--/.Card-->
     </div>
-    <!--/ Add question-->
 
     <!-- End: Exercise pluss chart row -->
     <!-- Charts js-->

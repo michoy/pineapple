@@ -11,10 +11,10 @@ class CourseForm(forms.ModelForm):
 class PartialExerciseForm(forms.ModelForm):
     class Meta:
         model = Exercise
-        exclude = ['course']
+        exclude = ['course', 'private']
 
 
 class PartialQuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        exclude = ['belongsTo']
+        exclude = ['belongsTo', 'is_worth']
