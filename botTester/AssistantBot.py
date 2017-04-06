@@ -50,8 +50,6 @@ def gen_exercise(num, dist_dict, username, course):
         question_list=selected_pks,
         private=True,
     )
-    print('Sel_pks:')
-    print(selected_pks)
     col.exercises.add(new_e)
     return new_e
 
