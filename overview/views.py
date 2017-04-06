@@ -36,4 +36,4 @@ def courses(request):
             else:
                 return HttpResponseRedirect('/course/' + selected_course + '/')
     course_list = get_course_list(current_user.username)
-    return render(request, 'overview.html', {'courseList': course_list})
+    return render(request, 'overview.html', {'courseList': course_list, 'username':current_user})
