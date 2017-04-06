@@ -47,9 +47,11 @@ def do_exercise(request, exer_id):
                         exercise=exer_id,
                     )
             form = []
+            # headline
+            exercise_name = Exercise.objects.get(pk=exer_id).title
         elif request.POST['next-q']:
             return goto_next_question(request, current_user, exer_id)
-        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong,'que_pk': que.title, 'que_que': que.question,})
+        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong,'que_pk': que.title, 'que_que': que.question, 'exercise_name':exercise_name})
     else:
         return goto_next_question(request, current_user, exer_id)
 
@@ -80,7 +82,8 @@ def goto_next_question(request, username, exer_id):
         read_mats = []
         for rm_id in reading_material_ids:
             read_mats.append(ReadingMaterial.objects.get(title=rm_id))
-
+        # headline
+        exercise_name = Exercise.objects.get(pk=exer_id).title
         # progress number
         done_questions = len(username.resultcollection.results.filter(exercise_id=exer_id))
         q_list = len(list(Exercise.objects.get(pk=exer_id).contains.all().values_list('pk', flat=True)))
@@ -93,6 +96,7 @@ def goto_next_question(request, username, exer_id):
             'que_pk': que.title,
             'que_que': que.question,
             'read_mats': read_mats,
+            'exercise_name': exercise_name,
             'prog_num': prog_num,
         }
         return render(request, 'exercise.html', context)

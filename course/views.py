@@ -30,13 +30,14 @@ def student_course_view(request, fagkode):
         )
         ex_graph_data = AssistantBot.gen_student_exercise(course_name=fagkode, username=request.user)
         tag_graph_data = AssistantBot.gen_student_theme(course_name=fagkode, username=request.user)
-        print(recommendations_list)
+        course_full = Course.objects.get(name=fagkode).full_name
         return render(
             request,
             'student_course.html',
             {'exercises': exercise_name_list,
              'rec_list': recommendations_list,
              'course': fagkode,
+             'course_full': course_full,
              'ex_graph_data': ex_graph_data,
              'tag_graph_data': tag_graph_data}
         )
@@ -51,18 +52,19 @@ def lecturer_course_view(request, fagkode=''):
             selected_ex = request.POST['exercise_select']
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
     else:
-        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
-                                  .values_list('id', flat=True))
+        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
         user = User.objects.get(username=request.user)
         # Collect data for graphs
         exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
         ex_graph_data = AssistantBot.gen_lecturer_exercise(course_name=fagkode)
         tag_graph_data = AssistantBot.gen_lecturer_theme(course_name=fagkode)
+        course_full = Course.objects.get(name=fagkode).full_name
         return render(
             request,
             'lecturer_course.html',
             {'exercises': exercise_name_list,
              'course': fagkode,
+             'course_full': course_full,
              'ex_graph_data': ex_graph_data,
              'tag_graph_data': tag_graph_data}
         )
