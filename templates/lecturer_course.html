@@ -2,19 +2,12 @@
 
 {% block pagename %}{{ course }}{% endblock %}
 
-{% block title1 %}{{ course }}{% endblock %}
+{% block title1 %}{{ course }}: {% endblock %}
 
-{% block title2 %}{{ course.full_name }}{% endblock %}
+{% block title2 %}{{ course_full }}{% endblock %}
 
 {% block content %}
 {% csrf_token %}
-    <!-- Exercise pluss chart row -->'
-    <div class="container" style="margin-top: 80px; margin-bottom: 30px">
-        <div class="h1-responsive">{{ course }}
-            <small class="title">{{ course.full_name }}</small>
-        </div>
-    </div>
-
 
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12">
@@ -38,14 +31,14 @@
                         <!--Card content-->
                         <div class="card-block text-center" style="height: 200px">
                             <!--Title-->
-                            <h4 class="card-title">Exercise {{ each }}</h4>
+                            <h4 class="card-title">{{ each.title }}</h4>
                             <hr>
                             <!--Text-->
                             <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
                             <!--Button-->
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <button name="exercise_select"  class="btn btn-primary btn-lg btn-block"  value="{{ each|cut:" " }}" >Go to Exercise!</button>
+                                <button name="exercise_select"  class="btn btn-primary btn-lg btn-block"  value="{{ each.id }}" >Go to Exercise!</button>
                             </form>
                         </div>
                         <!--/.Card content-->

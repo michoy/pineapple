@@ -42,6 +42,7 @@ def gen_exercise(num, dist_dict, username, course):
         x = int(round((dist_dict[key]*num)))
         question_pks = list(Question.objects.filter(themeTags__name=key).values_list('pk', flat=True).distinct())
         selected_pks.extend(random.sample(question_pks, min(x, len(question_pks))))
+    selected_pks=list(set(selected_pks))
     # Create new exercise and give to user
     new_e = add_exercise(
         title=user.username+"'s tailored Exercise "+(str(col.exercises.all().count()+1)),
@@ -64,8 +65,12 @@ def make_rec(username, course):
     """
     # Figure out how many percent to dedicate to topic
     user = User.objects.get(username=username)
-    tag_list = list(user.resultcollection.results.filter(question__belongsTo=course).
-                    values_list('question__themeTags', flat=True).distinct())  # Kan sikkert optimaliseres
+    q_list=list(Question.objects.filter(belongsTo__pk=course).values_list('pk',flat=True))
+    tag_list = []
+    for each in q_list:
+        tag_list.extend(list(Question.objects.get(pk=each).themeTags.values_list('pk',flat=True)))
+    tag_list=list(set(tag_list))
+    # TODO: Hvis bruker ikke har resultater; prompt til å ta test
     out_dict = {}
     work_sum = 0
     for each in tag_list:
@@ -74,14 +79,19 @@ def make_rec(username, course):
         possible = int(user.resultcollection.results.filter(question__themeTags__name=each).
                        aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
         if possible == 0:
-            new_val = 0
+            new_val = 1
         else:
             new_val = (1-(correct/possible))
         work_sum += new_val
         out_dict[each] = new_val
-    for each in out_dict:
-        out_dict[each] = out_dict[each]/work_sum
-    return out_dict
+    if work_sum == 0:
+        for each in out_dict:
+            out_dict[each] = 1/len(out_dict)
+        return out_dict
+    else:
+        for each in out_dict:
+            out_dict[each] = out_dict[each]/work_sum
+        return out_dict
 
 
 def gen_reading_rec(num, dist_dict):
@@ -116,10 +126,7 @@ def gen_lecturer_exercise(course_name):
         if possible != 0:
             data_points.append(int((correct/possible)*100))
         else:
-            if correct == 0:
-                data_points.append(100)
-            else:
-                data_points.append(0)
+            data_points.append(0)
     exercise_out_list = list(Exercise.objects.filter(course__name=course_name)
                              .filter(private=False).values_list('title', flat=True))
     return exercise_out_list, data_points
@@ -146,10 +153,7 @@ def gen_lecturer_theme(course_name):
         if possible != 0:
             data_points.append(int((correct/possible)*100))
         else:
-            if correct == 0:
-                data_points.append(100)
-            else:
-                data_points.append(0)
+            data_points.append(0)
     return tag_list, data_points
 
 # def gen_lecturer_time(course_name):
@@ -171,10 +175,7 @@ def gen_student_exercise(course_name, username):
         if possible_class != 0:
             data_points_class.append(int((correct_class/possible_class)*100))
         else:
-            if correct_class == 0:
-                data_points_class.append(100)
-            else:
-                data_points_class.append(0)
+            data_points_class.append(0)
         correct_student = int(user.resultcollection.results.filter(question__title__in=q_list).filter(resultVal=True)
                               .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
         possible_student = int(user.resultcollection.results.filter(question__title__in=q_list)
@@ -182,10 +183,7 @@ def gen_student_exercise(course_name, username):
         if possible_student != 0:
             data_points_student.append(int((correct_student/possible_student)*100))
         else:
-            if correct_student == 0:
-                data_points_student.append(100)
-            else:
-                data_points_student.append(0)
+            data_points_student.append(0)
     exercise_out_list = list(Exercise.objects.filter(course__name=course_name)
                              .filter(private=False).values_list('title', flat=True))
     return exercise_out_list, data_points_class, data_points_student
@@ -214,10 +212,7 @@ def gen_student_theme(course_name, username):
         if possible_class != 0:
             data_points_class.append(int((correct_class / possible_class) * 100))
         else:
-            if correct_class == 0:
-                data_points_class.append(100)
-            else:
-                data_points_class.append(0)
+            data_points_class.append(0)
         correct_stud = int(user.resultcollection.results.filter(question__belongsTo__name=course_name)
                            .filter(question__themeTags__name=tag).filter(resultVal=True)
                            .aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
@@ -227,10 +222,7 @@ def gen_student_theme(course_name, username):
         if possible_stud != 0:
             data_points_stud.append(int((correct_stud / possible_stud) * 100))
         else:
-            if correct_stud == 0:
-                data_points_stud.append(100)
-            else:
-                data_points_stud.append(0)
+            data_points_stud.append(0)
     return tag_list, data_points_class, data_points_stud
 
 
@@ -259,3 +251,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# TODO: If no results, make performance 0%

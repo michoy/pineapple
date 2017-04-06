@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}Exercise{% endblock %}
+{% block pagename %}Exercise{% endblock %}
+
+{% block title1 %}{{ exercise_name }} {% endblock %}
+
+{% block title2 %}{% endblock %}
 
 {% block content %}
 
@@ -15,8 +20,8 @@
 
     <h3>{{ que_pk }}</h3>
     <p>{{ que_que }}</p>
-    {% if form %}
 
+    {% if form %}
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_table }}
@@ -24,7 +29,10 @@
     </form>
 
     {% else %}
-        <button type="button" id="next" class="btn btn-primary btn-lg" onClick="window.location.reload()">Next</button>
+        <form action="" method="post">
+            {% csrf_token %}
+            <button name="next-q" class="btn btn-primary btn-lg" value="nextQ">Next</button>
+        </form>
     {% endif %}
 
     {% if correct %}
