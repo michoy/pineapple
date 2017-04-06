@@ -82,7 +82,7 @@ def goto_next_question(request, username, exer_id):
             read_mats.append(ReadingMaterial.objects.get(title=rm_id))
 
         # progress number
-        done_questions = len(current_user.resultcollection.results.filter(exercise_id=exer_id))
+        done_questions = len(username.resultcollection.results.filter(exercise_id=exer_id))
         q_list = len(list(Exercise.objects.get(pk=exer_id).contains.all().values_list('pk', flat=True)))
         if q_list:
             prog_num = (done_questions / q_list) * 100
