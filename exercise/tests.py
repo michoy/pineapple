@@ -10,20 +10,17 @@ from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate
 import unittest
 
-# Tester om sidene på serveren og funksjonene der fungerer rett
-# Kan kjøre uten at serveren faktisk er på, tester kun serverkode, bruker ikke http
-
 
 class ServerTestCase(TestCase):
 
     def setUp(self):
-        # Må kjøres, ellers krasj
+        # Must be run, crashes otherwise
         django.setup()
         self.client = Client()
-        # Attempt to add entries
+        # Attempt to add entries to database, using methods from populate.py
         populate.add_reading_material('NewMaterial', 'www.google.com')  # Reading material
         populate.add_tag('TestTag', ['NewMaterial'])  # Theme Tag
-        populate.add_course('NewCourse', 'This course is an example',[], [], '')
+        populate.add_course('NewCourse', 'This course is an example', [], [], '')
         populate.add_user_group('Lecturer')  # Group
         populate.add_user_group('Student')
         populate.add_user(
@@ -51,11 +48,19 @@ class ServerTestCase(TestCase):
             'NewCourse',
             11
         )
-        ex = populate.add_exercise('Quiz 1', 'NewCourse', ['Q1'])
+        populate.add_question(
+            'Q2',
+            'My car really says',
+            ['dingdong', 'clingcling', 'boom', 'poof'],
+            2,
+            ['TestTag'],
+            'NewCourse',
+            11
+        )
+        ex = populate.add_exercise('Quiz 1', 'NewCourse', ['Q1', 'Q2'])
         populate.add_result(True, 'Q1', 'Pekka', ex.pk)
 
     # Test if database entries can be found and if their values are correct
-
     def test_add_reading_material(self):
         self.assertEqual('NewMaterial', ReadingMaterial.objects.all().__getitem__(0).title)
         self.assertEqual('www.google.com', ReadingMaterial.objects.get(title='NewMaterial').link)
@@ -66,7 +71,6 @@ class ServerTestCase(TestCase):
 
     def test_add_user_group(self):
         self.assertEqual('Lecturer', Group.objects.get(name='Lecturer').name)
-        # TODO check permissions
 
     def test_create_user(self):
         self.assertEqual('Pekka', User.objects.all().__getitem__(0).username)
@@ -112,14 +116,8 @@ class ServerTestCase(TestCase):
         self.assertEqual('Q1', r.question.title)
         self.assertEqual(r, User.objects.get(username='Pekka').resultcollection.results.all().__getitem__(0))
 
-    # Test for exercise collection should be in botTester
-
     # Test server connectivity
-
-
-
-def main():
-    unittest.main()
-
-if __name__ == '__main__':
-    main()
+    def test_do_quiz(self):
+        self.client.login(username='Pekka', password='kanban')
+        resp = self.client.get('/exercise/' + str(Exercise.objects.all().__getitem__(0).pk) + '/')
+        self.assertEqual(200, resp.status_code)

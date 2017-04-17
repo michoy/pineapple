@@ -4,22 +4,17 @@ import django
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 from exercise import populate
-from exercise.models import *
 from django.contrib.auth.models import User
-from django.contrib.auth.models import Group
-from django.contrib.auth import authenticate
-import unittest
 from botTester import AssistantBot
-# Tester om sidene på serveren og funksjonene der fungerer rett
-# Kan kjøre uten at serveren faktisk er på, tester kun serverkode, bruker ikke http
 
 
 class ServerTestCase(TestCase):
 
     def setUp(self):
-        # Må kjøres, ellers krasj
+        # Must be run, else crash
         django.setup()
         self.client = Client()
+        # Add entries to database for later tests
         populate.add_reading_material(title='Robot toes', link='http://wikipedia.com/robotstoes')
         populate.add_reading_material(title='Cakes', link='http://wikipedia.com/cakes')
         populate.add_reading_material(title='TheThingNobodyReads', link='http://studemail.no')
@@ -109,10 +104,13 @@ class ServerTestCase(TestCase):
             exercise=ex.pk,
         )
 
+    # Test recommendation and exercise generation
     def test_make_rec(self):
         result = AssistantBot.make_rec('YoungAndNaive', 'TDT0001')
-        # Litt placeholder
-        self.assertEqual({'Robot-things': 0.28571428571428575, 'Not robot-things': 0.0, 'Nobody gets this': 0.7142857142857143}, result)
+        self.assertEqual(
+            {'Robot-things': 0.28571428571428575, 'Not robot-things': 0.0, 'Nobody gets this': 0.7142857142857143},
+            result
+        )
 
     def test_gen_reading_rec(self):
         rec = AssistantBot.make_rec('YoungAndNaive', 'TDT0001')
@@ -123,18 +121,19 @@ class ServerTestCase(TestCase):
 
     def test_gen_exercise(self):
         rec = AssistantBot.make_rec('YoungAndNaive', 'TDT0001')
-        result = AssistantBot.gen_exercise(2,rec, 'YoungAndNaive', 'TDT0001')
+        result = AssistantBot.gen_exercise(2, rec, 'YoungAndNaive', 'TDT0001')
         self.assertEqual("YoungAndNaive's tailored Exercise 1", result.title)
         self.assertEqual(
             result.pk,
             User.objects.get(username='YoungAndNaive').pecollector.exercises.all().__getitem__(0).pk
         )
-        self.assertTrue('DoNotAnswerThis' in result.contains.all().values_list('title',flat=True))
-        self.assertTrue('Cupcakecakes' in result.contains.all().values_list('title',flat=True) or
-                        'RoboToes' in result.contains.all().values_list('title',flat=True))
-        self.assertRaises(ValueError, AssistantBot.gen_exercise, 5,{},'YoungAndNaive','TDT0001')
-        self.assertRaises(ValueError, AssistantBot.gen_exercise, 5, {'test':0.5}, 'YoungAndNaive', 'TDT0001')
+        self.assertTrue('DoNotAnswerThis' in result.contains.all().values_list('title', flat=True))
+        self.assertTrue('Cupcakecakes' in result.contains.all().values_list('title', flat=True) or
+                        'RoboToes' in result.contains.all().values_list('title', flat=True))
+        self.assertRaises(ValueError, AssistantBot.gen_exercise, 5, {}, 'YoungAndNaive', 'TDT0001')
+        self.assertRaises(ValueError, AssistantBot.gen_exercise, 5, {'test': 0.5}, 'YoungAndNaive', 'TDT0001')
 
+    # Test graph data generation
     def test_gen_student_exercise(self):
         result = AssistantBot.gen_student_exercise('TDT0001', 'YoungAndNaive')
         self.assertEqual((['OopsAlmostForgotTheExercise'], [60], [60]), result)
@@ -154,6 +153,7 @@ class ServerTestCase(TestCase):
         result = AssistantBot.gen_lecturer_theme('TDT0001')
         self.assertEqual((['Robot-things', 'Not robot-things', 'Nobody gets this'], [60, 100, 0]), result)
 
+    # Test question-hint generation
     def test_retrieve_question_material(self):
         result_1 = AssistantBot.retrieve_question_material('RoboToes', 5)
         result_2 = AssistantBot.retrieve_question_material('Cupcakecakes', 5)

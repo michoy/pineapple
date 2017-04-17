@@ -63,6 +63,7 @@ class Question(models.Model):
 class Exercise(models.Model):
     title = models.CharField(max_length=80)
     private = models.BooleanField(default=False)
+    # Relationships:
     course = models.ForeignKey(Course)
     contains = models.ManyToManyField(Question)  # Spørsmålet oppgaven vil tilby
 

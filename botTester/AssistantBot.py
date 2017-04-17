@@ -11,16 +11,16 @@ from django.db.models import Sum
 
 def gen_exercise(num, dist_dict, username, course):
     """ 
-    Generates a new exercise for a student 
-    
+    Generates a new exercise for a student.
     Args:
-        :param course: 
-        :param username: 
-        :param num: number of questions
-        :param dist_dict: dict containing themetags and a num describing importance for student. Retreive from make_rec
+        :param course:      [str] The pk of the course which this exercise will belong to
+        :param username:    [str] The username of the student who generates the exercise
+        :param num:         [int] The number of questions to add to the new exercise
+        :param dist_dict:   [dict] Dictionary containing themetags and a num describing priority for student.
+                                Retreive from make_rec
         
     Return:
-        New exercise
+        [exercise] A new personal exercise
     """
     if len(dist_dict) == 0:
         raise ValueError('Distribution dictionary is empty, no exercise can be generated.')
@@ -42,7 +42,7 @@ def gen_exercise(num, dist_dict, username, course):
         x = int(round((dist_dict[key]*num)))
         question_pks = list(Question.objects.filter(themeTags__name=key).values_list('pk', flat=True).distinct())
         selected_pks.extend(random.sample(question_pks, min(x, len(question_pks))))
-    selected_pks=list(set(selected_pks))
+    selected_pks = list(set(selected_pks))
     # Create new exercise and give to user
     new_e = add_exercise(
         title=user.username+"'s tailored Exercise "+(str(col.exercises.all().count()+1)),
@@ -56,28 +56,35 @@ def gen_exercise(num, dist_dict, username, course):
 
 def make_rec(username, course):
     """ 
-    Creates a distribution which can be fed to the gen_* methods
+    Creates a distribution which can be fed to the gen_exercise and gen_reading_rec methods.
+    The distribution indicates topic priority.
     Args:
-        :param username: 
-        :param course: 
+        :param username:    [str] The username of the student
+        :param course:      [str] The pk of the course for which this recommendation is valid
     Return:
-        dict: containing themetags and their importance to the user 
+        [dict] A distribution with themeTag-pk as key and a float percentage as value
     """
     # Figure out how many percent to dedicate to topic
+    last_x = 5  # Bot only considers the last X of the results, so that the calculated performance can reach 100%
     user = User.objects.get(username=username)
-    q_list=list(Question.objects.filter(belongsTo__pk=course).values_list('pk',flat=True))
+    q_list = list(Question.objects.filter(belongsTo__pk=course).values_list('pk', flat=True))
     tag_list = []
     for each in q_list:
-        tag_list.extend(list(Question.objects.get(pk=each).themeTags.values_list('pk',flat=True)))
-    tag_list=list(set(tag_list))
-    # TODO: Hvis bruker ikke har resultater; prompt til å ta test
+        tag_list.extend(list(Question.objects.get(pk=each).themeTags.values_list('pk', flat=True)))
+    tag_list = list(set(tag_list))
     out_dict = {}
     work_sum = 0
     for each in tag_list:
-        correct = int(user.resultcollection.results.filter(question__themeTags__name=each).filter(resultVal=True).
-                      aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
-        possible = int(user.resultcollection.results.filter(question__themeTags__name=each).
-                       aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0)
+        # How many points the user has in a topic
+        correct = int(
+            user.resultcollection.results.filter(question__themeTags__name=each).filter(resultVal=True).order_by('pk').
+            reverse()[:last_x].aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0
+        )
+        # How many points the user could have got
+        possible = int(
+            user.resultcollection.results.filter(question__themeTags__name=each).order_by('pk').
+            reverse()[:last_x].aggregate(Sum('question__is_worth'))['question__is_worth__sum'] or 0
+        )
         if possible == 0:
             new_val = 1
         else:
@@ -95,6 +102,14 @@ def make_rec(username, course):
 
 
 def gen_reading_rec(num, dist_dict):
+    """
+    Find suitable ReadingMaterial.
+    Args:
+        :param num:         [int] The number of recommendations to be made
+        :param dist_dict:   [dict] A distribution, made by gen_rec
+    :return:
+        [list] A list of tuples in the format (title, link)
+    """
     # Test that percentages add up to 100
     total = 0
     for key in dist_dict:
@@ -114,6 +129,13 @@ def gen_reading_rec(num, dist_dict):
 
 
 def gen_lecturer_exercise(course_name):
+    """
+    Creates data points for the lecturers exercise graph.
+    Args:
+        :param course_name: [str] Pk of the course in which this graph is generated
+    :return:
+        [tuple] The list of Exercise pks, and a list of class success percentages
+    """
     exercise_list = list(Exercise.objects.filter(course__name=course_name)
                          .filter(private=False).values_list('pk', flat=True))
     data_points = []
@@ -133,16 +155,22 @@ def gen_lecturer_exercise(course_name):
 
 
 def gen_lecturer_theme(course_name):
+    """
+    Creates data points for the lecturer ThemeTag graph.
+    Args:
+        :param course_name: [str] Pk of the course in which this graph is generated
+    :return:
+        [tuple] The list of ThemeTag pks, and a list of class success percentages
+    """
     data_points = []
-    # TODO: Optimaliser
-    # Finn spørsmål som hører til faget
+    # Find questions belonging to the course
     q_list = list(Question.objects.filter(belongsTo__name=course_name).values_list('title', flat=True))
-    # Finn tags som hører til disse spørsmålene
+    # Find tags belonging to those questions
     tag_list = []
     for q in q_list:
         tag_list.extend(Question.objects.get(title=q).themeTags.exclude(name__in=tag_list)
                         .values_list('name', flat=True))
-    # Finn performance for hver av disse tag-ene
+    # Find performance for each of those tags
     for tag in tag_list:
         correct = int(Result.objects.filter(question__belongsTo__name=course_name)
                       .filter(question__themeTags__name=tag).filter(resultVal=True)
@@ -156,11 +184,16 @@ def gen_lecturer_theme(course_name):
             data_points.append(0)
     return tag_list, data_points
 
-# def gen_lecturer_time(course_name):
-#    pass
-
 
 def gen_student_exercise(course_name, username):
+    """
+    Creates data points for the student Exercise graph.
+    Args:
+        :param course_name: [str] Pk of the course in which this graph is generated
+        :param username:    [str] Username of the student
+    :return:
+        [tuple] The list of Exercise pks, list of class success percentages, list of user success percentages
+    """
     user = User.objects.get(username=username)
     exercise_list = list(Exercise.objects.filter(course__name=course_name)
                          .filter(private=False).values_list('pk', flat=True))
@@ -190,18 +223,25 @@ def gen_student_exercise(course_name, username):
 
 
 def gen_student_theme(course_name, username):
+    """
+    Creates data points for the student ThemeTag graph.
+    Args:
+        :param course_name: [str] Pk of the course in which this graph is generated
+        :param username:    [str] Username of the student
+    :return:
+        [tuple] The list of ThemeTag pks, list of class success percentages, list of user success percentages
+    """
     user = User.objects.get(username=username)
     data_points_stud = []
     data_points_class = []
-    # TODO: Optimaliser
-    # Finn spørsmål som hører til faget
+    # Find questions belonging to the course
     q_list = list(Question.objects.filter(belongsTo__name=course_name).values_list('pk', flat=True))
-    # Finn tags som hører til disse spørsmålene
+    # Find tags that belong to those questions
     tag_list = []
     for q in q_list:
         tag_list.extend(Question.objects.get(pk=q).themeTags.exclude(name__in=tag_list)
                         .values_list('name', flat=True))
-    # Finn performance for hver av disse tag-ene
+    # Find performance for each of those tags
     for tag in tag_list:
         correct_class = int(Result.objects.filter(question__belongsTo__name=course_name)
                             .filter(question__themeTags__name=tag).filter(resultVal=True)
@@ -228,28 +268,14 @@ def gen_student_theme(course_name, username):
 
 def retrieve_question_material(question_title, num):
     """
-    Genererer anbefalt reading material, til bruk når student løser quiz
-    Litt hacks
-    :return list with reading material pk's
+    Generates recommended reading material, for when the student solves a quiz
+    Some hacks
+    :return
+        [list] of reading material pk's
     """
     tag_list = Question.objects.get(title=question_title).themeTags.all()
     material_list = []
     for each in tag_list:
-        material_list.extend(each.material.all().values_list('title',flat=True))
+        material_list.extend(each.material.all().values_list('title', flat=True))
     out_list = random.sample(material_list, min(num, len(material_list)))
     return out_list
-
-
-# TODO: make graphs only let the last x results count
-def main():
-    #rec = make_rec('Pål', 'TDT4140')
-    #gen_exercise(2, rec, 'Pål', 'TDT4140')
-    #gen_reading_rec(3, rec)
-    #print(gen_student_theme('TDT4140', 'Pål'))
-    #print(retrieve_question_material('Q1',10))
-    pass
-
-if __name__ == '__main__':
-    main()
-
-# TODO: If no results, make performance 0%

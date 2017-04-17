@@ -10,7 +10,7 @@ from course.forms import PartialExerciseForm, PartialQuestionForm
 def student_course_view(request, fagkode):
     current_user = request.user
     if fagkode == '':
-        return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
+        return HttpResponseRedirect('/overview')  # Redirect if no course-code has been selected
     if request.method == 'POST':
         if request.POST.get('exercise_select', False):
             selected_ex = request.POST['exercise_select']
@@ -49,7 +49,7 @@ def lecturer_course_view(request, fagkode=''):
     added_exercise = False
     added_question = False
     if fagkode == '':
-        return HttpResponseRedirect('/overview')  # Redirekt hvis ingen fagkode har blitt valgt
+        return HttpResponseRedirect('/overview')  # Redirect if no course-code has been selected
     if request.method == 'POST':
         if request.POST.get('exercise_select', False):
             selected_ex = request.POST.get('exercise_select', False)
@@ -71,23 +71,18 @@ def lecturer_course_view(request, fagkode=''):
                 new_question.is_worth = 10
                 new_question.save()
                 added_question = True
-
     exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False)
                               .values_list('id', flat=True))
     user = User.objects.get(username=request.user)
-
     # Collect data for graphs
     exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
     ex_graph_data = AssistantBot.gen_lecturer_exercise(course_name=fagkode)
     tag_graph_data = AssistantBot.gen_lecturer_theme(course_name=fagkode)
     course_full = Course.objects.get(name=fagkode).full_name
-
     # Add new exercise
     exercise_form = PartialExerciseForm()
-
     # Add new question
     question_form = PartialQuestionForm()
-
     context = {
         'exercises': exercise_name_list,
         'course': fagkode,
@@ -109,7 +104,3 @@ def delegate_course_view(request, fagkode=''):
         return lecturer_course_view(request, fagkode)
     else:
         return student_course_view(request, fagkode)
-
-
-def lecturer_course(request):
-    return render(request, 'lecturer_course.html')
