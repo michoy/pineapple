@@ -2,11 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from exercise.forms import AnswerForm, make_question_form
-from exercise.models import Question, ReadingMaterial, Exercise, ResultCollection
+from exercise.models import Question, ReadingMaterial, Exercise
 from exercise import populate
 from botTester.AssistantBot import retrieve_question_material
 from django.http import HttpResponseRedirect
-from django.db.models import Sum
 
 
 def base(request):
@@ -33,7 +32,7 @@ def do_exercise(request, exer_id):
                 if int(data['Answer']) == que.correct_alternative:
                     correct = True
                     populate.add_result(
-                        val = True,
+                        val=True,
                         question=que_pk,
                         student=current_user,
                         exercise=exer_id,
@@ -51,9 +50,20 @@ def do_exercise(request, exer_id):
             exercise_name = Exercise.objects.get(pk=exer_id).title
         elif request.POST['next-q']:
             return goto_next_question(request, current_user, exer_id)
-        return render(request, 'exercise.html', {'form': form, 'correct': correct, 'wrong': wrong,'que_pk': que.title, 'que_que': que.question, 'exercise_name':exercise_name})
+        return render(
+            request,
+            'exercise.html',
+            {'form': form,
+             'correct': correct,
+             'wrong': wrong,
+             'que_pk': que.title,
+             'que_que': que.question,
+             'exercise_name': exercise_name,
+             }
+        )
     else:
         return goto_next_question(request, current_user, exer_id)
+
 
 def find_next_question(student_name, exercise_pk):
     re = User.objects.get(username=student_name).resultcollection.results.all()
@@ -64,6 +74,7 @@ def find_next_question(student_name, exercise_pk):
         if res_list.count() == 0:
             return q
     return False
+
 
 def goto_next_question(request, username, exer_id):
     next_pk = find_next_question(username, exer_id)
@@ -102,5 +113,4 @@ def goto_next_question(request, username, exer_id):
         return render(request, 'exercise.html', context)
     else:
         course_name = Exercise.objects.get(pk=exer_id).course.name
-        # TODO: add something to tell the user that this exercise is done
         return HttpResponseRedirect('/course/' + course_name + '/')

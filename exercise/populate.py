@@ -1,7 +1,5 @@
 import os
-
 import django
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 django.setup()  # Don't mess with this, unless you know what you're doing
 from django.contrib.auth.models import Group
@@ -9,7 +7,6 @@ from exercise.models import *
 
 
 # Simple script to populate the database with objects for testing and demonstration
-
 def add_reading_material(title, link):
     material = ReadingMaterial(title=title, link=link)
     material.save()
@@ -54,8 +51,6 @@ def add_question(title, question, alternative_list, correct_num, tag_list, belon
     new_q.save()
     return new_q
 
-    # TODO: Rewrite question to allow arbitrary amount of alternatives?
-
 
 def add_exercise(title, course, question_list, private=False):
     exercise = Exercise(
@@ -78,9 +73,9 @@ def add_result(val, question, student, exercise):
     result.save()
     user = User.objects.get(username=student)
     try:
-        col = User.objects.get(username=user.get_username()).resultcollection.results.add(result)
+        User.objects.get(username=user.get_username()).resultcollection.results.add(result)
     except:
-        col = add_resultcollection(user.get_username(), [result.pk])
+        add_resultcollection(user.get_username(), [result.pk])
     return result
 
 
@@ -133,6 +128,7 @@ def add_user(username, email, password, course_list, result_pk_list, pers_exerci
     for each in group_name_list:
         user.groups.add(Group.objects.get(name=each))
     return user
+
 
 def main():
     # Delete existing entries
@@ -255,12 +251,9 @@ def main():
         'Software Quality Assurance'
     ]
     add_tag('Exercise Lectures', exercise_list)
-
-    # Add groups (needed for unit testing)
-    # TODO add permissions
-    lecturergroup = add_user_group('Lecturer')
-    studentgroup = add_user_group('Student')
-
+    # Add groups
+    add_user_group('Lecturer')
+    add_user_group('Student')
     # Lecturers
     add_user(
         username='Pekka',
@@ -300,13 +293,17 @@ def main():
         result_pk_list=[],
         group_name_list=['Lecturer', 'Student'],
     )
-
     # Course:
-    add_course('TDT4140','Programvareutvikling' , ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
+    add_course('TDT4140', 'Programvareutvikling', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
     add_course('TMA4100', 'Matematikk 1', ['Pekka'], [], 'Matte 1')
-    add_course('TFY4125', 'Fysikk', ['Magnus'], physics_reading_material_list, 'Exam will consist of multiple choice questions')
+    add_course(
+        'TFY4125',
+        'Fysikk',
+        ['Magnus'],
+        physics_reading_material_list,
+        'Exam will consist of multiple choice questions'
+    )
     add_course('TDT4145', 'Datamodellering og databasesystemer', ['Bovim'], [], 'Databaser for n00bs')
-    
     # Students
     add_user(
         username='Per',
@@ -335,9 +332,7 @@ def main():
         result_pk_list=[],
         group_name_list=['Student']
     )
-
-
-    # Question:
+    # Questions:
     add_question(
         'Q1',
         'What day is it?',
@@ -369,7 +364,7 @@ def main():
     add_question(
         'TFY4125_Q1',
         'What is Newtons secound law of physics?',
-        ['E=mc^2','B=aD','F=ma','F=0.5mv^2'],
+        ['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
         3,
         ['Mechanics'],
         'TFY4125',
@@ -378,7 +373,7 @@ def main():
     add_question(
         'TFY4125_Q2',
         'What is the speed of light?',
-        ['300 m/s','10^8 m/s','300 000 km/s', '3*10^9 m/s'],
+        ['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
         3,
         ['Mechanics'],
         'TFY4125',
@@ -387,27 +382,25 @@ def main():
     add_question(
         'TFY4125_Q3',
         'Work is ...',
-        ['Displacement times force', 'Hard!','Measured in newton', 'invers proportional to force'],
+        ['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
         1,
         ['Mechanics'],
         'TFY4125',
         5
     )
-
     # Exercises:
     ex_1 = add_exercise('Quiz 1', 'TDT4140', ['Q1', 'Q2', 'Q3'])
     ex_2 = add_exercise('New and empty', 'TDT4140', [])
     ex_3 = add_exercise('TFY4125_Exercise1', 'TFY4125', ['TFY4125_Q1', 'TFY4125_Q2', 'TFY4125_Q3'])
-
     # Results:
     add_result(True, 'Q1', 'Per', ex_1.pk)
-    #add_result(True, 'Q1', 'Pål', ex_1.pk)
+    # add_result(True, 'Q1', 'Pål', ex_1.pk)
     add_result(True, 'Q1', 'Sofie', ex_1.pk)
     add_result(False, 'Q2', 'Per', ex_1.pk)
-    #add_result(False, 'Q2', 'Pål', ex_1.pk)
+    # add_result(True, 'Q2', 'Pål', ex_1.pk)
     add_result(True, 'Q2', 'Sofie', ex_1.pk)
     add_result(True, 'Q3', 'Per', ex_1.pk)
-    #add_result(True, 'Q3', 'Pål', ex_1.pk)
+    # add_result(True, 'Q3', 'Pål', ex_1.pk)
 
 
 if __name__ == '__main__':

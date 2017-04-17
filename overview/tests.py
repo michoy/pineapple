@@ -5,12 +5,12 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 from django.contrib.auth.models import User
 from exercise import populate
-# Tester om sidene på serveren og funksjonene der fungerer rett
-# Kan kjøre uten at serveren faktisk er på, tester kun serverkode, bruker ikke http
+
+
 class ServerTestCase(TestCase):
 
     def setUp(self):
-        # Må kjøres, ellers krasj
+        # Must be run, else crash
         django.setup()
         self.client = Client()
         # Create test lecturer and the corresponding lecturer group.
@@ -35,10 +35,10 @@ class ServerTestCase(TestCase):
     def test_overview_student(self):
         # Log in
         self.client.login(username='theMan', password='thePa$$word')
-        # Kan overview nås?
+        # Can overview be reached?
         resp = self.client.get('/overview/')
         self.assertEqual(200, resp.status_code)
-        # Fungerer redirection når fag velges?
+        # Does the redirect work when the course is selected?
         resp = self.client.post('/overview/', {'course-select': 'TDTT3st'})
         self.assertEqual(302, resp.status_code)
         self.assertEqual('/course/TDTT3st/', resp.url)
@@ -46,16 +46,16 @@ class ServerTestCase(TestCase):
     def test_overview_lecturer(self):
         # Log in
         self.client.login(username='theTeach', password='schooled')
-        # Kan overview nås?
+        # Can overview be reached?
         resp = self.client.get('/overview/')
         self.assertEqual(200, resp.status_code)
-        # Fungerer redirection når fag velges?
+        # Does redirect work when the course is selected?
         resp = self.client.post('/overview/', {'course-select': 'TDTT3st'})
         self.assertEqual(302, resp.status_code)
         self.assertEqual('/course/TDTT3st/', resp.url)
 
     def test_overview_redirect(self):
-        # Hvis bruker ikke er logget inn, redirectes han til login page ?
+        # If user is not logged in, is he redirected correctly?
         resp = self.client.get('/overview/')
         self.assertEqual(302, resp.status_code)
         self.assertEqual('/login/?next=/overview/', resp.url)

@@ -3,14 +3,13 @@ from django.test import TestCase
 import django
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
-from django.contrib.auth.models import User
 from exercise import populate
-# Tester om sidene på serveren og funksjonene der fungerer rett
-# Kan kjøre uten at serveren faktisk er på, tester kun serverkode, bruker ikke http
+
+
 class ServerTestCase(TestCase):
 
     def setUp(self):
-        # Må kjøres, ellers krasj
+        # Must be run, else crash
         django.setup()
         self.client = Client()
         # Create test lecturer and the corresponding lecturer group.
@@ -43,6 +42,7 @@ class ServerTestCase(TestCase):
             result_pk_list=[],
             group_name_list=['Student']
         )
+        # Create test question and an exercise
         populate.add_question(
             title='test Q',
             question='Will this humble test bless us by working as intended?',

@@ -1,10 +1,8 @@
-from course.forms import CourseForm
 from course.views import *
-from .forms import StudentAddCourseForm
-
 
 
 def get_course_list(username):
+    # Get a list of the user's courses
     user = User.objects.get(username=username)
     user_groups = list(user.groups.all().values_list('name', flat=True))
     course_list = []
@@ -22,6 +20,7 @@ def get_course_list(username):
 
 @login_required()
 def courses(request):
+    # Allow the user to select a course-page
     current_user = request.user
     if request.method == 'POST':
         if request.POST.get('course_name', False):  # add new course to student
