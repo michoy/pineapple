@@ -21,7 +21,7 @@ def do_register(request):
         else:  # user can be created
             user = User.objects.create_user(username, email, password)
             login(request, user)
-            return render(request, 'registration/register.html', {'user_created': True})
+            return render(request, 'overview.html')
     else:
         return render(request, 'registration/register.html')
 
