@@ -54,6 +54,16 @@ var genStudEx = genStudEx || (function(){
                             spanGaps: false,
                         }
                     ]
+                },
+                options : {
+                  scales: {
+                    xAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: 'Exercise'
+                      }
+                    }]
+                  }
                 }
             });
         }
@@ -115,6 +125,16 @@ var genStudTag = genStudTag || (function(){
                             spanGaps: false,
                         }
                     ]
+                },
+                options : {
+                  scales: {
+                    xAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: 'Topic'
+                      }
+                    }]
+                  }
                 }
             });
         }

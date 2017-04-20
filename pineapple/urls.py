@@ -33,4 +33,5 @@ urlpatterns = [
     url(r'^course/(?P<fagkode>[\w]{7})/$', course.views.delegate_course_view),  # TODO VI KAN KUN HA 7-TEGN FAGKODER!
     url(r'^exercise/$', exercise.views.do_exercise),
     url(r'^exercise/(?P<exer_id>[0-9]+)/$', exercise.views.do_exercise),
+    url(r'^examine_exercise/(?P<exer_id>[0-9]+)/$', exercise.views.examine_exercise)
 ]

@@ -65,7 +65,7 @@
                 {% if read_mats %}
                     <ul style="list-style-type: disc">
                     {% for hint in read_mats %}
-                        <li><a href={{ hint.link }}>{{ hint.title }}</a></li>
+                        <li><a href="{{ hint.link }}" target="_blank">{{ hint.title }}</a></li>
                     {% endfor %}
                     </ul>
                 {% endif %}
