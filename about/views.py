@@ -22,7 +22,7 @@ def do_register(request):
         else:  # user can be created
             user = add_user(username, email, password)
             login(request, user)
-            return render(request, 'overview.html')
+            return HttpResponseRedirect('/overview/')
     else:
         return render(request, 'registration/register.html')
 
