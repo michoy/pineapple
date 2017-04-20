@@ -30,7 +30,7 @@ var genLectEx = genLectEx || (function(){
                             pointHitRadius: 10,
                             data: classData,
                             spanGaps: false,
-                        },
+                        }
                     ]
                 },
                 options : {
@@ -79,7 +79,7 @@ var genLectTag = genLectTag || (function(){
                             pointHitRadius: 10,
                             data: classData,
                             spanGaps: false,
-                        },
+                        }
                     ]
                 },
                 options : {
@@ -98,8 +98,6 @@ var genLectTag = genLectTag || (function(){
 }());
 
 
-
-
 var genCardPie = genCardPie || (function(){
     return {
         genGraph : function(targetId, success) {
@@ -111,19 +109,17 @@ var genCardPie = genCardPie || (function(){
                     labels: ['Correct', 'Incorrect'],
                     datasets: [
                         {
-                            backgroundColor: ["#007E33", "#ffbb33"],
+                            backgroundColor: ["#5cb85c", "#ffc21a"],
                             boarderWidth: 1,
-                            fillColor : ["#007E33","#007E33"],
-                            strokeColor : ["#007E33","#007E33"],
-                            pointColor : ["#007E33","#007E33"],
-                            pointStrokeColor : "#007E33",
+                            fillColor : ["#5cb85c","#ffc21a"],
+                            strokeColor : ["#5cb85c","#ffc21a"],
+                            pointColor : ["#5cb85c","#ffc21a"],
+                            pointStrokeColor : "#5cb85c",
                             data : [success, 100-success]
-                        },
+                        }
                     ]
                 }
             });
         }
     };
 }());
-
-
