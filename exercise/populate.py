@@ -144,6 +144,88 @@ def main():
     # Reading material:
     # Must begin with https:// if you want to link to external page
     add_reading_material(
+        #TFY
+        title='Newton Mechanics Wikipedia',
+        link='https://en.wikipedia.org/wiki/Classical_mechanics'
+    )
+    add_reading_material(
+        #TFY
+        title='Newton Mechanics: p. 100',
+    )
+    add_reading_material(
+        #TFY
+        title='Mechanical Energy Wikipedia',
+        link='https://en.wikipedia.org/wiki/Mechanical_energy'
+    )
+    add_reading_material(
+        #TFY
+        title='Mechanical Energy: p. 125'
+    )
+    add_reading_material(
+        #TFY
+        title='Rotation',
+        link='https://en.wikipedia.org/wiki/Rotation'
+    )
+    add_reading_material(
+        #TFY
+        title='Rotation: p. 137'
+    )
+    add_reading_material(
+        #TFY
+        title='Electrostatics Wikipedia',
+        link='https://en.wikipedia.org/wiki/Electrostatics'
+    )
+    add_reading_material(
+        #TFY
+        title='Electrostatics: p. 213'
+    )
+    add_reading_material(
+        #TFY
+        title='Dielectric Wikipedia',
+        link='https://en.wikipedia.org/wiki/Dielectric'
+    )
+    add_reading_material(
+        #TFY
+        title='Dielectric: p. 231'
+    )
+    add_reading_material(
+        #TFY
+        title='Magnetic Field Wikipedia',
+        link='https://en.wikipedia.org/wiki/Magnetic_field'
+    )
+    add_reading_material(
+        #TFY
+        title='Magnetic Field: p. 245'
+    )
+    add_reading_material(
+        #TFY
+        title='Temperature Wikipedia',
+        link='https://en.wikipedia.org/wiki/Temperature'
+    )
+    add_reading_material(
+        #TFY
+        title='Temperature: p. 270'
+    )
+    add_reading_material(
+        #TFY
+        title='Carnot Cycle',
+        link='https://en.wikipedia.org/wiki/Carnot_cycle'
+    )
+    add_reading_material(
+        #TFY
+        title='Carnot Cycle: p. 292'
+    )
+    add_reading_material(
+        #TFY
+        title='Ideal Gas',
+        link='https://en.wikipedia.org/wiki/Ideal_gas'
+    )
+    add_reading_material(
+        #TFY
+        title='Ideal gas: p. 302'
+    )
+
+    add_reading_material(
         # PU
         title='TDT4140 Assessment Criteria',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4682507&FileVersionID=-1&ChildID=-1',
@@ -214,26 +296,7 @@ def main():
         title='Software Quality Assurance',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4747391&FileVersionID=-1&ChildID=-1',
     )
-    add_reading_material(
-        # FYS
-        title='Newtons Laws of Gravity',
-        link='https://www.grc.nasa.gov/www/k-12/airplane/newton.html',
-    )
-    add_reading_material(
-        # FYS
-        title='Work, energy, power',
-        link='http://hyperphysics.phy-astr.gsu.edu/hbase/work.html',
-    )
-    add_reading_material(
-        # FYS
-        title='Newtons Laws',
-        link='http://hyperphysics.phy-astr.gsu.edu/hbase/Newt.html',
-    )
-    add_reading_material(
-        # FYS
-        title='Thermodynamics Khan Academy',
-        link='https://nb.khanacademy.org/science/chemistry/thermodynamics-chemistry',
-    )
+
     # Tags:
     pu_prosjekt_list = [
         'TDT4140 Assessment Criteria',
@@ -242,21 +305,7 @@ def main():
         'TDT4140 Poster Layout',
         'Improving Needed Posters'
     ]
-    physics_reading_material_list = [
-        'Newtons Laws of Gravity',
-        'Work, energy, power',
-        'Newtons Laws',
-    ]
-    add_tag(
-        # FYS
-        name='Mechanics',
-        material_list=physics_reading_material_list,
-    )
-    add_tag(
-        # FYS
-        name='Thermodynamics',
-        material_list=['Thermodynamics Khan Academy']
-    )
+
     add_tag(
         # PU
         name='PU-prosjekt',
@@ -333,7 +382,7 @@ def main():
         group_name_list=['Lecturer'],
     )
     add_user(
-        #FYS
+        #TFY
         username='Magnus Borstad Lilledahl',
         email='magnus@ntnu.no',
         password='passord',
@@ -438,43 +487,9 @@ def main():
         group_name_list=['Student']
     )
     # Questions:
-    add_question(
-        title='TFY4125_Innlevering1_Spørsmål_1',
-        question="What is Newton's secound law of physics?",
-        alternative_list=['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
-        correct_num=3,
-        tag_list=['Mechanics'],
-        belongs_to='TFY4125',
-        is_worth=5,
-    )
-    add_question(
-        title='TFY4125_Innlevering1_Spørsmål_2',
-        question='What is the speed of light?',
-        alternative_list=['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
-        correct_num=3,
-        tag_list=['Mechanics'],
-        belongs_to='TFY4125',
-        is_worth=7,
-    )
-    add_question(
-        title='TFY4125_Innlevering1_Spørsmål_3',
-        question='Work is ...',
-        alternative_list=['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
-        correct_num=1,
-        tag_list=['Mechanics'],
-        belongs_to='TFY4125',
-        is_worth=2,
-    )
+
     # Exercises:
-    ex_1 = add_exercise(
-        title='TFY4125_Exercise1',
-        course='TFY4125',
-        question_list=[
-            'TFY4125_Innlevering1_Spørsmål_1',
-            'TFY4125_Innlevering1_Spørsmål_2',
-            'TFY4125_Innlevering1_Spørsmål_3',
-        ]
-    )
+
     # Results:
 
 
