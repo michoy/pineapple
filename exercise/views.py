@@ -46,8 +46,9 @@ def do_exercise(request, exer_id):
                         student=current_user,
                         exercise=exer_id,
                     )
-<<<<<<< HEAD
                 form = []
+                # Hint
+                read_mats = get_hints(que_pk)
                 # headline
                 exercise_name = Exercise.objects.get(pk=exer_id).title
                 return render(
@@ -59,42 +60,22 @@ def do_exercise(request, exer_id):
                      'que_pk': que.title,
                      'que_que': que.question,
                      'exercise_name': exercise_name,
+                     'read_mats': read_mats,
                      }
                 )
         elif request.POST.get('next-q', False):
             return goto_next_question(request, current_user, exer_id)
-    return goto_next_question(request, current_user, exer_id)
-=======
-                # Hint
-                read_mats = get_hints(que_pk)
-            form = []
-            # headline
-            exercise_name = Exercise.objects.get(pk=exer_id).title
-        elif request.POST['next-q']:
-            return goto_next_question(request, current_user, exer_id)
-        return render(
-            request,
-            'exercise.html',
-            {'form': form,
-             'correct': correct,
-             'wrong': wrong,
-             'que_pk': que.title,
-             'que_que': que.question,
-             'exercise_name': exercise_name,
-             'read_mats': read_mats,
-             }
-        )
-    else:
+    elif request.method == 'GET':
         # Redirect lecturers
         lecturer_list = list(
-            Course.objects.get(pk=Exercise.objects.get(pk=exer_id).course.pk)
-            .administrators.values_list('username', flat=True)
+        Course.objects.get(pk=Exercise.objects.get(pk=exer_id).course.pk)
+        .administrators.values_list('username', flat=True)
         )
         # TODO: work in progress
         if current_user.username in lecturer_list:
             return HttpResponseRedirect('/examine_exercise/' + exer_id + '/')
-        return goto_next_question(request, current_user, exer_id)
->>>>>>> refs/remotes/origin/master
+            return goto_next_question(request, current_user, exer_id)
+    return goto_next_question(request, current_user, exer_id)
 
 
 def find_next_question(student_name, exercise_pk):
@@ -140,12 +121,8 @@ def goto_next_question(request, username, exer_id):
             'prog_num': prog_num,
         }
         return render(request, 'exercise.html', context)
-    else:
-        course_name = Exercise.objects.get(pk=exer_id).course.name
-<<<<<<< HEAD
-        return student_course_view(request, course_name, True)
-=======
-        return HttpResponseRedirect('/course/' + course_name + '/')
+    course_name = Exercise.objects.get(pk=exer_id).course.name
+    return student_course_view(request, course_name, True)
 
 
 def get_hints(question_pk):
@@ -155,6 +132,7 @@ def get_hints(question_pk):
     for rm_id in reading_material_ids:
         read_mats.append(ReadingMaterial.objects.get(title=rm_id))
     return read_mats
+
 
 def examine_exercise(request, exer_id):
     ex = Exercise.objects.get(pk=exer_id)
@@ -167,4 +145,3 @@ def examine_exercise(request, exer_id):
         'questions': questions,
     }
     return render(request, 'exercise_overview.html', context)
->>>>>>> refs/remotes/origin/master
