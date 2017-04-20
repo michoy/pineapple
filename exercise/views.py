@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from exercise.forms import AnswerForm, make_question_form
-from exercise.models import Question, ReadingMaterial, Exercise
+from exercise.models import Question, ReadingMaterial, Exercise, Course, Result
 from exercise import populate
 from botTester.AssistantBot import retrieve_question_material
 from django.http import HttpResponseRedirect
@@ -45,6 +45,8 @@ def do_exercise(request, exer_id):
                         student=current_user,
                         exercise=exer_id,
                     )
+                # Hint
+                read_mats = get_hints(que_pk)
             form = []
             # headline
             exercise_name = Exercise.objects.get(pk=exer_id).title
@@ -59,9 +61,18 @@ def do_exercise(request, exer_id):
              'que_pk': que.title,
              'que_que': que.question,
              'exercise_name': exercise_name,
+             'read_mats': read_mats,
              }
         )
     else:
+        # Redirect lecturers
+        lecturer_list = list(
+            Course.objects.get(pk=Exercise.objects.get(pk=exer_id).course.pk)
+            .administrators.values_list('username', flat=True)
+        )
+        # TODO: work in progress
+        if current_user.username in lecturer_list:
+            return HttpResponseRedirect('/examine_exercise/' + exer_id + '/')
         return goto_next_question(request, current_user, exer_id)
 
 
@@ -89,10 +100,7 @@ def goto_next_question(request, username, exer_id):
         que_form = make_question_form(choices)
 
         # reading material
-        reading_material_ids = retrieve_question_material(que.title, 5)
-        read_mats = []
-        for rm_id in reading_material_ids:
-            read_mats.append(ReadingMaterial.objects.get(title=rm_id))
+        read_mats = get_hints(que.pk)
         # headline
         exercise_name = Exercise.objects.get(pk=exer_id).title
         # progress number
@@ -114,3 +122,24 @@ def goto_next_question(request, username, exer_id):
     else:
         course_name = Exercise.objects.get(pk=exer_id).course.name
         return HttpResponseRedirect('/course/' + course_name + '/')
+
+
+def get_hints(question_pk):
+    # reading material
+    reading_material_ids = retrieve_question_material(question_pk, 5)
+    read_mats = []
+    for rm_id in reading_material_ids:
+        read_mats.append(ReadingMaterial.objects.get(title=rm_id))
+    return read_mats
+
+def examine_exercise(request, exer_id):
+    ex = Exercise.objects.get(pk=exer_id)
+    questions = []
+    q_list = list(ex.contains.values_list('pk', flat=True))
+    for each in q_list:
+        questions.append((Question.objects.get(pk=each), Result.objects.filter(question__pk=each).count()))
+    context = {
+        'exercise': ex,
+        'questions': questions,
+    }
+    return render(request, 'exercise_overview.html', context)

@@ -32,6 +32,16 @@ var genLectEx = genLectEx || (function(){
                             spanGaps: false,
                         },
                     ]
+                },
+                options : {
+                  scales: {
+                    xAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: 'Exercise'
+                      }
+                    }]
+                  }
                 }
             });
         }
@@ -71,6 +81,16 @@ var genLectTag = genLectTag || (function(){
                             spanGaps: false,
                         },
                     ]
+                },
+                options : {
+                  scales: {
+                    xAxes: [{
+                      scaleLabel: {
+                        display: true,
+                        labelString: 'Topic'
+                      }
+                    }]
+                  }
                 }
             });
         }
@@ -91,7 +111,7 @@ var genCardPie = genCardPie || (function(){
                     labels: ['Correct', 'Incorrect'],
                     datasets: [
                         {
-                            backgroundColor: ["#ffbb33","#00C851"],
+                            backgroundColor: ["#00C851", "#ffbb33"],
                             boarderWidth: 1,
                             fillColor : ["#007E33","#007E33"],
                             strokeColor : ["#007E33","#007E33"],

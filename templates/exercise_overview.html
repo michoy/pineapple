@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block pagename %} {{ exercise.title }} {%  endblock %}
+
+{% block title1 %} {{ exercise.title }} {% endblock %}
+
+{% block title2 %} {% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+    {% for question in questions %}
+        <div class="card" style="padding: 20px; margin-left: 10px; margin-right: 10px">
+        <!--Card content-->
+            <div class="card-block">
+                <h4 class="card-title"> {{ question.title }} </h4>
+                    <p> {{ question.0.question }} </p>
+                    <p> Answered {{ question.1 }} times</p>
+                    <p> Alternatives: </p>
+                    <div style="text-indent: 50px;">
+                        {% if question.0.correct_alternative == 1 %}
+                            <p id="alt" style="color:#00C853"> {{ question.0.alternative_1 }} </p>
+                        {% else %}
+                            <p id="alt"> {{ question.0.alternative_1 }} </p>
+                        {% endif %}
+
+                        {% if question.0.correct_alternative == 2 %}
+                            <p id="alt" style="color:#00C853"> {{ question.0.alternative_2 }} </p>
+                        {% else %}
+                            <p id="alt"> {{ question.0.alternative_2 }} </p>
+                        {% endif %}
+
+                        {% if question.0.correct_alternative == 3 %}
+                            <p id="alt" style="color:#00C853"> {{ question.0.alternative_3 }} </p>
+                        {% else %}
+                            <p id="alt"> {{ question.0.alternative_3 }} </p>
+                        {% endif %}
+
+                        {% if question.0.correct_alternative == 4 %}
+                            <p id="alt" style="color:#00C853"> {{ question.0.alternative_4 }} </p>
+                        {% else %}
+                            <p id="alt"> {{ question.0.alternative_4 }} </p>
+                        {% endif %}
+                    </div>
+                    <p> Is worth: {{ question.0.is_worth }} points</p>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="text-center" style="margin-bottom: 50px">
+        <form action="/course/{{ exercise.course }}/" >
+            <input type="submit" value="Back to Course" class="btn btn-primary btn-lg "/>
+        </form>
+    </div>
+{% endblock %}
