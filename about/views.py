@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from exercise.populate import add_user
 
 
 def about(request):
@@ -19,7 +20,7 @@ def do_register(request):
         if User.objects.filter(username=username).exists():  # username allready taken
             return render(request, 'registration/register.html', {'username_taken': True})
         else:  # user can be created
-            user = User.objects.create_user(username, email, password)
+            user = add_user(username, email, password)
             login(request, user)
             return render(request, 'overview.html')
     else:
