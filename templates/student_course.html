@@ -104,12 +104,13 @@
                         <!--Card content-->
                         <div class="card-block">
                             <!--Title-->
-                            <h4 class="card-title">{{ entry.title }}</h4>
+                            <h4 class="card-title">{{ entry.0.title }}</h4>
                             <!--Text-->
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
+                            <p class="card-text">{{ entry.0.contains.count }} questions </p>
+                            <p class="card-text">{{ entry.1 }} points </p>
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <button name='exercise_select' class="btn btn-success" value="{{ entry.id }}">Go To Exercise!</button>
+                                <button name='exercise_select' class="btn btn-success" value="{{ entry.0.id }}">Go To Exercise!</button>
                             </form>
                         </div>
                     </div>

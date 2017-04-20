@@ -18,7 +18,6 @@ def gen_exercise(num, dist_dict, username, course):
         :param num:         [int] The number of questions to add to the new exercise
         :param dist_dict:   [dict] Dictionary containing themetags and a num describing priority for student.
                                 Retreive from make_rec
-        
     Return:
         [exercise] A new personal exercise
     """
@@ -125,6 +124,7 @@ def gen_reading_rec(num, dist_dict):
     selected_materials = []
     for pk in selected_pks:
         selected_materials.append((pk, ReadingMaterial.objects.get(pk=pk).link))
+    selected_materials=list(set(selected_materials))
     return selected_materials
 
 
