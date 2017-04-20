@@ -6,6 +6,7 @@ from exercise.models import Question, ReadingMaterial, Exercise
 from exercise import populate
 from botTester.AssistantBot import retrieve_question_material
 from django.http import HttpResponseRedirect
+from course.views import student_course_view
 
 
 def base(request):
@@ -45,24 +46,23 @@ def do_exercise(request, exer_id):
                         student=current_user,
                         exercise=exer_id,
                     )
-            form = []
-            # headline
-            exercise_name = Exercise.objects.get(pk=exer_id).title
-        elif request.POST['next-q']:
+                form = []
+                # headline
+                exercise_name = Exercise.objects.get(pk=exer_id).title
+                return render(
+                    request,
+                    'exercise.html',
+                    {'form': form,
+                     'correct': correct,
+                     'wrong': wrong,
+                     'que_pk': que.title,
+                     'que_que': que.question,
+                     'exercise_name': exercise_name,
+                     }
+                )
+        elif request.POST.get('next-q', False):
             return goto_next_question(request, current_user, exer_id)
-        return render(
-            request,
-            'exercise.html',
-            {'form': form,
-             'correct': correct,
-             'wrong': wrong,
-             'que_pk': que.title,
-             'que_que': que.question,
-             'exercise_name': exercise_name,
-             }
-        )
-    else:
-        return goto_next_question(request, current_user, exer_id)
+    return goto_next_question(request, current_user, exer_id)
 
 
 def find_next_question(student_name, exercise_pk):
@@ -113,4 +113,4 @@ def goto_next_question(request, username, exer_id):
         return render(request, 'exercise.html', context)
     else:
         course_name = Exercise.objects.get(pk=exer_id).course.name
-        return HttpResponseRedirect('/course/' + course_name + '/')
+        return student_course_view(request, course_name, True)
