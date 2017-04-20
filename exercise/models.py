@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class ReadingMaterial(models.Model):
     title = models.CharField(max_length=40, primary_key=True)
-    link = models.CharField(max_length=100)  # Langt felt, kan jo være komplisert link
+    link = models.CharField(max_length=300)  # Langt felt, kan jo være komplisert link
 
     def __str__(self):
         return self.title
@@ -21,8 +21,8 @@ class ThemeTag(models.Model):
 
 class Course(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
-    full_name = models.CharField(max_length=30)
-    description = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=40)
+    description = models.CharField(max_length=300)
     # Relationships:
     administrators = models.ManyToManyField(User)  # Antar dette er greit,
     content = models.ManyToManyField(ReadingMaterial)  # Lesestoff som faget inneholder
@@ -44,7 +44,7 @@ class Question(models.Model):
         (3, 'Alternative 3'),
         (4, 'Alternative 4'),
     )
-    title = models.CharField(max_length=100, primary_key=True)
+    title = models.CharField(max_length=70, primary_key=True)
     question = models.CharField(max_length=300)
     alternative_1 = models.CharField(max_length=50)
     alternative_2 = models.CharField(max_length=50)
@@ -61,7 +61,7 @@ class Question(models.Model):
 
 
 class Exercise(models.Model):
-    title = models.CharField(max_length=80)
+    title = models.CharField(max_length=70)
     private = models.BooleanField(default=False)
     # Relationships:
     course = models.ForeignKey(Course)

@@ -8,7 +8,7 @@ from django.db.models import Sum
 
 
 @login_required
-def student_course_view(request, fagkode):
+def student_course_view(request, fagkode, done_exercise=False):
     current_user = request.user
     if fagkode == '':
         return HttpResponseRedirect('/overview')  # Redirect if no course-code has been selected
@@ -20,36 +20,34 @@ def student_course_view(request, fagkode):
             reccomendation = AssistantBot.make_rec(current_user.username, fagkode)
             new_exercise = AssistantBot.gen_exercise(10, reccomendation, current_user.username, fagkode)
             current_user.pecollector.exercises.add(new_exercise)
-            return HttpResponseRedirect('/course/' + fagkode + '/' + '#exercises')
-    else:
-        exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
-        user = User.objects.get(username=request.user)
-        # Collect data
-        exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
-        ex_out_list = []
-        for each in exercise_name_list:     # Calculate how many points the exercise is worth
-            ex_out_list.append((
-                each,
-                int(each.contains.aggregate(Sum('is_worth'))['is_worth__sum'] or 0)
-            ))
-        recommendations_list = AssistantBot.gen_reading_rec(
-            num=10,
-            dist_dict=AssistantBot.make_rec(username=user.username, course=fagkode)
-        )
-        ex_graph_data = AssistantBot.gen_student_exercise(course_name=fagkode, username=request.user)
-        tag_graph_data = AssistantBot.gen_student_theme(course_name=fagkode, username=request.user)
-        course_full = Course.objects.get(name=fagkode).full_name
-        return render(
-            request,
-            'student_course.html',
-            {'exercises': ex_out_list,
-             'rec_list': recommendations_list,
-             'course': fagkode,
-             'course_full': course_full,
-             'ex_graph_data': ex_graph_data,
-             'tag_graph_data': tag_graph_data,
-             },
-        )
+            return HttpResponseRedirect('/course/' + fagkode + '/')
+    exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
+    user = User.objects.get(username=request.user)
+    # Collect data
+    exercise_name_list.extend(user.pecollector.exercises.filter(course=fagkode))
+    ex_out_list = []
+    for each in exercise_name_list:     # Calculate how many points the exercise is worth
+        ex_out_list.append((
+            each,
+            int(each.contains.aggregate(Sum('is_worth'))['is_worth__sum'] or 0)
+        ))
+    recommendations_list = AssistantBot.gen_reading_rec(
+        num=10,
+        dist_dict=AssistantBot.make_rec(username=user.username, course=fagkode)
+    )
+    ex_graph_data = AssistantBot.gen_student_exercise(course_name=fagkode, username=request.user)
+    tag_graph_data = AssistantBot.gen_student_theme(course_name=fagkode, username=request.user)
+    course_full = Course.objects.get(name=fagkode).full_name
+    context = {
+        'exercises': ex_out_list,
+        'rec_list': recommendations_list,
+        'course': fagkode,
+        'course_full': course_full,
+        'ex_graph_data': ex_graph_data,
+        'tag_graph_data': tag_graph_data,
+        'exercise_done': done_exercise,
+    }
+    return render(request, 'student_course.html', context)
 
 
 @login_required
