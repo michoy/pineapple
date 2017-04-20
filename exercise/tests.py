@@ -8,7 +8,6 @@ from exercise.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth import authenticate
-import unittest
 
 
 class ServerTestCase(TestCase):
@@ -116,8 +115,16 @@ class ServerTestCase(TestCase):
         self.assertEqual('Q1', r.question.title)
         self.assertEqual(r, User.objects.get(username='Pekka').resultcollection.results.all().__getitem__(0))
 
+    def test_populate(self):
+        # Tests if populate.py populates the database without errors
+        try:
+            populate.main()
+        except:
+            self.fail()
+
     # Test server connectivity
     def test_do_quiz(self):
         self.client.login(username='Pekka', password='kanban')
         resp = self.client.get('/exercise/' + str(Exercise.objects.all().__getitem__(0).pk) + '/')
         self.assertEqual(200, resp.status_code)
+
