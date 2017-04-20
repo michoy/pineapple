@@ -17,7 +17,7 @@
                     <label for="form1">Enter course code here: (e.g. TDT4140)</label>
                 </div>
                 <div class="col-2">
-                    <button name='add_course' class="btn btn-secondary">Add</button>
+                    <button name='add_course' class="btn btn-deep-purple">Add</button>
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
                             <p class="card-text">{{ course.1 }}</p>
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <button name='course-select' class="btn btn-primary" value={{ course.0 }}>Go To {{ course.0 }}</button>
+                                <button name='course-select' class="btn btn-success" value={{ course.0 }}>Go To {{ course.0 }}</button>
                             </form>
                         </div>
                         <!--/.Card content-->
