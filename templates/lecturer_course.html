@@ -38,7 +38,7 @@
                             <!--Button-->
                             <form action="" method="post">
                                 {% csrf_token %}
-                                <button name="exercise_select"  class="btn btn-primary btn-lg btn-block"  value="{{ each.id }}" >Go to Exercise!</button>
+                                <button name="exercise_select"  class="btn btn-success btn-lg btn-block"  value="{{ each.id }}" >Go to Exercise!</button>
                             </form>
                         </div>
                         <!--/.Card content-->
@@ -76,7 +76,7 @@
                                     {% csrf_token %}
                                     {{ exercise_form }}
                                     <br>
-                                    <button type="submit" name="new_exercise" class="btn btn-secondary btn-lg btn-block" value="new_exercise" >
+                                    <button type="submit" name="new_exercise" class="btn btn-deep-purple btn-lg btn-block" value="new_exercise" >
                                         Add</button>
                                 </form>
                                 {% if added_exercise %}
@@ -99,7 +99,7 @@
                                     {% csrf_token %}
                                     {{ question_form }}
                                     <br>
-                                    <button type="submit" name="new_question" class="btn btn-secondary btn-lg btn-block" value="new_question" >
+                                    <button type="submit" name="new_question" class="btn btn-deep-purple btn-lg btn-block" value="new_question" >
                                         Add</button>
                                 </form>
                                 {% if added_question%}
@@ -110,6 +110,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row align-items-start" id="lect_new_r_or_t" style="margin-top: 30px; margin-bottom: 30px">
                     <!-- Add theme tag -->
                     <div class="col-6" >
@@ -124,7 +125,7 @@
                                     {% csrf_token %}
                                     {{ theme_tag_form}}
                                     <br>
-                                    <button type="submit" name="new_theme_tag" class="btn btn-secondary btn-lg btn-block" value="new_theme_tag" >
+                                    <button type="submit" name="new_theme_tag" class="btn btn-deep-purple btn-lg btn-block" value="new_theme_tag" >
                                         Add</button>
                                 </form>
                                 {% if added_theme_tag%}
@@ -147,7 +148,7 @@
                                     {% csrf_token %}
                                     {{ reading_mat_form}}
                                     <br>
-                                    <button type="submit" name="new_reading_mat" class="btn btn-secondary btn-lg btn-block" value="new_reading_mat" >
+                                    <button type="submit" name="new_reading_mat" class="btn btn-deep-purple btn-lg btn-block" value="new_reading_mat" >
                                         Add</button>
                                 </form>
                                 {% if added_reading_mat%}

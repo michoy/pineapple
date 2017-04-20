@@ -111,7 +111,7 @@ var genCardPie = genCardPie || (function(){
                     labels: ['Correct', 'Incorrect'],
                     datasets: [
                         {
-                            backgroundColor: ["#00C851", "#ffbb33"],
+                            backgroundColor: ["#007E33", "#ffbb33"],
                             boarderWidth: 1,
                             fillColor : ["#007E33","#007E33"],
                             strokeColor : ["#007E33","#007E33"],
