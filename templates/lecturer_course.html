@@ -34,7 +34,7 @@
                             <h4 class="card-title">{{ each.title }}</h4>
                             <hr>
                             <!--Text-->
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur </p>
+                            <p class="card-text"> </p>
                             <!--Button-->
                             <form action="" method="post">
                                 {% csrf_token %}
@@ -61,51 +61,101 @@
     </div>
 
     <!-- Add new cards -->
-    <div class="container" id="lect_new_things">
-            <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
-                <!-- Add exercise-->
-                <div class="col-6" >
-                    <div class="card wow fadeInUp">
-                        <!--Card content-->
-                        <div class="card-block text-center">
-                            <!--Title-->
-                            <h4 class="card-title">New exercise</h4>
-                            <hr>
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                {{ exercise_form }}
-                                <br>
-                                <button type="submit" name="new_exercise" class="btn btn-secondary btn-lg btn-block" value="new_exercise" >
-                                    Add</button>
-                            </form>
-                            {% if added_exercise %}
-                                <p>Exercise added</p>
-                            {% endif %}
+    <div class="container">
+            <div class="column align-items-start" id="lect_new_q_or_e" style="margin-top: 30px; margin-bottom: 30px">
+                <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
+                    <!-- Add exercise-->
+                    <div class="col-6" >
+                        <div class="card wow fadeInUp">
+                            <!--Card content-->
+                            <div class="card-block text-center">
+                                <!--Title-->
+                                <h4 class="card-title">New exercise</h4>
+                                <hr>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ exercise_form }}
+                                    <br>
+                                    <button type="submit" name="new_exercise" class="btn btn-secondary btn-lg btn-block" value="new_exercise" >
+                                        Add</button>
+                                </form>
+                                {% if added_exercise %}
+                                    <p>Exercise added</p>
+                                {% endif %}
+                            </div>
+                            <!--/.Card content-->
                         </div>
-                        <!--/.Card content-->
+                    </div>
+                    <!-- Add question -->
+                    <div class="col-6" >
+                        <!--Card-->
+                        <div class="card wow fadeInUp">
+                            <!--Card content-->
+                            <div class="card-block text-center">
+                                <!--Title-->
+                                <h4 class="card-title">New Question</h4>
+                                <hr>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ question_form }}
+                                    <br>
+                                    <button type="submit" name="new_question" class="btn btn-secondary btn-lg btn-block" value="new_question" >
+                                        Add</button>
+                                </form>
+                                {% if added_question%}
+                                    <p>Question added</p>
+                                {% endif %}
+                            </div>
+                            <!--/.Card content-->
+                        </div>
                     </div>
                 </div>
-                <!-- Add question -->
-                <div class="col-6" >
-                    <!--Card-->
-                    <div class="card wow fadeInUp">
-                        <!--Card content-->
-                        <div class="card-block text-center">
-                            <!--Title-->
-                            <h4 class="card-title">New Question</h4>
-                            <hr>
-                            <form action="" method="post">
-                                {% csrf_token %}
-                                {{ question_form }}
-                                <br>
-                                <button type="submit" name="new_question" class="btn btn-secondary btn-lg btn-block" value="new_question" >
-                                    Add</button>
-                            </form>
-                            {% if added_question%}
-                                <p>Question added</p>
-                            {% endif %}
+                <div class="row align-items-start" id="lect_new_r_or_t" style="margin-top: 30px; margin-bottom: 30px">
+                    <!-- Add theme tag -->
+                    <div class="col-6" >
+                        <!--Card-->
+                        <div class="card wow fadeInUp">
+                            <!--Card content-->
+                            <div class="card-block text-center">
+                                <!--Title-->
+                                <h4 class="card-title">New Theme Tag</h4>
+                                <hr>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ theme_tag_form}}
+                                    <br>
+                                    <button type="submit" name="new_theme_tag" class="btn btn-secondary btn-lg btn-block" value="new_theme_tag" >
+                                        Add</button>
+                                </form>
+                                {% if added_theme_tag%}
+                                    <p>Theme Tag added</p>
+                                {% endif %}
+                            </div>
+                            <!--/.Card content-->
                         </div>
-                        <!--/.Card content-->
+                    </div>
+                    <!-- Add reading material -->
+                    <div class="col-6" >
+                        <!--Card-->
+                        <div class="card wow fadeInUp">
+                            <!--Card content-->
+                            <div class="card-block text-center">
+                                <!--Title-->
+                                <h4 class="card-title">New Reading Material</h4>
+                                <hr>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    {{ reading_mat_form}}
+                                    <br>
+                                    <button type="submit" name="new_reading_mat" class="btn btn-secondary btn-lg btn-block" value="new_reading_mat" >
+                                        Add</button>
+                                </form>
+                                {% if added_reading_mat%}
+                                    <p>Reading Material added</p>
+                                {% endif %}
+                            </div>
+                            <!--/.Card content-->
+                        </div>
                     </div>
                 </div>
             </div>
