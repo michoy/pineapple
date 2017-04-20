@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-lg-6 col-md-12 col-sm-12">
-            <canvas id="lect_ex_chart" style=>
+            <canvas id="lect_ex_chart" style="margin: 20px">
             </canvas>
         </div>
         <div class="col-lg-6 col-md-12 col-sm-12">
@@ -61,7 +61,7 @@
     </div>
 
     <!-- Add new cards -->
-    <div class="container">
+    <div class="container" id="lect_new_things">
             <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
                 <!-- Add exercise-->
                 <div class="col-6" >
@@ -75,7 +75,7 @@
                                 {% csrf_token %}
                                 {{ exercise_form }}
                                 <br>
-                                <button type="submit" name="new_exercise" class="btn btn-secondary btn-lg btn-block" >
+                                <button type="submit" name="new_exercise" class="btn btn-secondary btn-lg btn-block" value="new_exercise" >
                                     Add</button>
                             </form>
                             {% if added_exercise %}
@@ -98,7 +98,7 @@
                                 {% csrf_token %}
                                 {{ question_form }}
                                 <br>
-                                <button type="submit" name="new_question" class="btn btn-secondary btn-lg btn-block" >
+                                <button type="submit" name="new_question" class="btn btn-secondary btn-lg btn-block" value="new_question" >
                                     Add</button>
                             </form>
                             {% if added_question%}
@@ -119,5 +119,12 @@
         genLectEx.genGraph({% autoescape off %}{{ ex_graph_data.0 }} {% endautoescape %}, {{ ex_graph_data.1}} );
         genLectTag.genGraph({% autoescape off %}{{ tag_graph_data.0 }} {% endautoescape %}, {{ tag_graph_data.1}});
      </script>
-
+    <!-- If a new exercise or question was created, scroll down -->
+    <script type="text/javascript">
+        if ("{{ target_pos }}".length != 0) {
+            element = document.getElementById("{{ target_pos }}");
+            alignWithTop = true;
+            element.scrollIntoView(alignWithTop);
+        }
+    </script>
 {% endblock %}

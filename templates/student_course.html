@@ -36,7 +36,7 @@
                              <hr>
                         <!--Text-->
                         {% for recommendation in rec_list %}
-                            <a href="{{ recommendation.1 }}">{{ recommendation.0 }}</a>
+                            <a href="{{ recommendation.1 }}" target="_blank">{{ recommendation.0 }}</a>
                             <p></p>
                         {% endfor %}
                     </div>
@@ -48,7 +48,7 @@
     <hr>
     <div class="h3-responsive" style="margin-bottom: 20px">Exercises</div>
     <!-- Exercise pluss chart row -->
-    <div class="container" style="margin: 50px">
+    <div class="container" id="exercises" style="margin: 50px">
         <div class="row">
             {% for entry in exercises %}
                 <div class="col-lg-3 col-md-6 col-sm-12">
@@ -91,5 +91,12 @@
             <button name="generate_exercise" class="btn btn-secondary" value="generate_exercise">Genereate new exercise</button>
         </div>
     </form>
-
+    <!-- If a new exercise or question was created, scroll down -->
+    <script type="text/javascript">
+        if ("{{ target_pos }}".length != 0) {
+            element = document.getElementById("{{ target_pos }}");
+            alignWithTop = true;
+            element.scrollIntoView(alignWithTop);
+        }
+    </script>
 {% endblock %}
