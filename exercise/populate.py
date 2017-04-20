@@ -120,7 +120,8 @@ def add_user_group(name):
     return new_group
 
 
-def add_user(username, email, password, course_list, result_pk_list, pers_exercise_list, group_name_list):
+def add_user(username, email, password, course_list=[], result_pk_list=[], pers_exercise_list=[],
+             group_name_list='Student'):
     user = User.objects.create_user(username=username, email=email, password=password)
     add_exercisecollection(student=username, exercise_list=pers_exercise_list)
     add_coursecollection(student=username, course_list=course_list)
