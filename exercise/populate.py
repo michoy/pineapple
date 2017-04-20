@@ -141,84 +141,99 @@ def main():
     Exercise.objects.all().delete()
     Result.objects.all().delete()
     # Reading material:
-    add_reading_material('google', 'http://www.google.com')
-    add_reading_material('wikipedia', 'http://www.wikipedia.com')
-    add_reading_material('its', 'http://www.itslearning.com')
+    # Must begin with https:// if you want to link to external page
     add_reading_material(
-        'TDT4140 Assessment Criteria',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4682507&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='TDT4140 Assessment Criteria',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4682507&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'TDT4140 Project Milestones',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4684192&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='TDT4140 Project Milestones',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4684192&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'TDT4140 Project Description',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4686464&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='TDT4140 Project Description',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4686464&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'TDT4140 Poster Layout',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4691171&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='TDT4140 Poster Layout',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4691171&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Improving Needed Posters',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4735595&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Improving Needed Posters',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4735595&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Exercise class 1 - exploration phase',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4684246&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Exercise class 1 - exploration phase',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4684246&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Bot Technologies',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4692502&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Bot Technologies',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4692502&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Bot Code Examples',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4692504&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Bot Code Examples',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4692504&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Git planning',
-        'http://bit.do/tdt4140-git'
+        # PU
+        title='Git planning',
+        link='http://bit.do/tdt4140-git',
     )
     add_reading_material(
-        'Sprint planning',
-        'http://bit.do/tdt4140-sprint'
+        # PU
+        title='Sprint planning',
+        link='http://bit.do/tdt4140-sprint',
     )
     add_reading_material(
-        'Unit Testing',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4712822&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Unit Testing',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4712822&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Unit testing code examples',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4713066&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Unit testing code examples',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4713066&FileVersionID=-1&ChildID=-1'
     )
     add_reading_material(
-        'Software Architecture',
-        'https://applications.itslearning.com/Resource/Proxy/DownloadRedirect.ashx?LearningObjectId=14824289&'
-        'LearningObjectInstanceId=30536736'
+        # PU
+        title='Software Architecture',
+        link='https://applications.itslearning.com/Resource/Proxy/DownloadRedirect.ashx?LearningObjectId=14824289&'
+        'LearningObjectInstanceId=30536736',
     )
     add_reading_material(
-        'Software Quality Assurance',
-        'https://ntnu.itslearning.com/file/download.aspx?FileID=4747391&FileVersionID=-1&ChildID=-1'
+        # PU
+        title='Software Quality Assurance',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4747391&FileVersionID=-1&ChildID=-1',
     )
     add_reading_material(
-        'Newtons Laws of Gravity',
-        'https://www.grc.nasa.gov/www/k-12/airplane/newton.html'
+        # FYS
+        title='Newtons Laws of Gravity',
+        link='https://www.grc.nasa.gov/www/k-12/airplane/newton.html',
     )
     add_reading_material(
-        'Work, energy, power',
-        'http://hyperphysics.phy-astr.gsu.edu/hbase/work.html'
+        # FYS
+        title='Work, energy, power',
+        link='http://hyperphysics.phy-astr.gsu.edu/hbase/work.html',
     )
     add_reading_material(
-        'Newtons Laws',
-        'http://hyperphysics.phy-astr.gsu.edu/hbase/Newt.html'
+        # FYS
+        title='Newtons Laws',
+        link='http://hyperphysics.phy-astr.gsu.edu/hbase/Newt.html',
     )
     add_reading_material(
-        'Thermodynamics Khan Academy',
-        'https://nb.khanacademy.org/science/chemistry/thermodynamics-chemistry'
+        # FYS
+        title='Thermodynamics Khan Academy',
+        link='https://nb.khanacademy.org/science/chemistry/thermodynamics-chemistry',
     )
     # Tags:
-    add_tag('basicStuff', ['google', 'wikipedia', 'its'])
     pu_prosjekt_list = [
         'TDT4140 Assessment Criteria',
         'TDT4140 Project Milestones',
@@ -229,16 +244,53 @@ def main():
     physics_reading_material_list = [
         'Newtons Laws of Gravity',
         'Work, energy, power',
-        'Newtons Laws'
+        'Newtons Laws',
     ]
-    add_tag('Mechanics', physics_reading_material_list)
-    add_tag('PU-prosjekt', pu_prosjekt_list)
-    add_tag('Exercise Lecture 1', ['Exercise class 1 - exploration phase'])
-    add_tag('Exercise Lecture 2', ['Bot Technologies', 'Bot Code Examples'])
-    add_tag('Exercise Lecture 3', ['Git planning', 'Sprint planning'])
-    add_tag('Exercise Lecture 4', ['Unit Testing', 'Unit testing code examples'])
-    add_tag('Exercise LEcture 5', ['Software Architecture'])
-    add_tag('Exercise Lecture 6', ['Software Quality Assurance'])
+    add_tag(
+        # FYS
+        name='Mechanics',
+        material_list=physics_reading_material_list,
+    )
+    add_tag(
+        # FYS
+        name='Thermodynamics',
+        material_list=['Thermodynamics Khan Academy']
+    )
+    add_tag(
+        # PU
+        name='PU-prosjekt',
+        material_list=pu_prosjekt_list,
+    )
+    add_tag(
+        # PU
+        name='Exercise Lecture 1',
+        material_list=['Exercise class 1 - exploration phase'],
+    )
+    add_tag(
+        # PU
+        name='Exercise Lecture 2',
+        material_list=['Bot Technologies', 'Bot Code Examples'],
+    )
+    add_tag(
+        # PU
+        name='Exercise Lecture 3',
+        material_list=['Git planning', 'Sprint planning'],
+    )
+    add_tag(
+        # PU
+        name='Exercise Lecture 4',
+        material_list=['Unit Testing', 'Unit testing code examples'],
+    )
+    add_tag(
+        # PU
+        name='Exercise LEcture 5',
+        material_list=['Software Architecture'],
+    )
+    add_tag(
+        # PU
+        name='Exercise Lecture 6',
+        material_list=['Software Quality Assurance'],
+    )
     exercise_list = [
         'Exercise class 1 - exploration phase',
         'Bot Technologies',
@@ -250,65 +302,81 @@ def main():
         'Software Architecture',
         'Software Quality Assurance'
     ]
-    add_tag('Exercise Lectures', exercise_list)
-    # Add groups
+    add_tag(
+        # PU
+        name='Exercise Lectures',
+        material_list=exercise_list,
+    )
+    # Add user groups
     add_user_group('Lecturer')
     add_user_group('Student')
     # Lecturers
     add_user(
+        # PU
         username='Pekka',
         email='the@man.com',
-        password='kanban',
+        password='passord',
         course_list=[],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Lecturer'],
     )
     add_user(
+        # MAT
+        username='MortenNome',
+        email='too@awesome.com',
+        password='passord',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer'],
+    )
+    add_user(
+        #FYS
+        username='Magnus Borstad Lilledahl',
+        email='magnus@ntnu.no',
+        password='passord',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer']
+    )
+    add_user(
         username='RandomStudAss',
         email='red@shirt.com',
-        password='ctrlCctrlV',
-        course_list=[],
-        pers_exercise_list=[],
-        result_pk_list=[],
-        group_name_list=['Lecturer', 'Student'],
-    )
-
-    add_user(
-        username='Magnus',
-        email='red@shirt.com',
-        password='ctrlCctrlV',
-        course_list=[],
-        pers_exercise_list=[],
-        result_pk_list=[],
-        group_name_list=['Lecturer', 'Student'],
-    )
-
-    add_user(
-        username='Bovim',
-        email='red@shirt.com',
-        password='ctrlCctrlV',
+        password='passord',
         course_list=[],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Lecturer', 'Student'],
     )
     # Course:
-    add_course('TDT4140', 'Programvareutvikling', ['Pekka'], pu_prosjekt_list + exercise_list, 'Beware the 27.4')
-    add_course('TMA4100', 'Matematikk 1', ['Pekka'], [], 'Matte 1')
     add_course(
-        'TFY4125',
-        'Fysikk',
-        ['Magnus'],
-        physics_reading_material_list,
-        'Exam will consist of multiple choice questions'
+        name='TDT4140',
+        full_name='Programvareutvikling',
+        admin_list=['Pekka'],
+        material_list=pu_prosjekt_list + exercise_list,
+        description='Beware the 27.4',
     )
-    add_course('TDT4145', 'Datamodellering og databasesystemer', ['Bovim'], [], 'Databaser for n00bs')
+    add_course(
+        name='TMA4100',
+        full_name='Matematikk 1',
+        admin_list=['MortenNome'],
+        material_list=[],
+        description='Begynnelsen av matteeventyret',
+    )
+    add_course(
+        name='TFY4125',
+        full_name='Fysikk 1',
+        admin_list=['Magnus Borstad Lilledahl'],
+        material_list=[],
+        description='Alt en trenger å vite innen fysikk',
+    )
     # Students
     add_user(
         username='Per',
         email='pers@son.no',
-        password='personifikasjon',
+        password='passord',
         course_list=['TDT4140'],
         pers_exercise_list=[],
         result_pk_list=[],
@@ -317,7 +385,7 @@ def main():
     add_user(
         username='Pål',
         email='pål@son.no',
-        password='ape',
+        password='passord',
         course_list=['TDT4140'],
         pers_exercise_list=[],
         result_pk_list=[],
@@ -326,7 +394,43 @@ def main():
     add_user(
         username='Sofie',
         email='sofie@notstud.ntnu.no',
-        password='apple',
+        password='passord',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Andreas',
+        email='andreas@stud.ntnu.no',
+        password='passord',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Jakob',
+        email='jakob@stud.ntnu.no',
+        password='passord',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Michael',
+        email='michael@stud.ntnu.no',
+        password='passord',
+        course_list=['TDT4140'],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Student']
+    )
+    add_user(
+        username='Richard',
+        email='richard@stud.ntnu.no',
+        password='passord',
         course_list=['TDT4140'],
         pers_exercise_list=[],
         result_pk_list=[],
@@ -334,73 +438,44 @@ def main():
     )
     # Questions:
     add_question(
-        'Q1',
-        'What day is it?',
-        ['monday', 'april 27', 'payday', 'taco-friday'],
-        4,
-        ['basicStuff', 'PU-prosjekt'],
-        'TDT4140',
-        2
+        title='TFY4125_Innlevering1_Spørsmål_1',
+        question="What is Newton's secound law of physics?",
+        alternative_list=['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
+        correct_num=3,
+        tag_list=['Mechanics'],
+        belongs_to='TFY4125',
+        is_worth=5,
     )
     add_question(
-        'Q2',
-        'My car says',
-        ['dingdong', 'clingcling', 'boom', 'poof'],
-        2,
-        ['basicStuff'],
-        'TDT4140',
-        11
+        title='TFY4125_Innlevering1_Spørsmål_2',
+        question='What is the speed of light?',
+        alternative_list=['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
+        correct_num=3,
+        tag_list=['Mechanics'],
+        belongs_to='TFY4125',
+        is_worth=7,
     )
     add_question(
-        'Q3',
-        'You should use:',
-        ['GitHub', 'Common Sense', 'Itslearning', 'All of the above'],
-        4,
-        ['Exercise Lectures', 'Exercise Lecture 3'],
-        'TDT4140',
-        5
-    )
-
-    add_question(
-        'TFY4125_Q1',
-        'What is Newtons secound law of physics?',
-        ['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
-        3,
-        ['Mechanics'],
-        'TFY4125',
-        5
-    )
-    add_question(
-        'TFY4125_Q2',
-        'What is the speed of light?',
-        ['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
-        3,
-        ['Mechanics'],
-        'TFY4125',
-        5
-    )
-    add_question(
-        'TFY4125_Q3',
-        'Work is ...',
-        ['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
-        1,
-        ['Mechanics'],
-        'TFY4125',
-        5
+        title='TFY4125_Innlevering1_Spørsmål_3',
+        question='Work is ...',
+        alternative_list=['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
+        correct_num=1,
+        tag_list=['Mechanics'],
+        belongs_to='TFY4125',
+        is_worth=2,
     )
     # Exercises:
-    ex_1 = add_exercise('Quiz 1', 'TDT4140', ['Q1', 'Q2', 'Q3'])
-    ex_2 = add_exercise('New and empty', 'TDT4140', [])
-    ex_3 = add_exercise('TFY4125_Exercise1', 'TFY4125', ['TFY4125_Q1', 'TFY4125_Q2', 'TFY4125_Q3'])
+    ex_1 = add_exercise(
+        title='TFY4125_Exercise1',
+        course='TFY4125',
+        question_list=[
+            'TFY4125_Innlevering1_Spørsmål_1',
+            'TFY4125_Innlevering1_Spørsmål_2',
+            'TFY4125_Innlevering1_Spørsmål_3',
+        ]
+    )
     # Results:
-    add_result(True, 'Q1', 'Per', ex_1.pk)
-    # add_result(True, 'Q1', 'Pål', ex_1.pk)
-    add_result(True, 'Q1', 'Sofie', ex_1.pk)
-    add_result(False, 'Q2', 'Per', ex_1.pk)
-    # add_result(True, 'Q2', 'Pål', ex_1.pk)
-    add_result(True, 'Q2', 'Sofie', ex_1.pk)
-    add_result(True, 'Q3', 'Per', ex_1.pk)
-    # add_result(True, 'Q3', 'Pål', ex_1.pk)
+
 
 
 if __name__ == '__main__':

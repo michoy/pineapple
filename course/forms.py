@@ -34,9 +34,14 @@ class PartialQuestionForm(forms.ModelForm):
 
 
 class ReadingMatForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super (ReadingMatForm,self ).__init__(*args, **kwargs) # populates the post
+        self.fields['link'].required = False
+
     class Meta:
         model = ReadingMaterial
         exclude = []
+
 
 
 class ThemeTagForm(forms.ModelForm):
