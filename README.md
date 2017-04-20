@@ -12,6 +12,17 @@ At the same time, lecturers are proveded with both information and tools to help
 topics as the class progresses. Do you teach a new course? No problem, with Pineapple you can adjust and
 fix issues on the fly. Maintaining an established course? Perfect, fine-tuning has never been easier.
 
+## Instructions
+This installation of pineapple runns a django test server. 
+
+Requirements:
+* MySQL installed
+* Python with Django installed
+
+
+
+
+
 ## TODO'S
 * Overview: if the course name does not exist, notify the user.
 * Improved statistics
