@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a23vukslfng-f39jo_=%@76a73ofgbg0x@6s-yc8-u!q@$8mhn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Seems 'testserver needs to be here for unit testing:
 ALLOWED_HOSTS = ['*']
@@ -149,3 +149,6 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/login/'  # Url der innlogging skjer
 
 LOGIN_REDIRECT_URL = '/overview/'  # Url som det redirectes til etter successfull innlogging
+
+# Production server optimizations
+CONN_MAX_AGE = None
