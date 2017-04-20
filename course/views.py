@@ -57,10 +57,7 @@ def lecturer_course_view(request, fagkode=''):
             return HttpResponseRedirect('/exercise/' + selected_ex + '/')
         elif request.POST.get('new_exercise', False):
             form = PartialExerciseForm(request.POST)
-<<<<<<< HEAD
-=======
             target_pos = 'lect_new_things'
->>>>>>> refs/remotes/origin/master
             if form.is_valid():
                 new_exercise = form.save(commit=False)
                 # Prevent name duplicates
