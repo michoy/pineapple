@@ -13,7 +13,7 @@ def get_course_list(username):
         for each in user.coursecollection.courses.all():
             course_list.append((each.name, each.description))
         for each in Course.objects.all():
-            if list(each.administrators.all().values_list('username', flat=True)):
+            if username in list(each.administrators.all().values_list('username', flat=True)):
                 course_list.append((each.name, each.description))
     return course_list
 

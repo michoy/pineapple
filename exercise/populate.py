@@ -233,7 +233,66 @@ def main():
         title='Thermodynamics Khan Academy',
         link='https://nb.khanacademy.org/science/chemistry/thermodynamics-chemistry',
     )
-    # Tags:
+    add_reading_material(
+        # KTN
+        title='SMTP protocol - Computer Networking ATDA s.123-130',
+        link='',
+    )
+    add_reading_material(
+        # KTN
+        title='SMTP example - Computer Networking ATDA s.127-128',
+        link='',
+    )
+    add_reading_material(
+        # KTN
+        title='SMTP - Slide 38',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4681008&FileVersionID=-1&ChildID=-1'
+    )
+    add_reading_material(
+        # KTN
+        title='POP3 - Computer Networking ATDA s.131',
+        link='',
+    )
+    add_reading_material(
+        # KTN
+        title='POP3 example - Slide 44',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4681008&FileVersionID=-1&ChildID=-1'
+    )
+    add_reading_material(
+        # KTN
+        title='IMAP - Computer Networking ATDA s.132',
+        link='',
+    )
+    add_reading_material(
+        # KTN
+        title='DNS - Computer Networking ATDA s.150-153',
+        link=''
+    )
+    add_reading_material(
+        # KTN
+        title='CDN - Computer Networking ATDA s.154-157',
+        link=''
+    )
+    add_reading_material(
+        # KTN
+        title='TCP  - Computer Networking ATDA s.177-187',
+        link='',
+    )
+    add_reading_material(
+        # KTN
+        title='UDP - Computer Networking ATDA s.170-177',
+        link='',
+    )
+    add_reading_material(
+        # KTN
+        title='HTTP - Computer Networking ATDA s.89-94',
+        link=''
+    )
+    add_reading_material(
+        # KTN
+        title='HTTP message types - Slide 19-29',
+        link='https://ntnu.itslearning.com/file/download.aspx?FileID=4681008&FileVersionID=-1&ChildID=-1'
+    )
     pu_prosjekt_list = [
         'TDT4140 Assessment Criteria',
         'TDT4140 Project Milestones',
@@ -246,6 +305,8 @@ def main():
         'Work, energy, power',
         'Newtons Laws',
     ]
+    # Tags:
+
     add_tag(
         # FYS
         name='Mechanics',
@@ -307,6 +368,57 @@ def main():
         name='Exercise Lectures',
         material_list=exercise_list,
     )
+    add_tag(
+        # KTN
+        name='SMTP',
+        material_list=[
+            'SMTP protocol - Computer Networking ATDA s.123-130',
+            'SMTP example - Computer Networking ATDA s.127-128',
+            'SMTP - Slide 38',
+        ]
+    )
+    add_tag(
+        # KTN
+        name='Email protocols',
+        material_list=[
+            'SMTP protocol - Computer Networking ATDA s.123-130',
+            'SMTP example - Computer Networking ATDA s.127-128',
+            'SMTP - Slide 38',
+            'POP3 - Computer Networking ATDA s.131',
+            'POP3 example - Slide 44',
+            'IMAP - Computer Networking ATDA s.132',
+        ]
+    )
+    add_tag(
+        # KTN
+        name='DNS',
+        material_list=[
+            'DNS - Computer Networking ATDA s.150-153',
+        ]
+    )
+    add_tag(
+        # KTN
+        name='Content Distribution',
+        material_list=[
+            'CDN - Computer Networking ATDA s.154-157',
+        ]
+    )
+    add_tag(
+        # KTN
+        name='Transport Layer',
+        material_list=[
+            'TCP  - Computer Networking ATDA s.177-187',
+            'UDP - Computer Networking ATDA s.170-177',
+        ]
+    )
+    add_tag(
+        # KTN
+        name='HTTP',
+        material_list=[
+            'HTTP - Computer Networking ATDA s.89-94',
+            'HTTP message types - Slide 19-29',
+        ]
+    )
     # Add user groups
     add_user_group('Lecturer')
     add_user_group('Student')
@@ -322,24 +434,24 @@ def main():
         group_name_list=['Lecturer'],
     )
     add_user(
-        # MAT
-        username='MortenNome',
-        email='too@awesome.com',
-        password='passord',
-        course_list=[],
-        pers_exercise_list=[],
-        result_pk_list=[],
-        group_name_list=['Lecturer'],
-    )
-    add_user(
-        #FYS
-        username='Magnus Borstad Lilledahl',
+        # FYS
+        username='MagnusBorstadLilledahl',
         email='magnus@ntnu.no',
         password='passord',
         course_list=[],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Lecturer']
+    )
+    add_user(
+        # KTN
+        username='KjerstiMoldeklev',
+        email='kjersti@ntnu.no',
+        password='passord',
+        course_list=[],
+        pers_exercise_list=[],
+        result_pk_list=[],
+        group_name_list=['Lecturer'],
     )
     add_user(
         username='RandomStudAss',
@@ -352,6 +464,7 @@ def main():
     )
     # Course:
     add_course(
+        # PU
         name='TDT4140',
         full_name='Programvareutvikling',
         admin_list=['Pekka'],
@@ -359,25 +472,40 @@ def main():
         description='Beware the 27.4',
     )
     add_course(
-        name='TMA4100',
-        full_name='Matematikk 1',
-        admin_list=['MortenNome'],
-        material_list=[],
-        description='Begynnelsen av matteeventyret',
-    )
-    add_course(
+        # FYS
         name='TFY4125',
         full_name='Fysikk 1',
-        admin_list=['Magnus Borstad Lilledahl'],
+        admin_list=['MagnusBorstadLilledahl'],
         material_list=[],
         description='Alt en trenger å vite innen fysikk',
+    )
+    add_course(
+        # KTN
+        name='TTM4100',
+        full_name='Kommunikasjon - Tjenester og nett',
+        admin_list=['KjerstiMoldeklev'],
+        material_list=[
+            'SMTP protocol - Computer Networking ATDA s.123-130',
+            'SMTP example - Computer Networking ATDA s.127-128',
+            'SMTP - Slide 38',
+            'POP3 - Computer Networking ATDA s.131',
+            'POP3 example - Slide 44',
+            'IMAP - Computer Networking ATDA s.132',
+            'DNS - Computer Networking ATDA s.150-153',
+            'CDN - Computer Networking ATDA s.154-157',
+            'TCP  - Computer Networking ATDA s.177-187',
+            'UDP - Computer Networking ATDA s.170-177',
+            'HTTP - Computer Networking ATDA s.89-94',
+            'HTTP message types - Slide 19-29',
+        ],
+        description='Alt en må vite om internett og protokoller'
     )
     # Students
     add_user(
         username='Per',
         email='pers@son.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -386,7 +514,7 @@ def main():
         username='Pål',
         email='pål@son.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -395,7 +523,7 @@ def main():
         username='Sofie',
         email='sofie@notstud.ntnu.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -438,6 +566,7 @@ def main():
     )
     # Questions:
     add_question(
+        # FYS
         title='TFY4125_Innlevering1_Spørsmål_1',
         question="What is Newton's secound law of physics?",
         alternative_list=['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
@@ -447,6 +576,7 @@ def main():
         is_worth=5,
     )
     add_question(
+        # FYS
         title='TFY4125_Innlevering1_Spørsmål_2',
         question='What is the speed of light?',
         alternative_list=['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
@@ -456,6 +586,7 @@ def main():
         is_worth=7,
     )
     add_question(
+        # FYS
         title='TFY4125_Innlevering1_Spørsmål_3',
         question='Work is ...',
         alternative_list=['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
@@ -464,19 +595,333 @@ def main():
         belongs_to='TFY4125',
         is_worth=2,
     )
+    add_question(
+        # KTN
+        title='Exercise 1: Email, Q1',
+        question='SMTP stands for:',
+        alternative_list=[
+            'Simple Mail Transfer Protocol',
+            'Strict Mail Threading Plan',
+            'Strong Multi-Translated Port',
+            'Severe Markup Transfer Protection',
+        ],
+        correct_num=1,
+        tag_list=['SMTP'],
+        belongs_to='TTM4100',
+        is_worth=5,
+    )
+    add_question(
+        # KTN
+        title='Exercise 1: Email, Q2',
+        question='The main difference between POP3 and IMAP is:',
+        alternative_list=[
+            'POP3 is push-oriented, while IMAP is pull-oriented',
+            'POP3 is a simple protocol, IMAP is more feature rich',
+            'POP3 is designed for human interaction, IMAP for server-server communication',
+            'POP3 is deprecated, IMAP should be used instead as of 2008'
+        ],
+        correct_num=2,
+        tag_list=['Email protocols'],
+        belongs_to='TTM4100',
+        is_worth=3,
+    )
+    add_question(
+        # KTN
+        title='Exercise 1: Email, Q3',
+        question='SMTP is usually used when:',
+        alternative_list=[
+            'Downloading email from server to client',
+            'Retrieving email from the server when using a browser as client',
+            'Uploading to email server and transferring between servers',
+            'POP3 is downloading encoded files, such as pictures (jpg, png) or movies',
+        ],
+        correct_num=3,
+        tag_list=['SMTP', 'Email protocols'],
+        belongs_to='TTM4100',
+        is_worth=4,
+    )
+    add_question(
+        # KTN
+        title='Exercise 2: HTTP and content distribution, Q1',
+        question='When looking for an IP-adress, DNS generally accesses these three servers:',
+        alternative_list=[
+            'Root, TLD and Authoritative',
+            'Base, SSL and Denominative',
+            'Core, TQR and Relative',
+            'Central, SQC and Root',
+        ],
+        correct_num=1,
+        tag_list=['DNS'],
+        belongs_to='TTM4100',
+        is_worth=3,
+    )
+    add_question(
+        # KTN
+        title='Exercise 2: HTTP and content distribution, Q2',
+        question='"The "method"-field in an HTTP/1.1 request can contain one of these strings:',
+        alternative_list=[
+            'GET, POST, HEAD',
+            'GET, POST, HEAD, PUT, DELETE',
+            'GET, POST, HEAD, PUT, DELETE, SELECT',
+            'GET, POST, HEAD, ACK'
+        ],
+        correct_num=2,
+        tag_list=['HTTP'],
+        belongs_to='TTM4100',
+        is_worth=5,
+    )
+    add_question(
+        # KTN
+        title='Exercise 2: HTTP and content distribution, Q3',
+        question='TCP guarantees several features which UDP does not, these include:',
+        alternative_list=[
+            'End-to-end encryption and pipelining',
+            'Increased bitrate and version control',
+            'Congestion control and reliable data transfer',
+            'Error correction and signal backups'
+        ],
+        correct_num=3,
+        tag_list=['Transport Layer'],
+        belongs_to='TTM4100',
+        is_worth=6,
+    )
+    add_question(
+        # KTN
+        title='Exercise 2: HTTP and content distribution, Q4',
+        question='Usually CDNs use one these two server placement methods. Pick the right one:',
+        alternative_list=[
+            'Reach far, Short Reroute',
+            'Explore, Expand',
+            'Exploit Exterminate',
+            'Bring Home, Enter Deep',
+        ],
+        correct_num=4,
+        tag_list=['Content Distribution'],
+        belongs_to='TTM4100',
+        is_worth=10,
+    )
     # Exercises:
     ex_1 = add_exercise(
+        # FYS
         title='TFY4125_Exercise1',
         course='TFY4125',
         question_list=[
             'TFY4125_Innlevering1_Spørsmål_1',
             'TFY4125_Innlevering1_Spørsmål_2',
             'TFY4125_Innlevering1_Spørsmål_3',
+        ],
+    )
+    ex_2 = add_exercise(
+        # KTN
+        title='Exercise 1: Email',
+        course='TTM4100',
+        question_list=[
+            'Exercise 1: Email, Q1',
+            'Exercise 1: Email, Q2',
+            'Exercise 1: Email, Q3',
+        ],
+    )
+    ex_3 = add_exercise(
+        # KTN
+        title='Exercise 2: HTTP and content distribution',
+        course='TTM4100',
+        question_list=[
+            'Exercise 2: HTTP and content distribution, Q1',
+            'Exercise 2: HTTP and content distribution, Q2',
+            'Exercise 2: HTTP and content distribution, Q3',
+            'Exercise 2: HTTP and content distribution, Q4'
+        ],
+    )
+    ex_4 = add_exercise(
+        # KTN
+        title='Exercise3: Repetition',
+        course='TTM4100',
+        question_list=[
+            'Exercise 2: HTTP and content distribution, Q1',
+            'Exercise 2: HTTP and content distribution, Q2',
+            'Exercise 1: Email, Q2',
+            'Exercise 1: Email, Q3',
         ]
     )
     # Results:
-
-
+    # Per
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q1',
+        student='Per',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q2',
+        student='Per',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q3',
+        student='Per',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q1',
+        student='Per',
+        exercise=ex_3.pk,
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q2',
+        student='Per',
+        exercise=ex_3.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q3',
+        student='Per',
+        exercise=ex_3.pk,
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q4',
+        student='Per',
+        exercise=ex_3.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q1',
+        student='Per',
+        exercise=ex_4.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q2',
+        student='Per',
+        exercise=ex_4.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q2',
+        student='Per',
+        exercise=ex_4.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q3',
+        student='Per',
+        exercise=ex_4.pk,
+    )
+    # Pål
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q1',
+        student='Pål',
+        exercise=ex_2.pk
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q2',
+        student='Pål',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q3',
+        student='Pål',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q1',
+        student='Pål',
+        exercise=ex_3.pk
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q2',
+        student='Pål',
+        exercise=ex_3.pk
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q3',
+        student='Pål',
+        exercise=ex_3.pk
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q4',
+        student='Pål',
+        exercise=ex_3.pk
+    )
+    # Sofie
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 1: Email, Q1',
+        student='Sofie',
+        exercise=ex_2.pk
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 1: Email, Q2',
+        student='Sofie',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 1: Email, Q3',
+        student='Sofie',
+        exercise=ex_2.pk,
+    )
+    add_result(
+        # KTN
+        val=False,
+        question='Exercise 2: HTTP and content distribution, Q1',
+        student='Sofie',
+        exercise=ex_3.pk
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q2',
+        student='Pål',
+        exercise=ex_3.pk
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q3',
+        student='Pål',
+        exercise=ex_3.pk
+    )
+    add_result(
+        # KTN
+        val=True,
+        question='Exercise 2: HTTP and content distribution, Q4',
+        student='Pål',
+        exercise=ex_3.pk
+    )
 
 if __name__ == '__main__':
     main()
