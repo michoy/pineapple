@@ -20,7 +20,7 @@ def student_course_view(request, fagkode, done_exercise=False):
             reccomendation = AssistantBot.make_rec(current_user.username, fagkode)
             new_exercise = AssistantBot.gen_exercise(10, reccomendation, current_user.username, fagkode)
             current_user.pecollector.exercises.add(new_exercise)
-            return HttpResponseRedirect('/course/' + fagkode + '/')
+            return HttpResponseRedirect('/course/' + fagkode + '/' + '#exercises')
     exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
     user = User.objects.get(username=request.user)
     # Collect data
@@ -134,7 +134,9 @@ def lecturer_course_view(request, fagkode=''):
 @login_required
 def delegate_course_view(request, fagkode=''):
     current_user = request.user
-    if current_user.groups.filter(name='Lecturer').exists():
+    # Redirect lecturers
+    lecturer_list = list(Course.objects.get(pk=fagkode).administrators.values_list('username', flat=True))
+    if current_user.username in lecturer_list:
         return lecturer_course_view(request, fagkode)
     else:
         return student_course_view(request, fagkode)

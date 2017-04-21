@@ -69,7 +69,6 @@ def do_exercise(request, exer_id):
         # Redirect lecturers
         lecturer_list = list(Course.objects.get(pk=Exercise.objects.get(pk=exer_id).course.pk)
                              .administrators.values_list('username', flat=True))
-        # TODO: work in progress
         if current_user.username in lecturer_list:
             return HttpResponseRedirect('/examine_exercise/' + exer_id + '/')
     return goto_next_question(request, current_user, exer_id)
