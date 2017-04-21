@@ -61,7 +61,7 @@
         {% endfor %}
     </div>
 
-    <!-- Add new cards -->
+    <!-- Add new things -->
     <div class="container">
             <div class="column align-items-start" id="lect_new_q_or_e" style="margin-top: 30px; margin-bottom: 30px">
                 <div class="row align-items-start" style="margin-top: 30px; margin-bottom: 30px">
@@ -124,7 +124,7 @@
                                 <hr>
                                 <form action="" method="post">
                                     {% csrf_token %}
-                                    {{ theme_tag_form}}
+                                    {{ theme_tag_form }}
                                     <br>
                                     <button type="submit" name="new_theme_tag" class="btn btn-primary btn-lg btn-block" value="new_theme_tag" >
                                         Add</button>

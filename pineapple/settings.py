@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'a23vukslfng-f39jo_=%@76a73ofgbg0x@6s-yc8-u!q@$8mhn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Seems 'testserver needs to be here for unit testing:
 ALLOWED_HOSTS = ['*']
