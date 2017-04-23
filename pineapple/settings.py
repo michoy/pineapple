@@ -24,8 +24,9 @@ SECRET_KEY = 'a23vukslfng-f39jo_=%@76a73ofgbg0x@6s-yc8-u!q@$8mhn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# Seems 'testserver needs to be here for unit testing:
-ALLOWED_HOSTS = ['*']
+# Host names which this server can serve. Need to be specified to avoid HTTP Host header attacks
+# If you deploy Pineapple, this line will most likely need to be changed
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'pineapple.com', 'pineapple.no']
 
 # Application definition
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'about',
     'botTester',
     'unitTests',
+    'course',
 ]
 
 MIDDLEWARE = [
@@ -143,6 +145,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
+]
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 ]
 
 # Login page
