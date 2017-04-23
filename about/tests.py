@@ -4,7 +4,7 @@ import django
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pineapple.settings")
 from django.contrib.auth.models import User
-
+from exercise.populate import add_user_group
 
 class ServerTestCase(TestCase):
 
@@ -41,6 +41,8 @@ class ServerTestCase(TestCase):
 
     # Can the user register?
     def test_register(self):
+        # Add the Student group, so that a new user can be registered
+        add_user_group('Student')
         # Test wether register page can be reached
         resp = self.client.get('/register/')
         self.assertEqual(200, resp.status_code)
@@ -49,5 +51,6 @@ class ServerTestCase(TestCase):
             '/register/',
             {'username': 'newMan', 'password': 'datPWord', 'email': 'newMan@mailmail.com'}
         )
-        self.assertEqual(200, resp.status_code)
+        self.assertEqual(302, resp.status_code)
+        self.assertEqual('/overview/', resp.url)
         self.assertTrue('newMan', User.objects.all().__getitem__(1).username)

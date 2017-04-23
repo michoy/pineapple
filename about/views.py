@@ -27,7 +27,6 @@ def do_register(request):
         return render(request, 'registration/register.html')
 
 
-@login_required()
 def do_logout(request):
     logout(request)
     return HttpResponseRedirect('/about')

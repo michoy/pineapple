@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'overview',
     'about',
     'botTester',
-    'unitTests',
     'course',
 ]
 
