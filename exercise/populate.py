@@ -475,15 +475,15 @@ def main():
     add_course(
         # FYS
         name='TFY4125',
-        full_name='Fysikk 1',
+        full_name='Physics',
         admin_list=['MagnusBorstadLilledahl'],
         material_list=[],
-        description='Alt en trenger å vite innen fysikk',
+        description='Everything one needs to know about physics.',
     )
     add_course(
         # KTN
         name='TTM4100',
-        full_name='Kommunikasjon - Tjenester og nett',
+        full_name='Communication - Services and Networks',
         admin_list=['KjerstiMoldeklev'],
         material_list=[
             'SMTP protocol - Computer Networking ATDA s.123-130',
@@ -499,7 +499,7 @@ def main():
             'HTTP - Computer Networking ATDA s.89-94',
             'HTTP message types - Slide 19-29',
         ],
-        description='Alt en må vite om internett og protokoller'
+        description='All there is to know about networks and the internet.'
     )
     # Students
     add_user(

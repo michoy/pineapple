@@ -33,5 +33,5 @@ urlpatterns = [
     url(r'^course/(?P<fagkode>[\w]+)/$', course.views.delegate_course_view),
     url(r'^exercise/$', exercise.views.do_exercise),
     url(r'^exercise/(?P<exer_id>[0-9]+)/$', exercise.views.do_exercise),
-    url(r'^examine_exercise/(?P<exer_id>[0-9]+)/$', exercise.views.examine_exercise)
+    url(r'^examine_exercise/(?P<exer_id>[0-9]+)/$', exercise.views.examine_exercise),
 ]
