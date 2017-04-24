@@ -77,7 +77,12 @@
                              <hr>
                         <!--Text-->
                         {% for recommendation in rec_list %}
-                            <a href="{{ recommendation.1 }}" target="_blank">{{ recommendation.0 }}</a>
+                            {% if recommendation.1 %}
+                                <a href="{{ recommendation.1 }}" target="_blank">{{ recommendation.0 }}</a>
+                            {% else %}
+                                <p>{{ recommendation.0 }}</p>
+                            {% endif %}
+
                             <p></p>
                         {% endfor %}
                     </div>
