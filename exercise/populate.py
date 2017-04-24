@@ -970,7 +970,7 @@ def main():
         title='TFY_E3',
         course='TFY4125',
         question_list=['TFY_E3_Q1', 'TFY_E3_Q2', 'TFY_E3_Q3']
-
+    )
     ex_2 = add_exercise(
         # KTN
         title='Exercise 1: Email',
