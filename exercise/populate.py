@@ -163,7 +163,7 @@ def main():
     )
     add_reading_material(
         #TFY
-        title='Rotation',
+        title='Rotation Wikipedia',
         link='https://en.wikipedia.org/wiki/Rotation'
     )
     add_reading_material(
@@ -208,7 +208,7 @@ def main():
     )
     add_reading_material(
         #TFY
-        title='Carnot Cycle',
+        title='Carnot Cycle Wikipedia',
         link='https://en.wikipedia.org/wiki/Carnot_cycle'
     )
     add_reading_material(
@@ -217,12 +217,12 @@ def main():
     )
     add_reading_material(
         #TFY
-        title='Ideal Gas',
+        title='Ideal Gas Wikipedia',
         link='https://en.wikipedia.org/wiki/Ideal_gas'
     )
     add_reading_material(
         #TFY
-        title='Ideal gas: p. 302'
+        title='Ideal Gas: p. 302'
     )
 
     add_reading_material(
@@ -306,6 +306,114 @@ def main():
         'Improving Needed Posters'
     ]
 
+    add_tag(
+        #TFY
+        name='Mechanics',
+        material_list=[
+            'Newton Mechanics Wikipedia',
+            'Newtons Mechanics: p. 100',
+            'Mechanical Energy Wikipedia',
+            'Mechanical Energy: p. 125',
+            'Rotation Wikipedia',
+            'Rotation: p. 137'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Mechanical Energy',
+        material_list=[
+            'Mechanical Energy Wikipedia',
+            'Mechanical Energy: p. 125'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Newton',
+        material_list=[
+            'Newton Mechanics Wikipedia',
+            'Newton Mechanics: p. 100'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Rotation',
+        material_list=[
+            'Rotation Wikipedia',
+            'Rotation: p. 137'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Electromagnetism',
+        material_list=[
+            'Electrostatics Wikipedia',
+            'Electrostatics: p. 213',
+            'Dielectric Wikipedia',
+            'Dielectric: p. 231',
+            'Magnetic Field Wikipedia',
+            'Magnetic Field: p. 245',
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Electrostatics',
+        material_list=[
+            'Electrostatics Wikipedia',
+            'Electrostatics: p. 213'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Dielectrics',
+        material_list=[
+            'Dielectrics Wikipedia',
+            'Dielectrics: p. 231'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Magnetic Field',
+        material_list=[
+            'Magnetic Field Wikipedia',
+            'Magnetic Field: p. 245'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Thermodynamics',
+        material_list=[
+            'Temperature Wikipedia',
+            'Temperature: p. 270',
+            'Carnot Cycle Wikipedia',
+            'Carnot Cycle: p. 292',
+            'Ideal Gas Wikipedia',
+            'Ideal Gas: p. 302'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Temperature',
+        material_list=[
+            'Temperature Wikipedia',
+            'Temperature: p. 270'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Carnot Cycle',
+        material_list=[
+            'Carnot Cycle Wikipedia',
+            'Carnot Cycle: p. 292'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Ideal Gas',
+        material_list=[
+            'Ideal Gas Wikipedia',
+            'Ideal Gas: p.302'
+        ]
+    )
     add_tag(
         # PU
         name='PU-prosjekt',
@@ -488,8 +596,122 @@ def main():
     )
     # Questions:
 
+    add_question(
+        #TFY
+        title='TFY_E1_Q1',
+        question='What is newtons second law of physics?',
+        alternative_list=['F = 0.5*mv^2','F = ma','Carrots', 'F = m*ln(x)'],
+        correct_num=2,
+        tag_list=['Newton'],
+        belongs_to='TFY4125',
+        is_worth=3
+    )
+    add_question(
+        #TFY
+        title='TFY_E1_Q2',
+        question='Rotational force is directed:',
+        alternative_list=['Upwards', 'In the direction of motion', 'Towards the center of the rotation', 'Allways towards Earts center'],
+        correct_num=3,
+        tag_list=['Rotation'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E1_Q3',
+        question='Work is:',
+        alternative_list=['Hard', 'Mass times acceleration', 'Force times distance', 'Equal force'],
+        correct_num=3,
+        tag_list=['Mechanical Energy'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q1',
+        question='The formula for electrostatic force is:',
+        alternative_list=['F = E/q', 'F = k*qQ/r^2', 'F = (q/r)^2', 'Too complicated to remember'],
+        correct_num=2,
+        tag_list=['Electrostatics'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q1',
+        question='The formula for electrostatic force is:',
+        alternative_list=['F = E/q', 'F = k*qQ/r^2', 'F = (q/r)^2', 'Too complicated to remember'],
+        correct_num=2,
+        tag_list=['Electrostatics'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q2',
+        question='Capacitance is:',
+        alternative_list=['invers proportional to voltage', 'not dependent on material type', 'Q = F*E', 'Monty Python'],
+        correct_num=1,
+        tag_list=['Dielectric'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q3',
+        question='How can we fugure out the direction of a electromagnetic force?',
+        alternative_list=['Look at the electrons', 'I do not know', 'Hand Rule', 'Right Hand Rule'],
+        correct_num=4,
+        tag_list=['Electro Magnetism'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E3_Q1',
+        question='What is temperature?',
+        alternative_list=['Comparative measuer of heat', 'Thermometer', 'Cold', 'Balls'],
+        correct_num=1,
+        tag_list=['Temperature'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E3_Q2',
+        question='Which is true?',
+        alternative_list=['T1*T2=C1*C2', 'T1*Q2=T2*Q1', 'T1=T2', 'Q^2=T1*T2'],
+        correct_num=2,
+        tag_list=['Carnot Cycle'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E3_Q3',
+        question='Which is true?',
+        alternative_list=['nR=N', 'RV=P/nT', 'PV=T', 'PV=nRT'],
+        correct_num=4,
+        tag_list=['Ideal Gas'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
     # Exercises:
-
+    add_exercise(
+        title='TFY_E1',
+        course='TFY4125',
+        question_list=['TFY_E1_Q1','TFY_E1_Q2','TFY_E1_Q3']
+    )
+    add_exercise(
+        title='TFY_E2',
+        course='TFY4125',
+        question_list=['TFY_E2_Q1', 'TFY_E2_Q2', 'TFY_E2_Q3']
+    )
+    add_exercise(
+        title='TFY_E3',
+        course='TFY4125',
+        question_list=['TFY_E3_Q1', 'TFY_E3_Q2', 'TFY_E3_Q3']
+    )
     # Results:
 
 
