@@ -1,5 +1,10 @@
 
-# pineapple
+# Pineapple
+
+
+## PineappleDeployment - What is different?
+This is the 'proper' version of Pineapple, meant for deployment on an existing server. 
+Set-up is more difficult than on the demo-branch, but in return you get Pineapple the way it always was intended.
 
 ## What is it?
 Pineapple is a learning tool, designed to be used on the institution level. It's goal is to improve
@@ -14,18 +19,34 @@ topics as the class progresses. Do you teach a new course? No problem, with Pine
 fix issues on the fly. Maintaining an established course? Perfect, fine-tuning has never been easier.
 
 ## Set-up
-This installation of pineapple is for demonstration purposes only. For deployment version see pineappleDeploymen package. 
+The unchanged server depends on an instance of MySQL running in the background. 
+Details such as server-name, username and password can be set in the pineapple/settings.py file. 
+The defaults are "pinedatabase", "admin" and "admin".
 
 ### Requirements
-* Python 3.4 or newer
+* Python 3.4
 * Django 1.11
+* mysql-connector-python 2.1.6
+* MySQL (57 tested)
 
 ### Instructions
-On windows simply cd into the project folder and run
+Step 1: Reconsider because the Pineapple team can't make any guarantees about security
+
+If that step fails:
+
+cd into the project folder and run
 ```
 py manage.py runserver
 ```
-Open the given IP adress in your browser to use the webapp.
+Make migrations and migrate in order to set up the database with the correct tables
+```
+py manage.py makemigrations
+py manage.py migrate
+```
+In order to insert example entries run the main() method in /exercise/populate.py
+
+Connect Pineapple to your server of choice according to its instructions.
+This will most likely involve changing some values in /pineapple/settings.py.
 
 ## In use
 To test pineapple as a student, start by registering a new user. From the *overview* page, type in a course name and click *add*. For demonstration purposes the following courses have allready been added:

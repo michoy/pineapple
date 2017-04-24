@@ -87,37 +87,37 @@ WSGI_APPLICATION = 'pineapple.wsgi.application'
 #       CREATE DATABASE pinedatabase CHARACTER SET utf8;
 # Give the database correct permissions (username and password is "admin"):
 #       GRANT ALL PRIVILEGES ON pinedatabase.* To 'admin'@'127.0.0.1' IDENTIFIED BY 'admin';
-#DATABASES = {
-#    'default': {
-#        'NAME': 'pinedatabase',
-#        'ENGINE': 'mysql.connector.django',
-#        'USER': 'admin',
-#        'PASSWORD': 'admin',
-#
-#        'OPTIONS': {
-#          'autocommit': True,
-#        },
-#    }
-#}
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'pinebase.db'),
-    }
-}
-'''
-    'default': {
-        'ENGINE': 'mysql.connector.django',
         'NAME': 'pinedatabase',
+        'ENGINE': 'mysql.connector.django',
         'USER': 'admin',
         'PASSWORD': 'admin',
+
         'OPTIONS': {
           'autocommit': True,
-        }
+        },
     }
 }
-'''
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': os.path.join(BASE_DIR, 'pinebase.db'),
+#    }
+#}
+#'''
+#    'default': {
+#        'ENGINE': 'mysql.connector.django',
+#        'NAME': 'pinedatabase',
+#        'USER': 'admin',
+#        'PASSWORD': 'admin',
+#        'OPTIONS': {
+#          'autocommit': True,
+#        }
+#    }
+#}
+#'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -149,7 +149,7 @@ USE_I18N = True
 USE_L10N = True
 
 # Put this to False in order to make MySQL play nice
-USE_TZ = True
+USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
