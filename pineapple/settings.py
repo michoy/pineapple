@@ -75,18 +75,30 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pineapple.wsgi.application'
 
 # Database
-# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-# MySQL config. For at denne skal fynke, må du ha laget en lokal database med rett navn og privilegier.
-# Kort guide, det er antatt at mysql er installert og at du har laget en root konto:
-# åpne CMD
-# Logg inn på MySQL som administrator:
-# mysql -u root -p
-# (Skriv inn passord)
-# Lag ny database med navn "pinedatabase":
-# CREATE DATABASE pinedatabase CHARACTER SET utf8;
-# Gi databasen rett privilegier (username og passord er "admin":
-# GRANT ALL PRIVILEGES ON pinedatabase.* To 'admin'@'127.0.0.1' IDENTIFIED BY 'admin';
+# MySQL:
+# For this to work as it should, you must create a local database with the correct name and permissions.
+# A short guide (windows), it is assumed that mysql is installed an that you have created a root account:
+# Open CMD
+# Log in to MySQL as administrator:
+#       mysql -u root -p
+# (Enter password)
+# Create a new database named "pinedatabase":
+#       CREATE DATABASE pinedatabase CHARACTER SET utf8;
+# Give the database correct permissions (username and password is "admin"):
+#       GRANT ALL PRIVILEGES ON pinedatabase.* To 'admin'@'127.0.0.1' IDENTIFIED BY 'admin';
+#DATABASES = {
+#    'default': {
+#        'NAME': 'pinedatabase',
+#        'ENGINE': 'mysql.connector.django',
+#        'USER': 'admin',
+#        'PASSWORD': 'admin',
+#
+#        'OPTIONS': {
+#          'autocommit': True,
+#        },
+#    }
+#}
 
 DATABASES = {
     'default': {
@@ -136,6 +148,7 @@ USE_I18N = True
 
 USE_L10N = True
 
+# Put this to False in order to make MySQL play nice
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
@@ -151,9 +164,9 @@ STATICFILES_FINDERS = [
 ]
 
 # Login page
-LOGIN_URL = '/login/'  # Url der innlogging skjer
+LOGIN_URL = '/login/'  # Url where log in happens
 
-LOGIN_REDIRECT_URL = '/overview/'  # Url som det redirectes til etter successfull innlogging
+LOGIN_REDIRECT_URL = '/overview/'  # Url used for redirection after successfull login
 
 # Production server optimizations
 CONN_MAX_AGE = None
