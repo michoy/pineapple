@@ -144,85 +144,94 @@ def main():
     # Reading material:
     # Must begin with https:// if you want to link to external page
     add_reading_material(
-        #TFY
+        # TFY
         title='Newton Mechanics Wikipedia',
         link='https://en.wikipedia.org/wiki/Classical_mechanics'
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Newton Mechanics: p. 100',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Mechanical Energy Wikipedia',
         link='https://en.wikipedia.org/wiki/Mechanical_energy'
     )
     add_reading_material(
-        #TFY
-        title='Mechanical Energy: p. 125'
+        # TFY
+        title='Mechanical Energy: p. 125',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Rotation Wikipedia',
         link='https://en.wikipedia.org/wiki/Rotation'
     )
     add_reading_material(
-        #TFY
-        title='Rotation: p. 137'
+        # TFY
+        title='Rotation: p. 137',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Electrostatics Wikipedia',
         link='https://en.wikipedia.org/wiki/Electrostatics'
     )
     add_reading_material(
-        #TFY
-        title='Electrostatics: p. 213'
+        # TFY
+        title='Electrostatics: p. 213',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Dielectric Wikipedia',
         link='https://en.wikipedia.org/wiki/Dielectric'
     )
     add_reading_material(
-        #TFY
-        title='Dielectric: p. 231'
+        # TFY
+        title='Dielectric: p. 231',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Magnetic Field Wikipedia',
         link='https://en.wikipedia.org/wiki/Magnetic_field'
     )
     add_reading_material(
-        #TFY
-        title='Magnetic Field: p. 245'
+        # TFY
+        title='Magnetic Field: p. 245',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Temperature Wikipedia',
         link='https://en.wikipedia.org/wiki/Temperature'
     )
     add_reading_material(
-        #TFY
-        title='Temperature: p. 270'
+        # TFY
+        title='Temperature: p. 270',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Carnot Cycle Wikipedia',
         link='https://en.wikipedia.org/wiki/Carnot_cycle'
     )
     add_reading_material(
-        #TFY
-        title='Carnot Cycle: p. 292'
+        # TFY
+        title='Carnot Cycle: p. 292',
+        link='',
     )
     add_reading_material(
-        #TFY
+        # TFY
         title='Ideal Gas Wikipedia',
         link='https://en.wikipedia.org/wiki/Ideal_gas'
     )
     add_reading_material(
-        #TFY
-        title='Ideal Gas: p. 302'
+        # TFY
+        title='Ideal Gas: p. 302',
+        link='',
     )
 
     add_reading_material(
@@ -394,7 +403,7 @@ def main():
     # Tags:
 
     add_tag(
-        #TFY
+        # TFY
         name='Mechanics',
         material_list=[
             'Newton Mechanics Wikipedia',
@@ -406,7 +415,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Mechanical Energy',
         material_list=[
             'Mechanical Energy Wikipedia',
@@ -430,7 +439,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Electromagnetism',
         material_list=[
             'Electrostatics Wikipedia',
@@ -442,7 +451,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Electrostatics',
         material_list=[
             'Electrostatics Wikipedia',
@@ -466,7 +475,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Thermodynamics',
         material_list=[
             'Temperature Wikipedia',
@@ -478,7 +487,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Temperature',
         material_list=[
             'Temperature Wikipedia',
@@ -486,7 +495,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Carnot Cycle',
         material_list=[
             'Carnot Cycle Wikipedia',
@@ -494,7 +503,7 @@ def main():
         ]
     )
     add_tag(
-        #TFY
+        # TFY
         name='Ideal Gas',
         material_list=[
             'Ideal Gas Wikipedia',
@@ -751,20 +760,25 @@ def main():
     # Questions:
 
     add_question(
-        #TFY
+        # TFY
         title='TFY_E1_Q1',
         question='What is newtons second law of physics?',
-        alternative_list=['F = 0.5*mv^2','F = ma','Carrots', 'F = m*ln(x)'],
+        alternative_list=['F = 0.5*mv^2', 'F = ma', 'Carrots', 'F = m*ln(x)'],
         correct_num=2,
         tag_list=['Newton'],
         belongs_to='TFY4125',
         is_worth=3
     )
     add_question(
-        #TFY
+        # TFY
         title='TFY_E1_Q2',
         question='Rotational force is directed:',
-        alternative_list=['Upwards', 'In the direction of motion', 'Towards the center of the rotation', 'Allways towards Earts center'],
+        alternative_list=[
+            'Upwards',
+            'In the direction of motion',
+            'Towards the center of the rotation',
+            'Allways towards Earts center',
+        ],
         correct_num=3,
         tag_list=['Rotation'],
         belongs_to='TFY4125',
@@ -804,7 +818,12 @@ def main():
         # TFY
         title='TFY_E2_Q2',
         question='Capacitance is:',
-        alternative_list=['invers proportional to voltage', 'not dependent on material type', 'Q = F*E', 'Monty Python'],
+        alternative_list=[
+            'invers proportional to voltage',
+            'not dependent on material type',
+            'Q = F*E',
+            'Monty Python'
+        ],
         correct_num=1,
         tag_list=['Dielectric'],
         belongs_to='TFY4125',
@@ -959,7 +978,7 @@ def main():
     add_exercise(
         title='TFY_E1',
         course='TFY4125',
-        question_list=['TFY_E1_Q1','TFY_E1_Q2','TFY_E1_Q3']
+        question_list=['TFY_E1_Q1', 'TFY_E1_Q2', 'TFY_E1_Q3']
     )
     add_exercise(
         title='TFY_E2',
@@ -970,7 +989,7 @@ def main():
         title='TFY_E3',
         course='TFY4125',
         question_list=['TFY_E3_Q1', 'TFY_E3_Q2', 'TFY_E3_Q3']
-
+    )
     ex_2 = add_exercise(
         # KTN
         title='Exercise 1: Email',
