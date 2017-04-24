@@ -150,7 +150,7 @@ def main():
     )
     add_reading_material(
         # TFY
-        title='Newton Mechanics: p. 100',
+        title='Newtons Mechanics: p. 100',
         link='',
     )
     add_reading_material(
@@ -233,7 +233,6 @@ def main():
         title='Ideal Gas: p. 302',
         link='',
     )
-
     add_reading_material(
         # PU
         title='TDT4140 Assessment Criteria',
@@ -411,7 +410,7 @@ def main():
             'Mechanical Energy Wikipedia',
             'Mechanical Energy: p. 125',
             'Rotation Wikipedia',
-            'Rotation: p. 137'
+            'Rotation: p. 137',
         ]
     )
     add_tag(
@@ -427,7 +426,7 @@ def main():
         name='Newton',
         material_list=[
             'Newton Mechanics Wikipedia',
-            'Newton Mechanics: p. 100'
+            'Newtons Mechanics: p. 100',
         ]
     )
     add_tag(
@@ -435,7 +434,7 @@ def main():
         name='Rotation',
         material_list=[
             'Rotation Wikipedia',
-            'Rotation: p. 137'
+            'Rotation: p. 137',
         ]
     )
     add_tag(
@@ -462,8 +461,8 @@ def main():
         # TFY
         name='Dielectrics',
         material_list=[
-            'Dielectrics Wikipedia',
-            'Dielectrics: p. 231'
+            'Dielectric Wikipedia',
+            'Dielectric: p. 231',
         ]
     )
     add_tag(
@@ -483,7 +482,7 @@ def main():
             'Carnot Cycle Wikipedia',
             'Carnot Cycle: p. 292',
             'Ideal Gas Wikipedia',
-            'Ideal Gas: p. 302'
+            'Ideal Gas: p. 302',
         ]
     )
     add_tag(
@@ -491,7 +490,7 @@ def main():
         name='Temperature',
         material_list=[
             'Temperature Wikipedia',
-            'Temperature: p. 270'
+            'Temperature: p. 270',
         ]
     )
     add_tag(
@@ -499,7 +498,7 @@ def main():
         name='Carnot Cycle',
         material_list=[
             'Carnot Cycle Wikipedia',
-            'Carnot Cycle: p. 292'
+            'Carnot Cycle: p. 292',
         ]
     )
     add_tag(
@@ -507,7 +506,7 @@ def main():
         name='Ideal Gas',
         material_list=[
             'Ideal Gas Wikipedia',
-            'Ideal Gas: p.302'
+            'Ideal Gas: p. 302',
         ]
     )
     add_tag(
@@ -628,7 +627,7 @@ def main():
     )
     add_user(
         # FYS
-        username='MagnusBorstadLilledahl',
+        username='Magnus',
         email='magnus@ntnu.no',
         password='passord',
         course_list=[],
@@ -638,7 +637,7 @@ def main():
     )
     add_user(
         # KTN
-        username='KjerstiMoldeklev',
+        username='Kjersti',
         email='kjersti@ntnu.no',
         password='passord',
         course_list=[],
@@ -668,15 +667,34 @@ def main():
         # FYS
         name='TFY4125',
         full_name='Physics',
-        admin_list=['MagnusBorstadLilledahl'],
-        material_list=[],
+        admin_list=['Magnus'],
+        material_list=[
+            'Newton Mechanics Wikipedia',
+            'Newtons Mechanics: p. 100',
+            'Mechanical Energy Wikipedia',
+            'Mechanical Energy: p. 125',
+            'Rotation Wikipedia',
+            'Rotation: p. 137',
+            'Electrostatics Wikipedia',
+            'Electrostatics: p. 213',
+            'Dielectric Wikipedia',
+            'Dielectric: p. 231',
+            'Magnetic Field Wikipedia',
+            'Magnetic Field: p. 245',
+            'Temperature Wikipedia',
+            'Temperature: p. 270',
+            'Carnot Cycle Wikipedia',
+            'Carnot Cycle: p. 292',
+            'Ideal Gas Wikipedia',
+            'Ideal Gas: p. 302',
+        ],
         description='Everything one needs to know about physics.',
     )
     add_course(
         # KTN
         name='TTM4100',
         full_name='Communication - Services and Networks',
-        admin_list=['KjerstiMoldeklev'],
+        admin_list=['Kjersti'],
         material_list=[
             'SMTP protocol - Computer Networking ATDA s.123-130',
             'SMTP example - Computer Networking ATDA s.127-128',
@@ -725,7 +743,7 @@ def main():
         username='Andreas',
         email='andreas@stud.ntnu.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -734,7 +752,7 @@ def main():
         username='Jakob',
         email='jakob@stud.ntnu.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -743,7 +761,7 @@ def main():
         username='Michael',
         email='michael@stud.ntnu.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -752,7 +770,7 @@ def main():
         username='Richard',
         email='richard@stud.ntnu.no',
         password='passord',
-        course_list=['TDT4140'],
+        course_list=['TTM4100'],
         pers_exercise_list=[],
         result_pk_list=[],
         group_name_list=['Student']
@@ -825,7 +843,7 @@ def main():
             'Monty Python'
         ],
         correct_num=1,
-        tag_list=['Dielectric'],
+        tag_list=['Dielectrics'],
         belongs_to='TFY4125',
         is_worth=5
     )
@@ -835,7 +853,7 @@ def main():
         question='How can we fugure out the direction of a electromagnetic force?',
         alternative_list=['Look at the electrons', 'I do not know', 'Hand Rule', 'Right Hand Rule'],
         correct_num=4,
-        tag_list=['Electro Magnetism'],
+        tag_list=['Electromagnetism'],
         belongs_to='TFY4125',
         is_worth=5
     )
