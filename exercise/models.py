@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 class ReadingMaterial(models.Model):
-    title = models.CharField(max_length=40, primary_key=True)
+    title = models.CharField(max_length=100, primary_key=True)
     link = models.CharField(max_length=300)  # Langt felt, kan jo være komplisert link
 
     def __str__(self):
@@ -46,10 +46,10 @@ class Question(models.Model):
     )
     title = models.CharField(max_length=70, primary_key=True)
     question = models.CharField(max_length=300)
-    alternative_1 = models.CharField(max_length=50)
-    alternative_2 = models.CharField(max_length=50)
-    alternative_3 = models.CharField(max_length=50)
-    alternative_4 = models.CharField(max_length=50)
+    alternative_1 = models.CharField(max_length=200)
+    alternative_2 = models.CharField(max_length=200)
+    alternative_3 = models.CharField(max_length=200)
+    alternative_4 = models.CharField(max_length=200)
     correct_alternative = models.IntegerField(default=1, choices=answer_choices)
     is_worth = models.IntegerField()
     # Relationships:
