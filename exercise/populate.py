@@ -296,10 +296,7 @@ def main():
         title='Software Quality Assurance',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4747391&FileVersionID=-1&ChildID=-1',
     )
-<<<<<<< HEAD
 
-    # Tags:
-=======
     add_reading_material(
         # FYS
         title='Newtons Laws of Gravity',
@@ -380,7 +377,7 @@ def main():
         title='HTTP message types - Slide 19-29',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4681008&FileVersionID=-1&ChildID=-1'
     )
->>>>>>> refs/remotes/origin/master
+
     pu_prosjekt_list = [
         'TDT4140 Assessment Criteria',
         'TDT4140 Project Milestones',
@@ -388,15 +385,13 @@ def main():
         'TDT4140 Poster Layout',
         'Improving Needed Posters'
     ]
-<<<<<<< HEAD
-=======
+
     physics_reading_material_list = [
         'Newtons Laws of Gravity',
         'Work, energy, power',
         'Newtons Laws',
     ]
     # Tags:
->>>>>>> refs/remotes/origin/master
 
     add_tag(
         #TFY
@@ -633,15 +628,9 @@ def main():
         group_name_list=['Lecturer']
     )
     add_user(
-<<<<<<< HEAD
-        #TFY
-        username='Magnus Borstad Lilledahl',
-        email='magnus@ntnu.no',
-=======
         # KTN
         username='KjerstiMoldeklev',
         email='kjersti@ntnu.no',
->>>>>>> refs/remotes/origin/master
         password='passord',
         course_list=[],
         pers_exercise_list=[],
@@ -762,7 +751,6 @@ def main():
     # Questions:
 
     add_question(
-<<<<<<< HEAD
         #TFY
         title='TFY_E1_Q1',
         question='What is newtons second law of physics?',
@@ -777,29 +765,16 @@ def main():
         title='TFY_E1_Q2',
         question='Rotational force is directed:',
         alternative_list=['Upwards', 'In the direction of motion', 'Towards the center of the rotation', 'Allways towards Earts center'],
-=======
-        # FYS
-        title='TFY4125_Innlevering1_Spørsmål_1',
-        question="What is Newton's secound law of physics?",
-        alternative_list=['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
->>>>>>> refs/remotes/origin/master
         correct_num=3,
         tag_list=['Rotation'],
         belongs_to='TFY4125',
         is_worth=5
     )
     add_question(
-<<<<<<< HEAD
         # TFY
         title='TFY_E1_Q3',
         question='Work is:',
         alternative_list=['Hard', 'Mass times acceleration', 'Force times distance', 'Equal force'],
-=======
-        # FYS
-        title='TFY4125_Innlevering1_Spørsmål_2',
-        question='What is the speed of light?',
-        alternative_list=['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
->>>>>>> refs/remotes/origin/master
         correct_num=3,
         tag_list=['Mechanical Energy'],
         belongs_to='TFY4125',
@@ -826,17 +801,10 @@ def main():
         is_worth=5
     )
     add_question(
-<<<<<<< HEAD
         # TFY
         title='TFY_E2_Q2',
         question='Capacitance is:',
         alternative_list=['invers proportional to voltage', 'not dependent on material type', 'Q = F*E', 'Monty Python'],
-=======
-        # FYS
-        title='TFY4125_Innlevering1_Spørsmål_3',
-        question='Work is ...',
-        alternative_list=['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
->>>>>>> refs/remotes/origin/master
         correct_num=1,
         tag_list=['Dielectric'],
         belongs_to='TFY4125',
@@ -988,7 +956,6 @@ def main():
         is_worth=10,
     )
     # Exercises:
-<<<<<<< HEAD
     add_exercise(
         title='TFY_E1',
         course='TFY4125',
@@ -1003,17 +970,7 @@ def main():
         title='TFY_E3',
         course='TFY4125',
         question_list=['TFY_E3_Q1', 'TFY_E3_Q2', 'TFY_E3_Q3']
-=======
-    ex_1 = add_exercise(
-        # FYS
-        title='TFY4125_Exercise1',
-        course='TFY4125',
-        question_list=[
-            'TFY4125_Innlevering1_Spørsmål_1',
-            'TFY4125_Innlevering1_Spørsmål_2',
-            'TFY4125_Innlevering1_Spørsmål_3',
-        ],
-    )
+
     ex_2 = add_exercise(
         # KTN
         title='Exercise 1: Email',
@@ -1045,7 +1002,6 @@ def main():
             'Exercise 1: Email, Q2',
             'Exercise 1: Email, Q3',
         ]
->>>>>>> refs/remotes/origin/master
     )
     # Results:
     # Per
