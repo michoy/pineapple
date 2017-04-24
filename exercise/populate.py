@@ -144,6 +144,88 @@ def main():
     # Reading material:
     # Must begin with https:// if you want to link to external page
     add_reading_material(
+        #TFY
+        title='Newton Mechanics Wikipedia',
+        link='https://en.wikipedia.org/wiki/Classical_mechanics'
+    )
+    add_reading_material(
+        #TFY
+        title='Newton Mechanics: p. 100',
+    )
+    add_reading_material(
+        #TFY
+        title='Mechanical Energy Wikipedia',
+        link='https://en.wikipedia.org/wiki/Mechanical_energy'
+    )
+    add_reading_material(
+        #TFY
+        title='Mechanical Energy: p. 125'
+    )
+    add_reading_material(
+        #TFY
+        title='Rotation Wikipedia',
+        link='https://en.wikipedia.org/wiki/Rotation'
+    )
+    add_reading_material(
+        #TFY
+        title='Rotation: p. 137'
+    )
+    add_reading_material(
+        #TFY
+        title='Electrostatics Wikipedia',
+        link='https://en.wikipedia.org/wiki/Electrostatics'
+    )
+    add_reading_material(
+        #TFY
+        title='Electrostatics: p. 213'
+    )
+    add_reading_material(
+        #TFY
+        title='Dielectric Wikipedia',
+        link='https://en.wikipedia.org/wiki/Dielectric'
+    )
+    add_reading_material(
+        #TFY
+        title='Dielectric: p. 231'
+    )
+    add_reading_material(
+        #TFY
+        title='Magnetic Field Wikipedia',
+        link='https://en.wikipedia.org/wiki/Magnetic_field'
+    )
+    add_reading_material(
+        #TFY
+        title='Magnetic Field: p. 245'
+    )
+    add_reading_material(
+        #TFY
+        title='Temperature Wikipedia',
+        link='https://en.wikipedia.org/wiki/Temperature'
+    )
+    add_reading_material(
+        #TFY
+        title='Temperature: p. 270'
+    )
+    add_reading_material(
+        #TFY
+        title='Carnot Cycle Wikipedia',
+        link='https://en.wikipedia.org/wiki/Carnot_cycle'
+    )
+    add_reading_material(
+        #TFY
+        title='Carnot Cycle: p. 292'
+    )
+    add_reading_material(
+        #TFY
+        title='Ideal Gas Wikipedia',
+        link='https://en.wikipedia.org/wiki/Ideal_gas'
+    )
+    add_reading_material(
+        #TFY
+        title='Ideal Gas: p. 302'
+    )
+
+    add_reading_material(
         # PU
         title='TDT4140 Assessment Criteria',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4682507&FileVersionID=-1&ChildID=-1',
@@ -214,6 +296,7 @@ def main():
         title='Software Quality Assurance',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4747391&FileVersionID=-1&ChildID=-1',
     )
+
     add_reading_material(
         # FYS
         title='Newtons Laws of Gravity',
@@ -294,6 +377,7 @@ def main():
         title='HTTP message types - Slide 19-29',
         link='https://ntnu.itslearning.com/file/download.aspx?FileID=4681008&FileVersionID=-1&ChildID=-1'
     )
+
     pu_prosjekt_list = [
         'TDT4140 Assessment Criteria',
         'TDT4140 Project Milestones',
@@ -301,6 +385,7 @@ def main():
         'TDT4140 Poster Layout',
         'Improving Needed Posters'
     ]
+
     physics_reading_material_list = [
         'Newtons Laws of Gravity',
         'Work, energy, power',
@@ -309,14 +394,112 @@ def main():
     # Tags:
 
     add_tag(
-        # FYS
+        #TFY
         name='Mechanics',
-        material_list=physics_reading_material_list,
+        material_list=[
+            'Newton Mechanics Wikipedia',
+            'Newtons Mechanics: p. 100',
+            'Mechanical Energy Wikipedia',
+            'Mechanical Energy: p. 125',
+            'Rotation Wikipedia',
+            'Rotation: p. 137'
+        ]
     )
     add_tag(
-        # FYS
+        #TFY
+        name='Mechanical Energy',
+        material_list=[
+            'Mechanical Energy Wikipedia',
+            'Mechanical Energy: p. 125'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Newton',
+        material_list=[
+            'Newton Mechanics Wikipedia',
+            'Newton Mechanics: p. 100'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Rotation',
+        material_list=[
+            'Rotation Wikipedia',
+            'Rotation: p. 137'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Electromagnetism',
+        material_list=[
+            'Electrostatics Wikipedia',
+            'Electrostatics: p. 213',
+            'Dielectric Wikipedia',
+            'Dielectric: p. 231',
+            'Magnetic Field Wikipedia',
+            'Magnetic Field: p. 245',
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Electrostatics',
+        material_list=[
+            'Electrostatics Wikipedia',
+            'Electrostatics: p. 213'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Dielectrics',
+        material_list=[
+            'Dielectrics Wikipedia',
+            'Dielectrics: p. 231'
+        ]
+    )
+    add_tag(
+        # TFY
+        name='Magnetic Field',
+        material_list=[
+            'Magnetic Field Wikipedia',
+            'Magnetic Field: p. 245'
+        ]
+    )
+    add_tag(
+        #TFY
         name='Thermodynamics',
-        material_list=['Thermodynamics Khan Academy']
+        material_list=[
+            'Temperature Wikipedia',
+            'Temperature: p. 270',
+            'Carnot Cycle Wikipedia',
+            'Carnot Cycle: p. 292',
+            'Ideal Gas Wikipedia',
+            'Ideal Gas: p. 302'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Temperature',
+        material_list=[
+            'Temperature Wikipedia',
+            'Temperature: p. 270'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Carnot Cycle',
+        material_list=[
+            'Carnot Cycle Wikipedia',
+            'Carnot Cycle: p. 292'
+        ]
+    )
+    add_tag(
+        #TFY
+        name='Ideal Gas',
+        material_list=[
+            'Ideal Gas Wikipedia',
+            'Ideal Gas: p.302'
+        ]
     )
     add_tag(
         # PU
@@ -566,35 +749,106 @@ def main():
         group_name_list=['Student']
     )
     # Questions:
+
     add_question(
-        # FYS
-        title='TFY4125_Innlevering1_Spørsmål_1',
-        question="What is Newton's secound law of physics?",
-        alternative_list=['E=mc^2', 'B=aD', 'F=ma', 'F=0.5mv^2'],
-        correct_num=3,
-        tag_list=['Mechanics'],
+        #TFY
+        title='TFY_E1_Q1',
+        question='What is newtons second law of physics?',
+        alternative_list=['F = 0.5*mv^2','F = ma','Carrots', 'F = m*ln(x)'],
+        correct_num=2,
+        tag_list=['Newton'],
         belongs_to='TFY4125',
-        is_worth=5,
+        is_worth=3
     )
     add_question(
-        # FYS
-        title='TFY4125_Innlevering1_Spørsmål_2',
-        question='What is the speed of light?',
-        alternative_list=['300 m/s', '10^8 m/s', '300 000 km/s', '3*10^9 m/s'],
+        #TFY
+        title='TFY_E1_Q2',
+        question='Rotational force is directed:',
+        alternative_list=['Upwards', 'In the direction of motion', 'Towards the center of the rotation', 'Allways towards Earts center'],
         correct_num=3,
-        tag_list=['Mechanics'],
+        tag_list=['Rotation'],
         belongs_to='TFY4125',
-        is_worth=7,
+        is_worth=5
     )
     add_question(
-        # FYS
-        title='TFY4125_Innlevering1_Spørsmål_3',
-        question='Work is ...',
-        alternative_list=['Displacement times force', 'Hard!', 'Measured in newton', 'invers proportional to force'],
+        # TFY
+        title='TFY_E1_Q3',
+        question='Work is:',
+        alternative_list=['Hard', 'Mass times acceleration', 'Force times distance', 'Equal force'],
+        correct_num=3,
+        tag_list=['Mechanical Energy'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q1',
+        question='The formula for electrostatic force is:',
+        alternative_list=['F = E/q', 'F = k*qQ/r^2', 'F = (q/r)^2', 'Too complicated to remember'],
+        correct_num=2,
+        tag_list=['Electrostatics'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q1',
+        question='The formula for electrostatic force is:',
+        alternative_list=['F = E/q', 'F = k*qQ/r^2', 'F = (q/r)^2', 'Too complicated to remember'],
+        correct_num=2,
+        tag_list=['Electrostatics'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q2',
+        question='Capacitance is:',
+        alternative_list=['invers proportional to voltage', 'not dependent on material type', 'Q = F*E', 'Monty Python'],
         correct_num=1,
-        tag_list=['Mechanics'],
+        tag_list=['Dielectric'],
         belongs_to='TFY4125',
-        is_worth=2,
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E2_Q3',
+        question='How can we fugure out the direction of a electromagnetic force?',
+        alternative_list=['Look at the electrons', 'I do not know', 'Hand Rule', 'Right Hand Rule'],
+        correct_num=4,
+        tag_list=['Electro Magnetism'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E3_Q1',
+        question='What is temperature?',
+        alternative_list=['Comparative measuer of heat', 'Thermometer', 'Cold', 'Balls'],
+        correct_num=1,
+        tag_list=['Temperature'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E3_Q2',
+        question='Which is true?',
+        alternative_list=['T1*T2=C1*C2', 'T1*Q2=T2*Q1', 'T1=T2', 'Q^2=T1*T2'],
+        correct_num=2,
+        tag_list=['Carnot Cycle'],
+        belongs_to='TFY4125',
+        is_worth=5
+    )
+    add_question(
+        # TFY
+        title='TFY_E3_Q3',
+        question='Which is true?',
+        alternative_list=['nR=N', 'RV=P/nT', 'PV=T', 'PV=nRT'],
+        correct_num=4,
+        tag_list=['Ideal Gas'],
+        belongs_to='TFY4125',
+        is_worth=5
     )
     add_question(
         # KTN
@@ -702,16 +956,21 @@ def main():
         is_worth=10,
     )
     # Exercises:
-    ex_1 = add_exercise(
-        # FYS
-        title='TFY4125_Exercise1',
+    add_exercise(
+        title='TFY_E1',
         course='TFY4125',
-        question_list=[
-            'TFY4125_Innlevering1_Spørsmål_1',
-            'TFY4125_Innlevering1_Spørsmål_2',
-            'TFY4125_Innlevering1_Spørsmål_3',
-        ],
+        question_list=['TFY_E1_Q1','TFY_E1_Q2','TFY_E1_Q3']
     )
+    add_exercise(
+        title='TFY_E2',
+        course='TFY4125',
+        question_list=['TFY_E2_Q1', 'TFY_E2_Q2', 'TFY_E2_Q3']
+    )
+    add_exercise(
+        title='TFY_E3',
+        course='TFY4125',
+        question_list=['TFY_E3_Q1', 'TFY_E3_Q2', 'TFY_E3_Q3']
+
     ex_2 = add_exercise(
         # KTN
         title='Exercise 1: Email',
