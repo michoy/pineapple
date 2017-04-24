@@ -24,4 +24,11 @@ On windows simply cd into the project folder and run
 ```
 py manage.py runserver
 ```
-Open the given IP adress in your browser to use the webapp
+Open the given IP adress in your browser to use the webapp.
+
+## In use
+Start with registering a new user. From the *overview* page, type in a course name and click *add*. For demonstration purposes the following courses have allready been added:
+* TTM4100
+* TDT4140
+* TFY4125
+Press *Go to course* to se the courses page. Here you can see statistics of how you're doing in the course, as well as avalible exercises. Next, choose one of the exercises and answer the given questions. After you're finished the exercise, you will see updated statistics on the course page.
