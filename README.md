@@ -1,3 +1,4 @@
+
 # pineapple
 
 ## What is it?
@@ -37,6 +38,7 @@ Press *Go to course* to se the student course page. Here you can see statistics 
 To test pineapple as a lecturer, log inn with the following credentials:
 
 Username: Pekka
+
 Password: passord
 
 From the *overview* page, go to one of the allready added courses. Here you can see the statistics of how your class is doing, cards you can use to add new reading materials, questions and exercises. Press on one of the exercises to see an overview of the selected exercise. 
