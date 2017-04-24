@@ -120,7 +120,7 @@ class ServerTestCase(TestCase):
         try:
             populate.main()
         except:
-            self.fail()
+            self.fail("Populate.py is broken, you can't populate database properly!")
 
     # Test server connectivity
     def test_do_quiz(self):

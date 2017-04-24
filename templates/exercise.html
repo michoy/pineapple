@@ -25,7 +25,7 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_table }}
-        <button name="submit" class="btn btn-success btn-lg" value={{ que_pk }}>Check</button>
+        <button name="submit" class="btn btn-success btn-lg" value="{{ que_pk }}">Check</button>
     </form>
 
     {% else %}

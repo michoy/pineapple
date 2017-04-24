@@ -12,6 +12,16 @@ At the same time, lecturers are proveded with both information and tools to help
 topics as the class progresses. Do you teach a new course? No problem, with Pineapple you can adjust and
 fix issues on the fly. Maintaining an established course? Perfect, fine-tuning has never been easier.
 
-## TODO'S
-* Overview: if the course name does not exist, notify the user.
-* Improved statistics
+## Set-up
+This installation of pineapple is for demonstration purposes only. For deployment version see pineappleDeploymen package. 
+
+### Requirements
+* Python 3.4 or newer
+* Django 1.11
+
+### Instructions
+On windows simply cd into the project folder and run
+```
+py manage.py runserver
+```
+Open the given IP adress in your browser to use the webapp
