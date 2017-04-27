@@ -51,6 +51,14 @@ def do_exercise(request, exer_id):
                 read_mats = get_hints(que_pk)
                 # headline
                 exercise_name = Exercise.objects.get(pk=exer_id).title
+                # progress number
+                done_questions = len(current_user.resultcollection.results.filter(exercise_id=exer_id))
+                q_list = len(list(Exercise.objects.get(pk=exer_id).contains.all().values_list('pk', flat=True)))
+                if q_list:
+                    prog_num = (done_questions / q_list) * 100
+                    prog_num = round(prog_num, 2)
+                else:
+                    prog_num = 0
                 return render(
                     request,
                     'exercise.html',
@@ -61,6 +69,7 @@ def do_exercise(request, exer_id):
                      'que_que': que.question,
                      'exercise_name': exercise_name,
                      'read_mats': read_mats,
+                     'prog_num': prog_num,
                      }
                 )
         elif request.POST.get('next-q', False):
@@ -106,6 +115,7 @@ def goto_next_question(request, username, exer_id):
         q_list = len(list(Exercise.objects.get(pk=exer_id).contains.all().values_list('pk', flat=True)))
         if q_list:
             prog_num = (done_questions / q_list) * 100
+            prog_num = round(prog_num, 2)
         else:
             prog_num = 0
         context = {
