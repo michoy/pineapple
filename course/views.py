@@ -74,6 +74,7 @@ def lecturer_course_view(request, fagkode=''):
                     new_exercise.course = Course.objects.get(name=fagkode)
                     new_exercise.private = False
                     new_exercise.save()
+                    form.save_m2m()
                     added_exercise = True
         elif request.POST.get('new_question', False):
             form = PartialQuestionForm(fagkode, request.POST)
@@ -82,6 +83,7 @@ def lecturer_course_view(request, fagkode=''):
                 new_question = form.save(commit=False)
                 new_question.belongsTo = Course.objects.get(name=fagkode)
                 new_question.save()
+                form.save_m2m()
                 added_question = True
         elif request.POST.get('new_reading_mat', False):
             form = ReadingMatForm(request.POST)
@@ -96,6 +98,7 @@ def lecturer_course_view(request, fagkode=''):
             target_pos = 'lect_new_r_or_t'
             if form.is_valid():
                 new_theme_tag = form.save()
+                # form.save_m2m()
                 added_theme_tag = True
     exercise_name_list = list(Exercise.objects.filter(course__name=fagkode).filter(private=False))
     user = User.objects.get(username=request.user)
